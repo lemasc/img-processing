@@ -1,0 +1,53 @@
+$ scripts/bench.sh -t cores build/bench_ladder_color -r 20 images/photo_1mp.png images/photo_6mp.png images/photo_24mp.png images/photo_48mp.png images/flat_24mp.png images/noise_24mp.png
+# 2026-10-27T00:51:57+07:00  host=lemasc-ubuntu  commit=3396bfd
+bench: mode=cores cpus=0,2,4,6,8,10 threads=6 governor=performance load=0.79
+runs=20, caches flushed before each run, medians
+photo_1mp.png (1.0 MP), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  scalar                         6.905 ms    148.3 MP/s     0.9 GB/s  x1.0     maxdiff 0
+  autovec AVX2                   1.167 ms    877.3 MP/s     5.3 GB/s  x5.9     maxdiff 1
+  autovec AVX2 + OpenMP          0.279 ms   3674.5 MP/s    22.0 GB/s  x24.8    maxdiff 1
+  AVX2 intrinsics                0.998 ms   1026.1 MP/s     6.2 GB/s  x6.9     maxdiff 1
+  AVX2 intrinsics + OpenMP       0.292 ms   3509.4 MP/s    21.1 GB/s  x23.7    maxdiff 1
+  CUDA kernel                    0.024 ms  (compute only)           x293.2   maxdiff 1
+  CUDA end to end                0.771 ms  (h2d 0.313 + kernel 0.024 + d2h 0.383)  x9.0
+photo_6mp.png (6.0 MP), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  scalar                        40.263 ms    149.0 MP/s     0.9 GB/s  x1.0     maxdiff 0
+  autovec AVX2                   6.472 ms    927.1 MP/s     5.6 GB/s  x6.2     maxdiff 1
+  autovec AVX2 + OpenMP          1.369 ms   4381.2 MP/s    26.3 GB/s  x29.4    maxdiff 1
+  AVX2 intrinsics                5.545 ms   1082.2 MP/s     6.5 GB/s  x7.3     maxdiff 1
+  AVX2 intrinsics + OpenMP       1.267 ms   4734.3 MP/s    28.4 GB/s  x31.8    maxdiff 1
+  CUDA kernel                    0.124 ms  (compute only)           x325.0   maxdiff 1
+  CUDA end to end                3.931 ms  (h2d 1.700 + kernel 0.124 + d2h 2.011)  x10.2
+photo_24mp.png (24.0 MP), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  scalar                       164.751 ms    145.7 MP/s     0.9 GB/s  x1.0     maxdiff 0
+  autovec AVX2                  26.017 ms    922.5 MP/s     5.5 GB/s  x6.3     maxdiff 1
+  autovec AVX2 + OpenMP          5.019 ms   4782.2 MP/s    28.7 GB/s  x32.8    maxdiff 1
+  AVX2 intrinsics               22.178 ms   1082.2 MP/s     6.5 GB/s  x7.4     maxdiff 1
+  AVX2 intrinsics + OpenMP       4.655 ms   5155.9 MP/s    30.9 GB/s  x35.4    maxdiff 1
+  CUDA kernel                    0.483 ms  (compute only)           x340.9   maxdiff 1
+  CUDA end to end               15.397 ms  (h2d 6.943 + kernel 0.483 + d2h 7.857)  x10.7
+photo_48mp.png (48.0 MP), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  scalar                       331.009 ms    145.0 MP/s     0.9 GB/s  x1.0     maxdiff 0
+  autovec AVX2                  51.692 ms    928.6 MP/s     5.6 GB/s  x6.4     maxdiff 1
+  autovec AVX2 + OpenMP          9.832 ms   4881.9 MP/s    29.3 GB/s  x33.7    maxdiff 1
+  AVX2 intrinsics               44.498 ms   1078.7 MP/s     6.5 GB/s  x7.4     maxdiff 1
+  AVX2 intrinsics + OpenMP       8.979 ms   5345.6 MP/s    32.1 GB/s  x36.9    maxdiff 1
+  CUDA kernel                    0.938 ms  (compute only)           x352.9   maxdiff 1
+  CUDA end to end               30.568 ms  (h2d 13.966 + kernel 0.938 + d2h 15.557)  x10.8
+flat_24mp.png (24.0 MP), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  scalar                       165.944 ms    144.6 MP/s     0.9 GB/s  x1.0     maxdiff 0
+  autovec AVX2                  25.785 ms    930.8 MP/s     5.6 GB/s  x6.4     maxdiff 0
+  autovec AVX2 + OpenMP          5.031 ms   4770.7 MP/s    28.6 GB/s  x33.0    maxdiff 0
+  AVX2 intrinsics               22.307 ms   1075.9 MP/s     6.5 GB/s  x7.4     maxdiff 0
+  AVX2 intrinsics + OpenMP       4.599 ms   5218.1 MP/s    31.3 GB/s  x36.1    maxdiff 0
+  CUDA kernel                    0.470 ms  (compute only)           x353.1   maxdiff 0
+  CUDA end to end               15.326 ms  (h2d 6.955 + kernel 0.470 + d2h 7.862)  x10.8
+noise_24mp.png (24.0 MP), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  scalar                       164.753 ms    145.7 MP/s     0.9 GB/s  x1.0     maxdiff 0
+  autovec AVX2                  25.786 ms    930.8 MP/s     5.6 GB/s  x6.4     maxdiff 1
+  autovec AVX2 + OpenMP          5.078 ms   4726.7 MP/s    28.4 GB/s  x32.4    maxdiff 1
+  AVX2 intrinsics               22.142 ms   1083.9 MP/s     6.5 GB/s  x7.4     maxdiff 1
+  AVX2 intrinsics + OpenMP       4.633 ms   5180.6 MP/s    31.1 GB/s  x35.6    maxdiff 1
+  CUDA kernel                    0.470 ms  (compute only)           x350.5   maxdiff 1
+  CUDA end to end               15.334 ms  (h2d 6.953 + kernel 0.470 + d2h 7.836)  x10.7
+# exit=0
