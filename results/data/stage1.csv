@@ -1,6 +1,6 @@
 kernel,platform,megapixels,params,median_ms,min_ms,max_ms,mpix_per_s,gb_per_s
-color,cpu_scalar,24.00,cpus=0;block=256,192.1531,192.0520,194.5844,124.90,0.75
-color,cuda_h2d,24.00,cpus=0;block=256,6.8229,6.7945,6.9553,3517.56,10.55
-color,cuda_kernel,24.00,cpus=0;block=256,0.4833,0.4823,0.4841,49655.72,297.93
-color,cuda_d2h,24.00,cpus=0;block=256,7.3762,7.3608,7.4650,3253.71,9.76
-color,cuda_e2e,24.00,cpus=0;block=256,14.7131,14.6324,15.0914,1631.20,9.79
+color,cpu_scalar,24.00,cpus=0;block=256,193.1549,192.5659,207.2946,124.25,0.75
+color,cuda_h2d,24.00,cpus=0;block=256,7.0485,6.9944,7.2511,3404.99,10.21
+color,cuda_kernel,24.00,cpus=0;block=256,0.4831,0.4823,0.4834,49682.03,298.09
+color,cuda_d2h,24.00,cpus=0;block=256,7.4806,7.3984,7.6690,3208.31,9.62
+color,cuda_e2e,24.00,cpus=0;block=256,14.9578,14.8660,15.1813,1604.51,9.63

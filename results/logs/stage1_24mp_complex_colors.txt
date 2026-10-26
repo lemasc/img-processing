@@ -1,0 +1,13 @@
+$ scripts/bench.sh -t single build/stage1_color images/photos/24mp_complex_colors.jpg results/output/stage1_24mp_complex_colors.png 10
+# 2026-10-26T11:37:22+07:00  host=lemasc-ubuntu  commit=a6a377c
+bench: mode=single cpus=0 threads=1 governor=performance load=0.01
+images/photos/24mp_complex_colors.jpg: 6000x4000 (24.0 MP)
+CPU scalar        193.155 ms  (124.3 MP/s)
+GPU H2D             7.048 ms
+GPU kernel          0.483 ms  (298.1 GB/s, 83% of 360 peak)
+GPU D2H             7.481 ms
+GPU end-to-end     14.958 ms
+speedup vs CPU: kernel 400x, end-to-end 12.9x
+sanity: max |cpu-gpu| = 1
+wrote results/output/stage1_24mp_complex_colors.png
+# exit=0
