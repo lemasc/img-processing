@@ -67,3 +67,20 @@ void blur_naive_launch(const uint8_t* d_in, uint8_t* d_out, int w, int h, const 
                        int by = 16);
 // Convenience: host pointers in and out.
 void blur_naive_cuda(const uint8_t* in, uint8_t* out, int w, int h, const GaussKernel& g, int bx = 16, int by = 16);
+
+// CUDA tiled version (Stage 5), defined in src/blur_cuda.cu. Each block loads its tile plus a
+// (k-1)-wide halo into shared memory once, then every thread reads its taps from there. Same
+// accumulation order as blur_pixel, so the result matches the naive kernel. Returns false (and
+// launches nothing) if the tile does not fit in 48 KB of shared memory.
+// float_tile keeps the tile as floats (converted once while loading) instead of bytes.
+bool blur_tiled_launch(const uint8_t* d_in, uint8_t* d_out, int w, int h, const GaussKernel& g, int bx = 16,
+                       int by = 16, bool float_tile = false);
+void blur_tiled_cuda(const uint8_t* in, uint8_t* out, int w, int h, const GaussKernel& g, int bx = 16, int by = 16,
+                     bool float_tile = false);
+// Bytes of shared memory the tiled kernel needs for this kernel size, block shape and element size.
+inline size_t blur_tile_bytes(const GaussKernel& g, int bx, int by, int elem = 1) {
+  return (size_t)(bx + g.k - 1) * (by + g.k - 1) * 3 * elem;
+}
+// Theoretical occupancy (resident threads / 1536 on sm_86) for each kernel at this configuration.
+double blur_naive_occupancy(int bx, int by);
+double blur_tiled_occupancy(const GaussKernel& g, int bx, int by, bool float_tile = false);

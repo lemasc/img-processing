@@ -139,3 +139,8 @@ blur_gauss,cuda_h2d,24.00,cpus=0;k=11;block=32x4;img=photo_24mp.png,20,6.9144,6.
 blur_gauss,cuda_kernel,24.00,cpus=0;k=11;block=32x4;img=photo_24mp.png,20,13.1468,13.1430,14.1097,1825.55,10.95,3.0
 blur_gauss,cuda_d2h,24.00,cpus=0;k=11;block=32x4;img=photo_24mp.png,20,7.3805,7.3564,7.4801,3251.79,9.76,82.7
 blur_gauss,cuda_e2e,24.00,cpus=0;k=11;block=32x4;img=photo_24mp.png,20,27.5098,27.4752,27.8872,872.42,5.23,
+blur_gauss,cpu_scalar,6.00,cpus=unpinned;k=11;block=16x16;img=photo_6mp.png,1,967.1049,967.1049,967.1049,6.20,0.04,0.0
+blur_gauss,cuda_h2d,6.00,cpus=unpinned;k=11;block=16x16;img=photo_6mp.png,2,1.7852,1.6797,1.7852,3360.88,10.08,76.4
+blur_gauss,cuda_kernel,6.00,cpus=unpinned;k=11;block=16x16;img=photo_6mp.png,2,3.7192,3.6690,3.7192,1613.26,9.68,2.7
+blur_gauss,cuda_d2h,6.00,cpus=unpinned;k=11;block=16x16;img=photo_6mp.png,2,1.9105,1.8852,1.9105,3140.55,9.42,79.8
+blur_gauss,cuda_e2e,6.00,cpus=unpinned;k=11;block=16x16;img=photo_6mp.png,2,7.4420,7.4059,7.4420,806.24,4.84,

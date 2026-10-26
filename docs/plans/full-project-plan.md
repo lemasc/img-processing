@@ -114,6 +114,24 @@ Rule: do not start a stage until the previous one is measured, screenshotted, an
 ### Stage 5: Convolution, tiled
 - **Build:** shared-memory version with halo loading.
 - **Measure:** speedup over naive, effect of block size, achieved occupancy.
+- **Built (in progress):** `blur_tiled_kernel<T>` in `src/blur_cuda.cu`: the block copies its tile plus a (k-1)-wide border-clamped halo into dynamic shared memory, then every thread blurs from shared memory. Two variants: byte tile (`tiled`) and float tile (`tiledf`, converts once at load, 4x the shared memory). Same taps in the same order as the naive kernel, so both are bit-identical to it (`check_blur`, 227 checks, tolerance 0 against naive and 1 against the CPU). `bench_blur` runs all three kernels and reports theoretical occupancy from the CUDA occupancy API. Logs: `results/logs/stage5_tiled_vs_naive.txt`, `results/logs/stage5_block_sweep.txt`, data in `results/data/blur_conv.csv`.
+- **Result (24 MP, 16x16):** tiled over naive is only 1.02x / 1.23x / 1.25x / 1.27x for k = 3 / 5 / 7 / 11 (kernel 1.34 / 2.53 / 4.52 / 10.5 ms). Tiling cuts global loads per pixel from 3k^2 to about 3x1.3 (k=3) or 3x2.9 (k=11) bytes, so load count alone was not the limit, and the Stage 4 hypothesis that it was is only weakly supported (hypothesis 4 holds, but the gap is small). The float tile is no faster than the byte tile (within 1%), which rules out the per-tap byte-to-float conversion as the limit. The kernel still reaches only 4% of DRAM bandwidth and about 1.9 TFLOP/s (15% of the 12.7 peak) at k=11, so what limits it is not yet known.
+- **Block size (tiled, 24 MP, kernel ms for k=3 / k=11):** 8x8 1.65 / 11.20, 16x16 1.34 / 10.48, 32x32 2.21 / 11.42, 32x4 1.38 / 10.84. Theoretical occupancy is 100% for 16x16 and 32x4 and 67% for 8x8 (16 blocks/SM limit, 1024 of 1536 threads) and 32x32 (one 1024-thread block per SM), which matches those two being slowest. At k=3 the 32x32 tiled kernel is slower than naive (x0.87), because the halo load and sync are not repaid at small k.
+- **Profile (Nsight Compute, 24 MP photo, 16x16, one launch each, `--set full`):** reports in `results/profiler/stage5_{naive,tiled}_k{3,11}.ncu-rep` (66 MB, git-ignored, regenerate with `ncu --set full -s 1 -c 1 -o ... build/bench_blur -r 2 -c 1 -k K -v VARIANT images/photo_24mp.png`), full details in `results/logs/stage5_ncu_details.txt`. Counters were blocked by `ERR_NVGPUCTRPERM` (`RmProfilingAdminOnly=1`) until `NVreg_RestrictProfilingToAdminUsers=0` was set in `/etc/modprobe.d/nvidia-profiling.conf` and the machine rebooted.
+
+  | | naive k=3 | naive k=11 | tiled k=3 | tiled k=11 |
+  |---|---|---|---|---|
+  | kernel time (ms, under ncu) | 1.45 | 14.2 | 1.43 | 11.2 |
+  | LSU pipe utilization (% of peak) | 64 | 76 | 82 | **99.7** |
+  | L1/TEX throughput (% of peak) | 64 | 76 | 82 | **99.7** |
+  | FMA pipe active (%) | 33 | 31 | 32 | 23 |
+  | global load instrs (M) | 20.3 | 272 | 3.1 | 6.2 |
+  | shared load instrs (M) | 0 | 0 | 20.3 | 272 |
+  | DRAM read (MB) | 72 | 72 | 72 | 72 |
+  | achieved occupancy (% of peak warps) | 77 | 96 | 94 | 98 |
+
+  **Finding: the limiter is the load/store instruction pipe (LSU/L1), not DRAM and not FP32.** DRAM traffic is the 72 MB minimum (24 MP x 3 bytes) for every variant, and the FMA pipe is at most 33% busy. Tiling only moves each per-tap load from a global load to a shared load, one for one (272.25 M at k=11 in both kernels), so the LSU instruction count does not drop and the speedup is small. The tiled k=11 kernel saturates the LSU pipe (99.7%), and its top stall is the MIO queue (7.7 of 18.3 cycles between issues, 42%). This confirms the Stage 4 hypothesis with a correction: the limit is load issue, and tiling does not relieve it, because it removes cache and DRAM traffic, not load instructions. A fix has to cut load instructions per output pixel: vector loads (load 4 bytes or a `uchar4` per instruction), several outputs per thread with register reuse, or the separable blur in Stage 6 (2k taps instead of k^2). Occupancy is 94 to 98% achieved, so it does not explain the gap. The naive k=3 value (77%) is a short-kernel tail effect.
+- **Caveat:** one profiled launch per configuration, under ncu (clocks locked, so times differ slightly from the benchmark). Screenshots of the ncu GUI are still to be taken for the report.
 
 ### Stage 6: Separable and large-radius blur
 - **Build:** separable Gaussian (horizontal then vertical pass) and a radius sweep (3, 7, 15, 31, 63).
@@ -317,7 +335,7 @@ Writing the report is not an afterthought. Draft each section right after its st
 - [x] Stage 2: measurement harness
 - [x] Stage 3: correctness check
 - [x] Stage 4: convolution naive
-- [ ] Stage 5: convolution tiled
+- [x] Stage 5: convolution tiled
 - [ ] Stage 6: separable and radius sweep
 - [ ] Stage 7: histogram
 - [ ] Stage 8: auto-contrast

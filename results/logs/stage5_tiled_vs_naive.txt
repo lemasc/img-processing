@@ -1,0 +1,41 @@
+$ scripts/bench.sh -t single -m 8G build/bench_blur -c 1 images/photo_1mp.png images/photo_6mp.png images/photo_24mp.png
+# 2026-10-26T15:12:40+07:00  host=lemasc-ubuntu  commit=18909d2
+bench: mode=single cpus=0 threads=1 governor=performance load=0.59
+gpu runs=20, cpu runs=1, block=16x16, caches flushed before each run, medians
+photo_1mp.png        1.0 MP k=3  naive  | cpu     15.6 | kern    0.065  e2e    0.79 ms |   95.2 GB/s ( 26%)  1000.0 GFLOP/s | occ 100% | x242 vs cpu
+photo_1mp.png        1.0 MP k=3  tiled  | cpu     15.6 | kern    0.066  e2e    0.79 ms |   93.8 GB/s ( 26%)   984.4 GFLOP/s | occ 100% | x238 vs cpu | x0.98 vs naive
+photo_1mp.png        1.0 MP k=3  tiledf | cpu     15.6 | kern    0.066  e2e    0.80 ms |   93.8 GB/s ( 26%)   984.4 GFLOP/s | occ 100% | x238 vs cpu | x0.98 vs naive
+photo_1mp.png        1.0 MP k=5  naive  | cpu     37.5 | kern    0.142  e2e    0.90 ms |   43.2 GB/s ( 12%)  1259.0 GFLOP/s | occ 100% | x263 vs cpu
+photo_1mp.png        1.0 MP k=5  tiled  | cpu     37.5 | kern    0.121  e2e    0.85 ms |   50.8 GB/s ( 14%)  1483.1 GFLOP/s | occ 100% | x310 vs cpu | x1.18 vs naive
+photo_1mp.png        1.0 MP k=5  tiledf | cpu     37.5 | kern    0.123  e2e    0.86 ms |   50.0 GB/s ( 14%)  1458.3 GFLOP/s | occ 100% | x305 vs cpu | x1.16 vs naive
+photo_1mp.png        1.0 MP k=7  naive  | cpu     68.4 | kern    0.259  e2e    1.00 ms |   23.7 GB/s (  7%)  1354.9 GFLOP/s | occ 100% | x264 vs cpu
+photo_1mp.png        1.0 MP k=7  tiled  | cpu     68.4 | kern    0.210  e2e    0.94 ms |   29.3 GB/s (  8%)  1673.2 GFLOP/s | occ 100% | x326 vs cpu | x1.23 vs naive
+photo_1mp.png        1.0 MP k=7  tiledf | cpu     68.4 | kern    0.214  e2e    0.95 ms |   28.7 GB/s (  8%)  1641.1 GFLOP/s | occ 100% | x320 vs cpu | x1.21 vs naive
+photo_1mp.png        1.0 MP k=11 naive  | cpu    159.2 | kern    0.608  e2e    1.33 ms |   10.1 GB/s (  3%)  1425.9 GFLOP/s | occ 100% | x262 vs cpu
+photo_1mp.png        1.0 MP k=11 tiled  | cpu    159.2 | kern    0.482  e2e    1.19 ms |   12.7 GB/s (  4%)  1798.3 GFLOP/s | occ 100% | x330 vs cpu | x1.26 vs naive
+photo_1mp.png        1.0 MP k=11 tiledf | cpu    159.2 | kern    0.460  e2e    1.19 ms |   13.4 GB/s (  4%)  1886.4 GFLOP/s | occ 100% | x346 vs cpu | x1.32 vs naive
+photo_6mp.png        6.0 MP k=3  naive  | cpu     92.2 | kern    0.343  e2e    4.10 ms |  104.9 GB/s ( 29%)  1101.9 GFLOP/s | occ 100% | x269 vs cpu
+photo_6mp.png        6.0 MP k=3  tiled  | cpu     92.2 | kern    0.341  e2e    4.10 ms |  105.5 GB/s ( 29%)  1107.6 GFLOP/s | occ 100% | x270 vs cpu | x1.01 vs naive
+photo_6mp.png        6.0 MP k=3  tiledf | cpu     92.2 | kern    0.341  e2e    4.07 ms |  105.7 GB/s ( 29%)  1109.5 GFLOP/s | occ 100% | x271 vs cpu | x1.01 vs naive
+photo_6mp.png        6.0 MP k=5  naive  | cpu    215.2 | kern    0.767  e2e    4.52 ms |   47.0 GB/s ( 13%)  1369.5 GFLOP/s | occ 100% | x281 vs cpu
+photo_6mp.png        6.0 MP k=5  tiled  | cpu    215.2 | kern    0.644  e2e    4.36 ms |   55.9 GB/s ( 16%)  1629.8 GFLOP/s | occ 100% | x334 vs cpu | x1.19 vs naive
+photo_6mp.png        6.0 MP k=5  tiledf | cpu    215.2 | kern    0.654  e2e    4.36 ms |   55.0 GB/s ( 15%)  1604.7 GFLOP/s | occ 100% | x329 vs cpu | x1.17 vs naive
+photo_6mp.png        6.0 MP k=7  naive  | cpu    400.3 | kern    1.410  e2e    5.15 ms |   25.5 GB/s (  7%)  1459.5 GFLOP/s | occ 100% | x284 vs cpu
+photo_6mp.png        6.0 MP k=7  tiled  | cpu    400.3 | kern    1.138  e2e    4.87 ms |   31.6 GB/s (  9%)  1809.0 GFLOP/s | occ 100% | x352 vs cpu | x1.24 vs naive
+photo_6mp.png        6.0 MP k=7  tiledf | cpu    400.3 | kern    1.160  e2e    4.89 ms |   31.0 GB/s (  9%)  1773.6 GFLOP/s | occ 100% | x345 vs cpu | x1.22 vs naive
+photo_6mp.png        6.0 MP k=11 naive  | cpu    932.2 | kern    3.555  e2e    7.08 ms |   10.1 GB/s (  3%)  1429.5 GFLOP/s | occ 100% | x262 vs cpu
+photo_6mp.png        6.0 MP k=11 tiled  | cpu    932.2 | kern    2.651  e2e    6.38 ms |   13.6 GB/s (  4%)  1916.9 GFLOP/s | occ 100% | x352 vs cpu | x1.34 vs naive
+photo_6mp.png        6.0 MP k=11 tiledf | cpu    932.2 | kern    2.661  e2e    6.40 ms |   13.5 GB/s (  4%)  1910.1 GFLOP/s | occ 100% | x350 vs cpu | x1.34 vs naive
+photo_24mp.png      24.0 MP k=3  naive  | cpu    365.5 | kern    1.364  e2e   15.95 ms |  105.6 GB/s ( 29%)  1108.7 GFLOP/s | occ 100% | x268 vs cpu
+photo_24mp.png      24.0 MP k=3  tiled  | cpu    365.5 | kern    1.338  e2e   15.91 ms |  107.6 GB/s ( 30%)  1129.8 GFLOP/s | occ 100% | x273 vs cpu | x1.02 vs naive
+photo_24mp.png      24.0 MP k=3  tiledf | cpu    365.5 | kern    1.325  e2e   15.87 ms |  108.7 GB/s ( 30%)  1141.1 GFLOP/s | occ 100% | x276 vs cpu | x1.03 vs naive
+photo_24mp.png      24.0 MP k=5  naive  | cpu    869.7 | kern    3.116  e2e   17.60 ms |   46.2 GB/s ( 13%)  1347.7 GFLOP/s | occ 100% | x279 vs cpu
+photo_24mp.png      24.0 MP k=5  tiled  | cpu    869.7 | kern    2.533  e2e   17.15 ms |   56.8 GB/s ( 16%)  1657.9 GFLOP/s | occ 100% | x343 vs cpu | x1.23 vs naive
+photo_24mp.png      24.0 MP k=5  tiledf | cpu    869.7 | kern    2.545  e2e   17.13 ms |   56.6 GB/s ( 16%)  1650.5 GFLOP/s | occ 100% | x342 vs cpu | x1.22 vs naive
+photo_24mp.png      24.0 MP k=7  naive  | cpu   1608.3 | kern    5.676  e2e   20.15 ms |   25.4 GB/s (  7%)  1450.3 GFLOP/s | occ 100% | x283 vs cpu
+photo_24mp.png      24.0 MP k=7  tiled  | cpu   1608.3 | kern    4.523  e2e   19.04 ms |   31.8 GB/s (  9%)  1820.0 GFLOP/s | occ 100% | x356 vs cpu | x1.25 vs naive
+photo_24mp.png      24.0 MP k=7  tiledf | cpu   1608.3 | kern    4.539  e2e   19.12 ms |   31.7 GB/s (  9%)  1813.5 GFLOP/s | occ 100% | x354 vs cpu | x1.25 vs naive
+photo_24mp.png      24.0 MP k=11 naive  | cpu   3743.7 | kern   13.298  e2e   27.79 ms |   10.8 GB/s (  3%)  1528.7 GFLOP/s | occ 100% | x282 vs cpu
+photo_24mp.png      24.0 MP k=11 tiled  | cpu   3743.7 | kern   10.477  e2e   25.09 ms |   13.7 GB/s (  4%)  1940.3 GFLOP/s | occ 100% | x357 vs cpu | x1.27 vs naive
+photo_24mp.png      24.0 MP k=11 tiledf | cpu   3743.7 | kern   10.542  e2e   25.09 ms |   13.7 GB/s (  4%)  1928.3 GFLOP/s | occ 100% | x355 vs cpu | x1.26 vs naive
+# exit=0

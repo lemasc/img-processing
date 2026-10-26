@@ -231,3 +231,1050 @@ blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
 blur_gauss,cuda_naive,photo_24mp.png k=5,1,24000000,99,0,1,0.00000137,1
 blur_gauss,cuda_naive,photo_24mp.png k=7,1,24000000,115,0,1,0.00000160,1
 blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_naive,photo_6mp.png k=11,1,6000000,26,0,1,0.00000144,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=3,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=5,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=7,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=11,1,851,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=3 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=3 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=3 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=5 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=5 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=5 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=7 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=7 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=7 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=11 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=11 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=11 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=3 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=5 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=7 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=11 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=3 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=5 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=7 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=11 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=3 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=3 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=3 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=5 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=5 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=5 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=7 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=7 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=7 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=11 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=11 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=11 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=3 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=3 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=3 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=5 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=5 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=5 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=7 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=7 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=7 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=11 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=11 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=11 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=3 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=3 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=3 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=5 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=5 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=5 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=7 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=7 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=7 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=11 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=11 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=11 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=3 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=3 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=3 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=5 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=5 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=5 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=7 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=7 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=7 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=11 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=11 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=11 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=3 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=3 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=3 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=5 blk=16x16,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiled,random 257x129 k=5 blk=16x16,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=5 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=7 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=7 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=7 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=11 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=11 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=11 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=8x8,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=8x8,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=8x8 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=8x8,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=8x8,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=8x8 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=16x16,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=16x16,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=16x16 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=16x16,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=16x16,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=16x16 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=32x32,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=32x32,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=32x32 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=32x32,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=32x32,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=32x32 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=32x4,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=32x4,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=32x4 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=32x4,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=32x4,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=32x4 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=1x1 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=1x1,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=1x1,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=1x1 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=3,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=5,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=7,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=11,1,851,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=3 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=3 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=3 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=5 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=5 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=5 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=7 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=7 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=7 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=11 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=11 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=11 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=3 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=5 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=7 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=11 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=3 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=5 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=7 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=11 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=3 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=3 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=3 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=5 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=5 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=5 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=7 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=7 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=7 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=11 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=11 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=11 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=3 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=3 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=3 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=5 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=5 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=5 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=7 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=7 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=7 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=11 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=11 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=11 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=3 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=3 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=3 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=5 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=5 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=5 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=7 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=7 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=7 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=11 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=11 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=11 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=3 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=3 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=3 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=5 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=5 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=5 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=7 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=7 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=7 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=11 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=11 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=11 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=3 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=3 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=3 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=5 blk=16x16,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiled,random 257x129 k=5 blk=16x16,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=5 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=7 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=7 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=7 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=11 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=11 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=11 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=8x8,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=8x8,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=8x8 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=8x8,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=8x8,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=8x8 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=16x16,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=16x16,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=16x16 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=16x16,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=16x16,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=16x16 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=32x32,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=32x32,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=32x32 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=32x32,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=32x32,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=32x32 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=32x4,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=32x4,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=32x4 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=32x4,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=32x4,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=32x4 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=1x1 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=1x1,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=1x1,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=1x1 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,photo_6mp.png k=3,1,6000000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,photo_6mp.png k=3,1,6000000,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,photo_6mp.png k=11,1,6000000,26,0,1,0.00000144,1
+blur_gauss,cuda_tiled,photo_6mp.png k=11,1,6000000,26,0,1,0.00000144,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=3,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=5,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=7,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=11,1,851,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=3 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=3 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=3 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=3 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=3 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=5 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=5 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=5 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=5 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=5 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=7 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=7 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=7 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=7 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=7 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=11 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=11 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=11 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=11 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=11 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=3 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=3 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=3 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=5 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=5 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=5 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=7 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=7 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=7 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=11 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=11 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=11 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=3 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=3 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=3 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=5 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=5 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=5 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=7 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=7 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=7 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=11 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=11 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=11 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=3 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=3 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=3 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=3 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=3 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=5 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=5 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=5 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=5 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=5 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=7 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=7 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=7 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=7 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=7 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=11 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=11 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=11 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=11 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=11 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=3 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=3 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=3 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=3 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=3 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=5 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=5 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=5 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=5 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=5 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=7 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=7 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=7 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=7 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=7 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=11 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=11 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=11 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=11 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=11 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=3 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=3 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=3 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=3 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=3 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=5 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=5 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=5 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=5 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=5 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=7 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=7 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=7 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=7 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=7 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=11 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=11 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=11 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=11 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=11 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=3 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=3 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=3 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=3 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=3 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=5 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=5 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=5 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=5 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=5 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=7 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=7 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=7 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=7 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=7 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=11 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=11 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=11 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=11 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=11 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=3 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=3 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=3 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=3 blk=16x16 float tile,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=3 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=5 blk=16x16,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiled,random 257x129 k=5 blk=16x16,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=5 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=5 blk=16x16 float tile,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=5 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=7 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=7 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=7 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=7 blk=16x16 float tile,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=7 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=11 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=11 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=11 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=11 blk=16x16 float tile,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=11 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=8x8,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=8x8,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=8x8 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=8x8 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=8x8 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=8x8,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=8x8,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=8x8 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=8x8 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=8x8 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=16x16,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=16x16,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=16x16 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=16x16 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=16x16 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=16x16,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=16x16,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=16x16 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=16x16 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=16x16 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=32x32,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=32x32,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=32x32 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=32x32 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=32x32 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=32x32,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=32x32,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=32x32 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=32x32 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=32x32 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=32x4,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=32x4,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=32x4 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=32x4 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=32x4 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=32x4,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=32x4,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=32x4 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=32x4 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=32x4 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=1x1 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=1x1 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=1x1 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=1x1,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=1x1,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=1x1 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=1x1 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=1x1 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=3,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=5,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=7,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=11,1,851,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=3 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=3 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=3 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=3 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=3 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=5 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=5 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=5 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=5 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=5 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=7 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=7 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=7 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=7 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=7 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=11 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=11 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=11 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=11 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=11 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=3 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=3 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=3 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=5 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=5 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=5 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=7 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=7 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=7 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=11 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=11 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=11 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=3 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=3 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=3 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=5 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=5 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=5 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=7 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=7 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=7 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=11 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=11 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=11 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=3 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=3 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=3 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=3 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=3 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=5 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=5 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=5 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=5 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=5 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=7 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=7 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=7 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=7 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=7 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=11 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=11 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=11 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=11 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=11 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=3 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=3 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=3 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=3 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=3 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=5 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=5 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=5 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=5 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=5 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=7 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=7 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=7 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=7 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=7 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=11 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=11 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=11 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=11 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=11 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=3 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=3 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=3 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=3 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=3 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=5 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=5 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=5 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=5 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=5 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=7 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=7 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=7 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=7 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=7 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=11 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=11 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=11 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=11 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=11 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=3 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=3 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=3 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=3 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=3 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=5 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=5 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=5 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=5 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=5 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=7 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=7 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=7 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=7 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=7 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=11 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=11 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=11 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=11 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=11 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=3 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=3 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=3 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=3 blk=16x16 float tile,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=3 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=5 blk=16x16,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiled,random 257x129 k=5 blk=16x16,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=5 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=5 blk=16x16 float tile,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=5 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=7 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=7 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=7 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=7 blk=16x16 float tile,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=7 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=11 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=11 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=11 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=11 blk=16x16 float tile,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=11 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=8x8,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=8x8,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=8x8 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=8x8 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=8x8 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=8x8,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=8x8,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=8x8 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=8x8 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=8x8 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=16x16,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=16x16,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=16x16 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=16x16 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=16x16 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=16x16,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=16x16,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=16x16 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=16x16 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=16x16 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=32x32,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=32x32,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=32x32 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=32x32 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=32x32 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=32x32,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=32x32,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=32x32 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=32x32 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=32x32 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=32x4,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=32x4,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=32x4 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=32x4 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=32x4 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=32x4,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=32x4,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=32x4 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=32x4 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=32x4 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=1x1 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=1x1 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=1x1 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=1x1,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=1x1,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=1x1 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=1x1 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=1x1 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,photo_6mp.png k=3,1,6000000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,photo_6mp.png k=3,1,6000000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,photo_6mp.png k=3,1,6000000,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,photo_6mp.png k=11,1,6000000,26,0,1,0.00000144,1
+blur_gauss,cuda_tiled,photo_6mp.png k=11,1,6000000,26,0,1,0.00000144,1
+blur_gauss,cuda_tiledf,photo_6mp.png k=11,1,6000000,26,0,1,0.00000144,1
+blur_gauss,cuda_naive,photo_1mp.png k=3,1,1024000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,photo_1mp.png k=3,1,1024000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,photo_1mp.png k=3,1,1024000,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,photo_1mp.png k=5,1,1024000,2,0,1,0.00000065,1
+blur_gauss,cuda_tiled,photo_1mp.png k=5,1,1024000,2,0,1,0.00000065,1
+blur_gauss,cuda_tiledf,photo_1mp.png k=5,1,1024000,2,0,1,0.00000065,1
+blur_gauss,cuda_naive,photo_1mp.png k=7,1,1024000,4,0,1,0.00000130,1
+blur_gauss,cuda_tiled,photo_1mp.png k=7,1,1024000,4,0,1,0.00000130,1
+blur_gauss,cuda_tiledf,photo_1mp.png k=7,1,1024000,4,0,1,0.00000130,1
+blur_gauss,cuda_naive,photo_1mp.png k=11,1,1024000,3,0,1,0.00000098,1
+blur_gauss,cuda_tiled,photo_1mp.png k=11,1,1024000,3,0,1,0.00000098,1
+blur_gauss,cuda_tiledf,photo_1mp.png k=11,1,1024000,3,0,1,0.00000098,1
+blur_gauss,cuda_naive,photo_6mp.png k=3,1,6000000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,photo_6mp.png k=3,1,6000000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,photo_6mp.png k=3,1,6000000,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,photo_6mp.png k=5,1,6000000,25,0,1,0.00000139,1
+blur_gauss,cuda_tiled,photo_6mp.png k=5,1,6000000,25,0,1,0.00000139,1
+blur_gauss,cuda_tiledf,photo_6mp.png k=5,1,6000000,25,0,1,0.00000139,1
+blur_gauss,cuda_naive,photo_6mp.png k=7,1,6000000,33,0,1,0.00000183,1
+blur_gauss,cuda_tiled,photo_6mp.png k=7,1,6000000,33,0,1,0.00000183,1
+blur_gauss,cuda_tiledf,photo_6mp.png k=7,1,6000000,33,0,1,0.00000183,1
+blur_gauss,cuda_naive,photo_6mp.png k=11,1,6000000,26,0,1,0.00000144,1
+blur_gauss,cuda_tiled,photo_6mp.png k=11,1,6000000,26,0,1,0.00000144,1
+blur_gauss,cuda_tiledf,photo_6mp.png k=11,1,6000000,26,0,1,0.00000144,1
+blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiled,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_naive,photo_24mp.png k=5,1,24000000,99,0,1,0.00000137,1
+blur_gauss,cuda_tiled,photo_24mp.png k=5,1,24000000,99,0,1,0.00000137,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=5,1,24000000,99,0,1,0.00000137,1
+blur_gauss,cuda_naive,photo_24mp.png k=7,1,24000000,115,0,1,0.00000160,1
+blur_gauss,cuda_tiled,photo_24mp.png k=7,1,24000000,115,0,1,0.00000160,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=7,1,24000000,115,0,1,0.00000160,1
+blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiled,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiled,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiled,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiled,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiled,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiled,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiled,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiled,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiled,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiledf,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+color,ctest,all 16.7M RGB colors,1,16777216,224,0,1,0.00000451,1
+color,ctest,first 1 px of all-colors,1,1,0,0,0,0.00000000,1
+color,ctest,first 2 px of all-colors,1,2,0,0,0,0.00000000,1
+color,ctest,first 255 px of all-colors,1,255,0,0,0,0.00000000,1
+color,ctest,first 256 px of all-colors,1,256,0,0,0,0.00000000,1
+color,ctest,first 257 px of all-colors,1,257,0,0,0,0.00000000,1
+color,ctest,first 1023 px of all-colors,1,1023,0,0,0,0.00000000,1
+color,ctest,first 1025 px of all-colors,1,1025,0,0,0,0.00000000,1
+color,ctest,first 65537 px of all-colors,1,65537,1,0,1,0.00000509,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=3,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=5,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=7,1,851,0,0,0,0.00000000,1
+blur_gauss,cpu_vs_double,cpu vs double ref 37x23 k=11,1,851,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=3,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=5,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=7,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_flat,flat 37: cuda tiled vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cpu_flat,flat 37: cpu vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_flat,flat 37: cuda vs input k=11,0,6000,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=3 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=3 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=3 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=3 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=3 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=5 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=5 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=5 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=5 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=5 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=7 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=7 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=7 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=7 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=7 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x1 k=11 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x1 k=11 blk=16x16,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x1 k=11 blk=16x16 vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x1 k=11 blk=16x16 float tile,1,1,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x1 k=11 blk=16x16 float tile vs naive,0,1,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=3 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=3 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=3 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=5 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=5 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=5 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=7 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=7 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=7 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 1x9 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 1x9 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 1x9 k=11 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 1x9 k=11 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 1x9 k=11 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=3 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=3 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=3 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=3 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=5 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=5 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=5 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=5 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=7 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=7 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=7 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=7 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 9x1 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 9x1 k=11 blk=16x16,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 9x1 k=11 blk=16x16 vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 9x1 k=11 blk=16x16 float tile,1,9,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 9x1 k=11 blk=16x16 float tile vs naive,0,9,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=3 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=3 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=3 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=3 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=3 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=5 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=5 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=5 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=5 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=5 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=7 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=7 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=7 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=7 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=7 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 5x5 k=11 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 5x5 k=11 blk=16x16,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 5x5 k=11 blk=16x16 vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 5x5 k=11 blk=16x16 float tile,1,25,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 5x5 k=11 blk=16x16 float tile vs naive,0,25,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=3 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=3 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=3 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=3 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=3 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=5 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=5 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=5 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=5 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=5 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=7 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=7 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=7 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=7 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=7 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 17x33 k=11 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 17x33 k=11 blk=16x16,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 17x33 k=11 blk=16x16 vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 17x33 k=11 blk=16x16 float tile,1,561,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 17x33 k=11 blk=16x16 float tile vs naive,0,561,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=3 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=3 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=3 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=3 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=3 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=5 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=5 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=5 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=5 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=5 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=7 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=7 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=7 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=7 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=7 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 16x16 k=11 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 16x16 k=11 blk=16x16,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 16x16 k=11 blk=16x16 vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 16x16 k=11 blk=16x16 float tile,1,256,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 16x16 k=11 blk=16x16 float tile vs naive,0,256,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=3 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=3 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=3 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=3 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=3 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=5 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=5 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=5 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=5 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=5 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=7 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=7 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=7 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=7 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=7 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 250x3 k=11 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 250x3 k=11 blk=16x16,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 250x3 k=11 blk=16x16 vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 250x3 k=11 blk=16x16 float tile,1,750,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 250x3 k=11 blk=16x16 float tile vs naive,0,750,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=3 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=3 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=3 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=3 blk=16x16 float tile,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=3 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=5 blk=16x16,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiled,random 257x129 k=5 blk=16x16,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=5 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=5 blk=16x16 float tile,1,33153,1,0,1,0.00001005,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=5 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=7 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=7 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=7 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=7 blk=16x16 float tile,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=7 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 257x129 k=11 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 257x129 k=11 blk=16x16,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 257x129 k=11 blk=16x16 vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 257x129 k=11 blk=16x16 float tile,1,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 257x129 k=11 blk=16x16 float tile vs naive,0,33153,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=8x8,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=8x8,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=8x8 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=8x8 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=8x8 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=8x8,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=8x8,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=8x8 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=8x8 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=8x8 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=16x16,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=16x16,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=16x16 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=16x16 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=16x16 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=16x16,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=16x16,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=16x16 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=16x16 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=16x16 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=32x32,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=32x32,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=32x32 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=32x32 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=32x32 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=32x32,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=32x32,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=32x32 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=32x32 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=32x32 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=32x4,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=32x4,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=32x4 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=32x4 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=32x4 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=32x4,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=32x4,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=32x4 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=32x4 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=32x4 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=3 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled,random 301x203 k=3 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=3 blk=1x1 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=3 blk=1x1 float tile,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=3 blk=1x1 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,random 301x203 k=11 blk=1x1,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled,random 301x203 k=11 blk=1x1,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiled_vs_naive,random 301x203 k=11 blk=1x1 vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf,random 301x203 k=11 blk=1x1 float tile,1,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_tiledf_vs_naive,random 301x203 k=11 blk=1x1 float tile vs naive,0,61103,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,photo_1mp.png k=3,1,1024000,0,0,0,0.00000000,1
+blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_tiled,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_tiled,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1

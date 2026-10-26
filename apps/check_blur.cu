@@ -1,4 +1,4 @@
-// Stage 4 correctness check of the blur implementations.
+// Stage 4 and 5 correctness check of the blur implementations (naive and tiled).
 // Usage: check_blur [image...]
 // Always runs: CPU vs a double-precision reference, flat-image invariance, then CUDA vs CPU on random
 // images with sizes smaller than, equal to and not dividing the block, for every kernel size and
@@ -30,13 +30,23 @@ static std::vector<uint8_t> random_image(int w, int h, unsigned seed) {
   return v;
 }
 
+// Both CUDA kernels against the CPU reference (tolerance 1), and the tiled kernel against the naive
+// one (tolerance 0: same taps, same order, so they should agree bit for bit).
 static void check_cuda(const std::string& label, const uint8_t* in, int w, int h, int k, int bx, int by) {
   GaussKernel g = make_gaussian(k);
-  std::vector<uint8_t> ref((size_t)w * h * 3), out(ref.size());
+  std::vector<uint8_t> ref((size_t)w * h * 3), naive(ref.size()), tiled(ref.size()), tiledf(ref.size());
   blur_cpu(in, ref.data(), w, h, g);
-  blur_naive_cuda(in, out.data(), w, h, g, bx, by);
-  report(label + " k=" + std::to_string(k) + " blk=" + std::to_string(bx) + "x" + std::to_string(by), "cuda_naive",
-         compare_images(ref.data(), out.data(), (size_t)w * h, 3, kTol), kTol);
+  blur_naive_cuda(in, naive.data(), w, h, g, bx, by);
+  const std::string l = label + " k=" + std::to_string(k) + " blk=" + std::to_string(bx) + "x" + std::to_string(by);
+  report(l, "cuda_naive", compare_images(ref.data(), naive.data(), (size_t)w * h, 3, kTol), kTol);
+  if (blur_tile_bytes(g, bx, by) > 48 * 1024) { printf("%-44s skipped (tile exceeds 48 KB)\n", l.c_str()); return; }
+  blur_tiled_cuda(in, tiled.data(), w, h, g, bx, by);
+  report(l, "cuda_tiled", compare_images(ref.data(), tiled.data(), (size_t)w * h, 3, kTol), kTol);
+  report(l + " vs naive", "cuda_tiled_vs_naive", compare_images(naive.data(), tiled.data(), (size_t)w * h, 3, 0), 0);
+  if (blur_tile_bytes(g, bx, by, 4) > 48 * 1024) { printf("%-44s float tile skipped (exceeds 48 KB)\n", l.c_str()); return; }
+  blur_tiled_cuda(in, tiledf.data(), w, h, g, bx, by, true);
+  report(l + " float tile", "cuda_tiledf", compare_images(ref.data(), tiledf.data(), (size_t)w * h, 3, kTol), kTol);
+  report(l + " float tile vs naive", "cuda_tiledf_vs_naive", compare_images(naive.data(), tiledf.data(), (size_t)w * h, 3, 0), 0);
 }
 
 int main(int argc, char** argv) {
@@ -68,6 +78,9 @@ int main(int argc, char** argv) {
     GaussKernel g = make_gaussian(k);
     blur_cpu(in.data(), a.data(), w, h, g);
     blur_naive_cuda(in.data(), b.data(), w, h, g);
+    std::vector<uint8_t> t(in.size());
+    blur_tiled_cuda(in.data(), t.data(), w, h, g);
+    report("flat 37: cuda tiled vs input k=" + std::to_string(k), "cuda_tiled_flat", compare_images(in.data(), t.data(), (size_t)w * h, 3, 0), 0);
     report("flat 37: cpu vs input k=" + std::to_string(k), "cpu_flat", compare_images(in.data(), a.data(), (size_t)w * h, 3, 0), 0);
     report("flat 37: cuda vs input k=" + std::to_string(k), "cuda_flat", compare_images(in.data(), b.data(), (size_t)w * h, 3, 0), 0);
   }
@@ -83,7 +96,7 @@ int main(int argc, char** argv) {
   {
     auto in = random_image(301, 203, 9);
     for (auto b : {std::pair<int, int>{8, 8}, {16, 16}, {32, 32}, {32, 4}, {1, 1}})
-      check_cuda("random 301x203", in.data(), 301, 203, 7, b.first, b.second);
+      for (int k : {3, 11}) check_cuda("random 301x203", in.data(), 301, 203, k, b.first, b.second);
   }
 
   for (int i = 1; i < argc; i++) {
