@@ -75,11 +75,13 @@ Each stage is a working checkpoint. The report is valid at any tier boundary.
 
 | Tier | Stages | Outcome |
 |---|---|---|
-| **Minimum (must finish)** | 1 to 5, plus the ladder (Stage 12) on color and blur only | Complete, gradable report |
-| **Target** | Add 6, 9, 10 | Compute-bound analysis, roofline chart |
-| **Stretch** | Add 7, 8, 11 and the median filter | Full coverage, extra depth |
+| **Submission scope (decided)** | 1 to 6 (done), 11 (pinned memory and streams), 12 (ladder on color and blur), roofline and charts | Complete, gradable report |
+| **Optional inside scope** | WASM rungs 3 and 4 (scalar, SIMD128) in Node | Extra platform angle, drop if setup runs long |
+| **Deferred (personal project, future work in the report)** | 7, 8, 9, 10, median filter, WASM threads (rung 5) | Not needed for the rubric |
 
-Rule: do not start a stage until the previous one is measured, screenshotted, and logged.
+Scope decision (revised after finishing Stage 6): stages 1 to 6 already cover source code, development steps and experiment summary for the rubric. What is missing is the CPU-vs-GPU comparison (Stage 12), the PCIe follow-up (Stage 11), and the write-up. The deferred stages stay in the roadmap below with their descriptions, and the report lists them as future work.
+
+Rule: do not start a stage until the previous one is measured and logged (command and output saved under `results/logs/`).
 
 ---
 
@@ -114,7 +116,7 @@ Rule: do not start a stage until the previous one is measured, screenshotted, an
 ### Stage 5: Convolution, tiled
 - **Build:** shared-memory version with halo loading.
 - **Measure:** speedup over naive, effect of block size, achieved occupancy.
-- **Built (in progress):** `blur_tiled_kernel<T>` in `src/blur_cuda.cu`: the block copies its tile plus a (k-1)-wide border-clamped halo into dynamic shared memory, then every thread blurs from shared memory. Two variants: byte tile (`tiled`) and float tile (`tiledf`, converts once at load, 4x the shared memory). Same taps in the same order as the naive kernel, so both are bit-identical to it (`check_blur`, 227 checks, tolerance 0 against naive and 1 against the CPU). `bench_blur` runs all three kernels and reports theoretical occupancy from the CUDA occupancy API. Logs: `results/logs/stage5_tiled_vs_naive.txt`, `results/logs/stage5_block_sweep.txt`, data in `results/data/blur_conv.csv`.
+- **Built:** `blur_tiled_kernel<T>` in `src/blur_cuda.cu`: the block copies its tile plus a (k-1)-wide border-clamped halo into dynamic shared memory, then every thread blurs from shared memory. Two variants: byte tile (`tiled`) and float tile (`tiledf`, converts once at load, 4x the shared memory). Same taps in the same order as the naive kernel, so both are bit-identical to it (`check_blur`, 227 checks, tolerance 0 against naive and 1 against the CPU). `bench_blur` runs all three kernels and reports theoretical occupancy from the CUDA occupancy API. Logs: `results/logs/stage5_tiled_vs_naive.txt`, `results/logs/stage5_block_sweep.txt`, data in `results/data/blur_conv.csv`.
 - **Result (24 MP, 16x16):** tiled over naive is only 1.02x / 1.23x / 1.25x / 1.27x for k = 3 / 5 / 7 / 11 (kernel 1.34 / 2.53 / 4.52 / 10.5 ms). Tiling cuts global loads per pixel from 3k^2 to about 3x1.3 (k=3) or 3x2.9 (k=11) bytes, so load count alone was not the limit, and the Stage 4 hypothesis that it was is only weakly supported (hypothesis 4 holds, but the gap is small). The float tile is no faster than the byte tile (within 1%), which rules out the per-tap byte-to-float conversion as the limit. The kernel still reaches only 4% of DRAM bandwidth and about 1.9 TFLOP/s (15% of the 12.7 peak) at k=11, so what limits it is not yet known.
 - **Block size (tiled, 24 MP, kernel ms for k=3 / k=11):** 8x8 1.65 / 11.20, 16x16 1.34 / 10.48, 32x32 2.21 / 11.42, 32x4 1.38 / 10.84. Theoretical occupancy is 100% for 16x16 and 32x4 and 67% for 8x8 (16 blocks/SM limit, 1024 of 1536 threads) and 32x32 (one 1024-thread block per SM), which matches those two being slowest. At k=3 the 32x32 tiled kernel is slower than naive (x0.87), because the halo load and sync are not repaid at small k.
 - **Profile (Nsight Compute, 24 MP photo, 16x16, one launch each, `--set full`):** reports in `results/profiler/stage5_{naive,tiled}_k{3,11}.ncu-rep` (66 MB, git-ignored, regenerate with `ncu --set full -s 1 -c 1 -o ... build/bench_blur -r 2 -c 1 -k K -v VARIANT images/photo_24mp.png`), full details in `results/logs/stage5_ncu_details.txt`. Counters were blocked by `ERR_NVGPUCTRPERM` (`RmProfilingAdminOnly=1`) until `NVreg_RestrictProfilingToAdminUsers=0` was set in `/etc/modprobe.d/nvidia-profiling.conf` and the machine rebooted.
@@ -131,7 +133,7 @@ Rule: do not start a stage until the previous one is measured, screenshotted, an
   | achieved occupancy (% of peak warps) | 77 | 96 | 94 | 98 |
 
   **Finding: the limiter is the load/store instruction pipe (LSU/L1), not DRAM and not FP32.** DRAM traffic is the 72 MB minimum (24 MP x 3 bytes) for every variant, and the FMA pipe is at most 33% busy. Tiling only moves each per-tap load from a global load to a shared load, one for one (272.25 M at k=11 in both kernels), so the LSU instruction count does not drop and the speedup is small. The tiled k=11 kernel saturates the LSU pipe (99.7%), and its top stall is the MIO queue (7.7 of 18.3 cycles between issues, 42%). This confirms the Stage 4 hypothesis with a correction: the limit is load issue, and tiling does not relieve it, because it removes cache and DRAM traffic, not load instructions. A fix has to cut load instructions per output pixel: vector loads (load 4 bytes or a `uchar4` per instruction), several outputs per thread with register reuse, or the separable blur in Stage 6 (2k taps instead of k^2). Occupancy is 94 to 98% achieved, so it does not explain the gap. The naive k=3 value (77%) is a short-kernel tail effect.
-- **Caveat:** one profiled launch per configuration, under ncu (clocks locked, so times differ slightly from the benchmark). Screenshots of the ncu GUI are still to be taken for the report.
+- **Caveat:** one profiled launch per configuration, under ncu (clocks locked, so times differ slightly from the benchmark). The report quotes the text output in `results/logs/stage5_ncu_details.txt`, no GUI screenshots.
 
 ### Stage 6: Separable and large-radius blur
 - **Build:** separable Gaussian (horizontal then vertical pass) and a radius sweep (3, 7, 15, 31, 63).
@@ -154,6 +156,9 @@ Rule: do not start a stage until the previous one is measured, screenshotted, an
   - **CPU:** scalar 2D is capped at k=31 (29 s per run at 24 MP, 3 runs). Above that the 2D GPU kernels have no CPU speedup figure and the GPU outputs are checked against the CPU separable result. Like for like (separable on both), the GPU kernel is 178x to 279x faster than scalar CPU. The scalar CPU separable is 17x faster than scalar CPU 2D at k=31 (1.7 s vs 29 s). End to end, separable at k=127 takes 40 ms against 1730 ms for naive 2D, with 14 ms of that fixed PCIe transfer.
 - **Caveats:** one image (24 MP photo), one block shape (16x16), medians of 20 GPU runs and 3 CPU runs. No Nsight Compute profile of the separable kernels yet, and no separable sweep across block sizes or image sizes.
 
+### Stages 7 to 10 (deferred)
+Not in the submission scope. Kept here for the personal project and for the report's future-work section.
+
 ### Stage 7: Histogram
 - **Build:** global-atomics version, then shared-memory privatized version.
 - **Measure:** time of each, on a flat-color image (maximum contention) vs a noisy image.
@@ -170,12 +175,22 @@ Rule: do not start a stage until the previous one is measured, screenshotted, an
 - **Build:** blurred-mask method that reuses the blur and color kernels so adjustments follow local regions.
 - **Measure:** pipeline time breakdown, and a visual before/after comparison against the per-pixel version from Stage 1.
 
-### Stage 11: Memory optimization
+### Stage 11: Memory optimization (in scope)
 - **Build:** pinned host memory, then chunked processing with CUDA streams.
 - **Measure:** transfer time pageable vs pinned, percentage saved by copy/compute overlap.
+- **Why it is in scope:** the color kernel is transfer-dominated (14 ms of PCIe against about 0.5 ms of kernel at 24 MP), and the measured PCIe cap (13 GB/s of 31.5 theoretical) is the main end-to-end limit. This stage shows how much of that can be hidden.
+- **Apply to:** color (transfer-bound) and separable blur (kernel 13 to 27 ms at large k, so overlap helps there). Expect overlap to save at most the smaller of transfer and compute time per chunk.
+- **Checks:** output identical to the unchunked version (Stage 3 check), chunk count swept (for example 1, 2, 4, 8, 16), and the transfer-time numbers compared against the measured 13.2 / 11.8 GB/s ceilings.
+- **Done when:** pageable vs pinned table, a streams-vs-chunks table, and a timeline from Nsight Systems (text summary is enough) are logged.
 
-### Stage 12: Parallelism ladder
-Run the same algorithm and the same image on every rung, on at least one memory-bound kernel (color) and one compute-bound kernel (blur or bilateral).
+### Stage 12: Parallelism ladder (in scope)
+Run the same algorithm and the same image on every rung, on one memory-bound kernel (color) and one compute-bound kernel (separable blur, Stage 6; bilateral is deferred).
+
+**Build order:** native rungs first (1, 2, 6, 7), since they answer the central question. Then WASM rungs 3 and 4 in Node only if emsdk setup is quick. Rung 5 (WASM threads) is deferred.
+
+**Report both end-to-end and compute-only time per rung.** The GPU rung includes the PCIe transfer in end-to-end, the CPU rungs do not, and hypothesis 2 depends on that difference. Pin threads to P-cores for the main rung 6 runs and report 6 and 16 threads separately (Section 2).
+
+**Reuse:** the shared pixel math in `include/` (`blur.h`, color math), the Stage 2 harness, and the Stage 3 compare, with the fixed-point rung getting its own tolerance.
 
 | Rung | Parallelism type | Approach |
 |---|---|---|
@@ -190,7 +205,7 @@ Run the same algorithm and the same image on every rung, on at least one memory-
 Notes:
 - Benchmark WASM in Node.js for cleaner timings.
 - Compare a float implementation against a fixed-point integer one on SIMD, and use the Stage 3 check to report the precision cost.
-- Rung 6 may be skipped if time is short, but it shows what the 128-bit WASM limit costs compared with native AVX2.
+- Rung 6 is now required (it is the strongest CPU rung, and the fair opponent for the GPU). Rungs 3 and 4 are optional, rung 5 is deferred.
 
 ### Optional: Median filter
 A branch-heavy counterexample showing warp divergence, and a case where the GPU advantage shrinks.
@@ -241,12 +256,12 @@ A branch-heavy counterexample showing warp divergence, and a case where the GPU 
 3. Effective bandwidth as % of peak, per kernel
 4. Block size comparison
 5. Naive vs tiled vs separable blur, time vs radius
-6. Histogram contention, flat vs noisy image
-7. Pipeline stage breakdown for auto-contrast and local highlights/shadows
+6. (Deferred) Histogram contention, flat vs noisy image
+7. (Deferred) Pipeline stage breakdown for auto-contrast and local highlights/shadows
 8. Pinned vs pageable, and streams overlap gain
 9. **Parallelism ladder:** one chart for the memory-bound kernel, one for the compute-bound kernel, side by side
 10. **Roofline chart** with CPU and GPU ceilings and each kernel plotted by arithmetic intensity
-11. Before/after image comparisons (original, global adjustment, local adjustment)
+11. Before/after image comparisons (original, color adjustment output, blur output). The local-adjustment version is deferred with Stage 10.
 
 ---
 
@@ -254,11 +269,12 @@ A branch-heavy counterexample showing warp divergence, and a case where the GPU 
 
 1. The color kernel is **memory-bound**. The GPU kernel itself is very fast, but PCIe transfer dominates end-to-end time.
 2. Multi-core CPU SIMD can be **competitive end-to-end** on simple per-pixel work, because it skips the PCIe transfer.
-3. Blur and bilateral are **compute-bound**, so the GPU wins by a large margin even including transfers.
-4. Tiled convolution beats naive, and separable beats both, with the gap growing with radius.
-5. Histogram atomics suffer heavy contention on flat images, and privatization largely fixes it.
-6. WASM SIMD sits between scalar and native AVX2, limited by its 128-bit width and sandbox overhead.
-7. The median filter narrows the GPU advantage because of divergence.
+3. Blur is **compute-bound** by arithmetic intensity, so the GPU wins by a large margin even including transfers. Stage 4 to 6 data already complicates this: the kernels stay at 11 to 16% of FP32 peak and are limited by load issue, so report "compute-bound by intensity, load-issue-bound in practice".
+4. Tiled convolution beats naive, and separable beats both, with the gap growing with radius. Measured: tiled is only 1.02x to 1.27x over naive, separable up to 63.9x.
+5. (Deferred with Stage 7) Histogram atomics suffer heavy contention on flat images, and privatization largely fixes it.
+6. (Optional, only if WASM rungs are built) WASM SIMD sits between scalar and native AVX2, limited by its 128-bit width and sandbox overhead.
+7. (Deferred with the median filter) The median filter narrows the GPU advantage because of divergence.
+8. (Stage 11) Pinned memory raises PCIe throughput toward the measured 13 GB/s cap, and chunked streams hide at most the smaller of transfer and compute time.
 
 Any hypothesis that fails to match the data is a stronger discussion point than one that matches, so report it honestly.
 
@@ -273,9 +289,9 @@ project/
   wasm/         WASM sources and benchmark runner
   include/      image I/O and timing headers
   images/       test images at several sizes
-  results/      CSV data, charts, output images, profiler screenshots
+  results/      CSV data, charts, output images, logs, profiler reports
   scripts/      run wrappers (capped, bench, logrun), chart generation, aggregation
-  report/       final report and screenshots
+  report/       final report and log excerpts
   Makefile
   README.md
 ```
@@ -288,11 +304,11 @@ project/
 |---|---|
 | **Source code with explanation** | Stage 1 kernel plus one short explanation per later stage (what each kernel does, how threads map to pixels) |
 | **Tools used with explanation** | Hardware table (Section 2), plus compiler, profiler, and runtime tools, each with a one-line role |
-| **Development steps with real screenshots** | Per-stage record: input, command, output, screenshot. Capture as you go. |
+| **Development steps with real screenshots** | Per-stage record: input, command, output. Evidence is the command and its saved output (`results/logs/`), set in the PDF as monospaced terminal-style blocks with the command as caption, plus charts generated from the CSVs and before/after output images. No GUI screenshots. |
 | **Installation and execution** | Tool installation steps, build steps, run steps, and the hardware/software required |
 | **Experiment summary** | Resources used (hardware and software), findings from Section 8, charts from Section 7 |
 
-**Report must include:** name and student ID, source code with brief explanation, tools (hardware and software) with brief roles, numbered development steps (input, output, screenshots from real runs), installation and execution instructions, and a conclusion listing the hardware and software resources required.
+**Report must include:** name and student ID, source code with brief explanation, tools (hardware and software) with brief roles, numbered development steps (input, command, output from real runs, as saved logs), installation and execution instructions, and a conclusion listing the hardware and software resources required.
 
 ---
 
@@ -302,7 +318,7 @@ project/
 2. Introduction: goal, hybrid computing context, central question
 3. Hardware and software environment
 4. Source code overview and explanation
-5. Development and compile steps (per stage: input, output, screenshots)
+5. Development and compile steps (per stage: input, command, output)
 6. Installation and execution
 7. Experiments and results (charts, tables, analysis)
 8. Parallelism ladder comparison
@@ -318,14 +334,15 @@ Adjust to the actual deadline. Work backward from the exam date.
 
 | Phase | Work | Target |
 |---|---|---|
-| A | Stages 1 to 3 (baseline, harness, correctness) | Week 1 |
-| B | Stages 4 to 6 (convolution, separable blur) | Week 2 |
-| C | Stage 12 ladder on color and blur (minimum tier complete here) | Week 3 |
-| D | Stages 9 and 10 (bilateral, local highlights/shadows) | Week 4 |
-| E | Stages 7, 8, 11 and median filter (stretch) | Week 5, only if time allows |
-| F | Charts, writing, proofreading, submission | Final week, reserve at least 5 days |
+| A | Stages 1 to 3 (baseline, harness, correctness) | Done |
+| B | Stages 4 to 6 (convolution, separable blur) | Done |
+| C | Stage 12 ladder, native rungs 1, 2, 6, 7 on color and blur | Next |
+| D | Stage 11 (pinned memory, streams) | After C |
+| E | Optional: WASM rungs 3 and 4 in Node | Only if time allows, cap the setup effort |
+| F | Chart scripts, roofline, Installation and Execution section, draft sections that do not depend on C to E (environment, source overview, steps) | In parallel with C to E |
+| G | Finish report, proofread, export PDF, submit | Reserve at least 5 days before the deadline |
 
-Writing the report is not an afterthought. Draft each section right after its stage while the screenshots and numbers are fresh.
+Writing the report is not an afterthought. Draft each section right after its stage while the logs and numbers are fresh.
 
 ---
 
@@ -338,7 +355,7 @@ Writing the report is not an afterthought. Draft each section right after its st
 | Unfair platform comparison | Same algorithm, image, and precision on every rung |
 | WASM threading setup trouble | Use Node.js, and drop to WASM SIMD without threads if needed |
 | Results contradict expectations | Report honestly and explain, since this counts as analysis |
-| Missing screenshots at the end | Capture at every stage, not afterward |
+| Missing evidence at the end | Every run saves its command and output under `results/logs/`, so the report only has to excerpt them |
 | Floating-point differences between platforms | Define a tolerance in Stage 3 and report max error |
 
 ---
@@ -353,15 +370,15 @@ Writing the report is not an afterthought. Draft each section right after its st
 - [x] Stage 4: convolution naive
 - [x] Stage 5: convolution tiled
 - [x] Stage 6: separable and radius sweep
-- [ ] Stage 7: histogram
-- [ ] Stage 8: auto-contrast
-- [ ] Stage 9: bilateral filter
-- [ ] Stage 10: local highlights/shadows
 - [ ] Stage 11: pinned memory and streams
-- [ ] Stage 12: parallelism ladder (color)
-- [ ] Stage 12: parallelism ladder (blur or bilateral)
+- [ ] Stage 12: parallelism ladder (color), native rungs 1, 2, 6, 7
+- [ ] Stage 12: parallelism ladder (separable blur), native rungs 1, 2, 6, 7
+- [ ] Stage 12 (optional): WASM rungs 3 and 4 in Node
+- [ ] Chart scripts (`scripts/`) for the in-scope charts
 - [ ] Roofline chart
-- [ ] Nsight Compute screenshots
+- [ ] Installation and execution section (commands, memory cap, profiling permission fix)
+- [ ] Optional: `ncu` run on the separable kernel (settles the load-issue hypothesis)
 - [ ] Report written, name and student ID included
+- Deferred: Stage 7 histogram, Stage 8 auto-contrast, Stage 9 bilateral, Stage 10 local highlights/shadows, median filter, WASM threads
 - [ ] Exported as PDF or Word
 - [ ] Submitted via Microsoft Teams before the final exam
