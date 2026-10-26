@@ -24,10 +24,36 @@ Build a set of image processing programs and measure how different kinds of para
 | GPU | NVIDIA RTX 3060 12 GB | 360 GB/s memory bandwidth, about 12.7 TFLOPS FP32 (theoretical peaks) |
 | CPU | Intel Core i5-13400F | 6 P-cores + 4 E-cores, 16 threads, AVX2 (no AVX-512) |
 | OS | Linux | |
-| Host RAM | _[fill in: type, speed, capacity]_ | Limits CPU-side bandwidth |
-| PCIe | _[fill in: generation and lanes]_ | Limits host-to-device transfers |
+| Host RAM | 2 x 8 GB Kingston DDR5-4800 (KF552C40-8), dual-channel, 16 GB total | About 76.8 GB/s theoretical peak, the CPU-side bandwidth ceiling |
+| PCIe | Gen 4 x16 capable (idles at gen 1, verify link under load) | Limits host-to-device transfers |
 
-Software versions (CUDA Toolkit, driver, compiler, Emscripten, Node.js) to be recorded in the report once installed.
+Installed software: driver 595.71.05, CUDA Toolkit 13.2 (target `sm_86`), gcc 13.3, CMake 3.28, Ninja 1.11, Node.js 24.19, Nsight Compute and Nsight Systems, uv 0.11 (Python 3.12). Emscripten via `emsdk` is installed at Stage 12. Final versions are recorded by `scripts/env_report.sh` into `results/env.txt`.
+
+**Machine setup for benchmarking:** CPU governor set to `performance`. Check PCIe link generation under load. Pin CPU threads to P-cores for the main runs and report 6-thread and 16-thread results separately (hybrid P/E-core CPU).
+
+---
+
+## 2a. Test Images
+
+Real photos are 24 to 32 MP at most.
+
+- **Natural content:** real photos at 24 to 32 MP. Smaller sizes (1, 6 MP) are made by area-average downscaling.
+- **48 MP:** made by tiling or upscaling a real photo and labelled "upscaled" in the report. Used only for kernels whose timing does not depend on pixel content (color, blur, bilateral).
+- **Content-dependent kernels (histogram, median):** use real photos plus generated flat and noise images, never upscaled ones.
+- **Flat and noise images:** generated at every size.
+
+---
+
+## 2b. Environment and Safety (remote machine)
+
+The machine is remote with 16 GB RAM, and an out-of-memory event has taken it down before. Precautions:
+
+- Run builds and benchmarks inside a memory-capped cgroup, for example `systemd-run --user --scope -p MemoryMax=10G -p MemorySwapMax=0 <cmd>`, so the OOM killer hits the job and not the machine.
+- Limit build parallelism (`ninja -j4`). CUDA compiles are memory-heavy.
+- Check available memory before large runs. Budget buffers explicitly (a 48 MP float RGB image is about 576 MB, and blur needs ping-pong copies).
+- Cap repetitions for slow CPU rungs (for example 3 runs for scalar 63-radius 2D blur at 24 MP and above).
+- Run long jobs under `tmux` so an SSH drop does not kill them.
+- Python tooling is managed with `uv` (project venv, `uv sync`), not system pip.
 
 ---
 
