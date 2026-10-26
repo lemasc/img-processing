@@ -1,12 +1,12 @@
 $ scripts/bench.sh -t single build/bench_color -r 20 -o results/output images/photo_1mp.png images/photo_6mp.png images/photo_24mp.png images/photo_48mp.png images/photos/32mp_complex_colors.jpg images/flat_24mp.png images/noise_24mp.png
-# 2026-10-26T11:43:47+07:00  host=lemasc-ubuntu  commit=93b9ff2
-bench: mode=single cpus=0 threads=1 governor=performance load=0.33
+# 2026-10-26T12:20:55+07:00  host=lemasc-ubuntu  commit=c32a579
+bench: mode=single cpus=0 threads=1 governor=performance load=0.72
 runs=20, caches flushed before each run, medians in ms
-photo_1mp.png                 1.0 MP | cpu     8.01 | h2d   0.294  kern   0.025  d2h   0.369  e2e    0.732 ms | kern 250.0 GB/s (69%) | x326 kern, x10.9 e2e | maxdiff 1
-photo_6mp.png                 6.0 MP | cpu    47.78 | h2d   1.668  kern   0.124  d2h   1.891  e2e    3.802 ms | kern 290.7 GB/s (81%) | x386 kern, x12.6 e2e | maxdiff 1
-photo_24mp.png               24.0 MP | cpu   193.96 | h2d   6.865  kern   0.472  d2h   7.402  e2e   14.820 ms | kern 305.0 GB/s (85%) | x411 kern, x13.1 e2e | maxdiff 1
-photo_48mp.png               48.0 MP | cpu   378.79 | h2d  13.714  kern   0.940  d2h  14.764  e2e   29.520 ms | kern 306.3 GB/s (85%) | x403 kern, x12.8 e2e | maxdiff 1
-32mp_complex_colors.jpg      32.3 MP | cpu   256.75 | h2d   9.246  kern   0.649  d2h   9.952  e2e   19.910 ms | kern 298.5 GB/s (83%) | x395 kern, x12.9 e2e | maxdiff 1
-flat_24mp.png                24.0 MP | cpu   169.50 | h2d   6.865  kern   0.483  d2h   7.417  e2e   14.811 ms | kern 297.9 GB/s (83%) | x351 kern, x11.4 e2e | maxdiff 0
-noise_24mp.png               24.0 MP | cpu   286.01 | h2d   6.873  kern   0.470  d2h   7.399  e2e   14.877 ms | kern 306.2 GB/s (85%) | x608 kern, x19.2 e2e | maxdiff 1
+photo_1mp.png                 1.0 MP | cpu     6.87 | h2d   0.292  kern   0.024  d2h   0.368  e2e    0.741 ms | kern 260.5 GB/s (72%) | x291 kern, x9.3 e2e | maxdiff 1
+photo_6mp.png                 6.0 MP | cpu    40.13 | h2d   1.681  kern   0.124  d2h   1.907  e2e    3.832 ms | kern 291.3 GB/s (81%) | x325 kern, x10.5 e2e | maxdiff 1
+photo_24mp.png               24.0 MP | cpu   164.11 | h2d   7.000  kern   0.472  d2h   7.438  e2e   14.994 ms | kern 305.0 GB/s (85%) | x348 kern, x10.9 e2e | maxdiff 1
+photo_48mp.png               48.0 MP | cpu   328.17 | h2d  13.976  kern   0.941  d2h  14.845  e2e   29.871 ms | kern 306.0 GB/s (85%) | x349 kern, x11.0 e2e | maxdiff 1
+32mp_complex_colors.jpg      32.3 MP | cpu   220.58 | h2d   9.421  kern   0.634  d2h  10.030  e2e   20.174 ms | kern 305.7 GB/s (85%) | x348 kern, x10.9 e2e | maxdiff 1
+flat_24mp.png                24.0 MP | cpu   163.87 | h2d   7.010  kern   0.472  d2h   7.430  e2e   15.010 ms | kern 305.0 GB/s (85%) | x347 kern, x10.9 e2e | maxdiff 0
+noise_24mp.png               24.0 MP | cpu   163.40 | h2d   7.023  kern   0.483  d2h   7.447  e2e   15.022 ms | kern 297.9 GB/s (83%) | x338 kern, x10.9 e2e | maxdiff 1
 # exit=0

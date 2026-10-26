@@ -17,7 +17,10 @@ target_link_libraries(image_io PUBLIC common)
 # Scalar CPU reference (ladder rung 1): auto-vectorization off.
 add_library(color_cpu STATIC src/color_cpu.cpp)
 target_link_libraries(color_cpu PUBLIC common)
-target_compile_options(color_cpu PRIVATE -O2 -fno-tree-vectorize -fno-tree-slp-vectorize)
+# -ffinite-math-only lets GCC emit minss/maxss for the clamp. Without it the clamp compiles to
+# branches that mispredict on noisy images (see experiments/clamp_branches.cpp).
+target_compile_options(color_cpu PRIVATE -O2 -fno-tree-vectorize -fno-tree-slp-vectorize
+                       -ffinite-math-only -fno-signed-zeros)
 
 add_library(color_cuda STATIC src/color_cuda.cu)
 target_link_libraries(color_cuda PUBLIC common)

@@ -1,0 +1,23 @@
+$ scripts/exp_clamp.sh
+# 2026-10-26T12:19:59+07:00  host=lemasc-ubuntu  commit=c32a579
+== v0_branchy   (minss+maxss in loop: 1)
+variant 0  images/flat_24mp.png       168.28 ms
+variant 0  images/photo_24mp.png      194.80 ms
+variant 0  images/noise_24mp.png      289.85 ms
+== v1_fminf   (minss+maxss in loop: 0)
+variant 1  images/flat_24mp.png       554.92 ms
+variant 1  images/photo_24mp.png      551.26 ms
+variant 1  images/noise_24mp.png      554.26 ms
+== v3_std_minmax   (minss+maxss in loop: 1)
+variant 3  images/flat_24mp.png       166.83 ms
+variant 3  images/photo_24mp.png      193.72 ms
+variant 3  images/noise_24mp.png      284.34 ms
+== v4_sse   (minss+maxss in loop: 4)
+variant 4  images/flat_24mp.png       198.67 ms
+variant 4  images/photo_24mp.png      198.75 ms
+variant 4  images/noise_24mp.png      198.67 ms
+== v0_finite_math   (minss+maxss in loop: 4)
+variant 0  images/flat_24mp.png       161.39 ms
+variant 0  images/photo_24mp.png      161.31 ms
+variant 0  images/noise_24mp.png      161.38 ms
+# exit=0

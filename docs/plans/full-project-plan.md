@@ -38,7 +38,7 @@ Installed software: driver 595.71.05, CUDA Toolkit 13.2 (target `sm_86`), gcc 13
 Real photos are 24 to 32 MP at most.
 
 - **Natural content:** real photos at 24 to 32 MP. Smaller sizes (1, 6 MP) are made by area-average downscaling.
-- **48 MP:** made by upscaling a real photo and labelled "upscaled" in the report. Used only for kernels whose timing does not depend on pixel content. Stage 2 check: the scalar CPU color kernel is content-dependent (24 MP: flat 170 ms, photo 194 ms, noise 286 ms, probably branch misprediction in the clamp), but per-MP time for the real 32 MP photo (7.95 ms/MP) matches the upscaled photos (7.9 to 8.1 ms/MP), so photo-like content is safe at any size. The GPU kernel is content-independent (0.47 to 0.48 ms).
+- **48 MP:** made by upscaling a real photo and labelled "upscaled" in the report. Per-MP time for the real 32 MP photo matches the upscaled photos, and the color kernel is content-independent on both CPU and GPU (24 MP: flat, photo, noise all 164 ms on CPU, 0.47 to 0.48 ms on GPU), so upscaled images are safe for it.
 - **Content-dependent kernels (histogram, median):** use real photos plus generated flat and noise images, never upscaled ones.
 - **Flat and noise images:** generated at every size.
 
@@ -81,6 +81,7 @@ Rule: do not start a stage until the previous one is measured, screenshotted, an
 ### Stage 2: Measurement harness
 - **Build:** timing infrastructure shared by all later stages, with warm-up run, repeated runs, and CSV output.
 - **Measure:** median of about 20 runs, time split (H2D copy, kernel, D2H copy), effective bandwidth as % of the 360 GB/s peak.
+- **Finding (clamp branches):** the first scalar baseline took 169 / 195 / 290 ms on flat / photo / noise 24 MP, because GCC compiled the clamp to compare-and-branch and random data mispredicts. A branch-free clamp (`-ffinite-math-only -fno-signed-zeros`, giving `minss`/`maxss`) takes 161 ms on all three. The baseline uses that, since it is the fairer scalar rung (the GPU clamp is branch-free too). Reproduce with `scripts/exp_clamp.sh`; log in `results/logs/exp_clamp.txt`. `fminf`/`fmaxf` without those flags are 3x slower (libm calls). The median filter experiment is where data-dependent branching matters on purpose.
 - **Built:** `include/timing.h` (warm-up, cache flush before every timed run, median/min/max, CSV), `include/bench.h` (phase split, peaks). Caches are flushed because the 3060 has only 3 MB of L2 and small images would otherwise report impossible bandwidth.
 
 ### Stage 3: Correctness check
