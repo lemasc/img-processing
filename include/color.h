@@ -35,5 +35,13 @@ HD inline void adjust_pixel(const uint8_t* in, uint8_t* out, const ColorParams& 
   for (int i = 0; i < 3; i++) out[i] = (uint8_t)(clamp01(c[i] + delta) * 255.f + 0.5f);
 }
 
+// All implementations share this shape: (in, out, npixels, params), interleaved RGB bytes.
+
 // CPU reference, defined in src/color_cpu.cpp (built scalar, no auto-vectorization).
 void color_cpu(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParams& p);
+
+// CUDA, defined in src/color_cuda.cu.
+// Kernel launch only: d_in and d_out are device pointers. Asynchronous, no sync.
+void color_cuda_launch(const uint8_t* d_in, uint8_t* d_out, size_t npixels, const ColorParams& p, int block = 256);
+// Convenience: host pointers in and out. Allocates, copies, runs, copies back, frees.
+void color_cuda(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParams& p);

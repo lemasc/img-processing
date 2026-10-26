@@ -214,12 +214,13 @@ Any hypothesis that fails to match the data is a stronger discussion point than 
 
 ```
 project/
-  src/          CUDA kernels, CPU reference, SIMD versions
+  src/          reusable library code: CUDA kernels, CPU reference, SIMD versions
+  apps/         thin drivers, one per stage (load image, call library, time, write CSV)
   wasm/         WASM sources and benchmark runner
   include/      image I/O and timing headers
   images/       test images at several sizes
   results/      CSV data, charts, output images, profiler screenshots
-  scripts/      chart generation, result aggregation
+  scripts/      run wrappers (capped, bench, logrun), chart generation, aggregation
   report/       final report and screenshots
   Makefile
   README.md

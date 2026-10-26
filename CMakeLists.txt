@@ -19,10 +19,13 @@ add_library(color_cpu STATIC src/color_cpu.cpp)
 target_link_libraries(color_cpu PUBLIC common)
 target_compile_options(color_cpu PRIVATE -O2 -fno-tree-vectorize -fno-tree-slp-vectorize)
 
+add_library(color_cuda STATIC src/color_cuda.cu)
+target_link_libraries(color_cuda PUBLIC common)
+
 # Smoke test: confirms the CUDA toolchain, GPU, and timing harness work.
-add_executable(smoke src/smoke.cu)
+add_executable(smoke apps/smoke.cu)
 target_link_libraries(smoke PRIVATE common)
 
 # Stage 1: color adjustment.
-add_executable(stage1_color src/stage1_color.cu)
-target_link_libraries(stage1_color PRIVATE common image_io color_cpu)
+add_executable(stage1_color apps/stage1_color.cu)
+target_link_libraries(stage1_color PRIVATE common image_io color_cpu color_cuda)
