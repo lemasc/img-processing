@@ -45,3 +45,10 @@ void color_cpu(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParam
 void color_cuda_launch(const uint8_t* d_in, uint8_t* d_out, size_t npixels, const ColorParams& p, int block = 256);
 // Convenience: host pointers in and out. Allocates, copies, runs, copies back, frees.
 void color_cuda(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParams& p);
+
+// Ladder rungs 2 and 6, defined in src/color_cpu_simd.cpp (built with AVX2, FMA and OpenMP).
+// Thread count for the _omp versions comes from OMP_NUM_THREADS.
+void color_cpu_autovec(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParams& p);
+void color_cpu_autovec_omp(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParams& p);
+void color_cpu_avx2(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParams& p);
+void color_cpu_avx2_omp(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParams& p);

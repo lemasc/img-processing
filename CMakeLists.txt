@@ -22,6 +22,13 @@ target_link_libraries(color_cpu PUBLIC common)
 target_compile_options(color_cpu PRIVATE -O2 -fno-tree-vectorize -fno-tree-slp-vectorize
                        -ffinite-math-only -fno-signed-zeros)
 
+# Ladder rungs 2 and 6: auto-vectorized and hand-written AVX2, with and without OpenMP.
+# Same clamp flags as the scalar rung, so only vectorization and threading differ.
+find_package(OpenMP REQUIRED COMPONENTS CXX)
+add_library(color_cpu_simd STATIC src/color_cpu_simd.cpp)
+target_link_libraries(color_cpu_simd PUBLIC common OpenMP::OpenMP_CXX)
+target_compile_options(color_cpu_simd PRIVATE -O3 -mavx2 -mfma -ffinite-math-only -fno-signed-zeros)
+
 add_library(color_cuda STATIC src/color_cuda.cu)
 target_link_libraries(color_cuda PUBLIC common)
 # nvcc fuses multiply-adds by default, the CPU baseline does not. OFF gives the unfused GPU result
@@ -41,6 +48,10 @@ target_link_libraries(smoke PRIVATE common)
 # Stages 1 and 2: color adjustment with the measurement harness.
 add_executable(bench_color apps/bench_color.cu)
 target_link_libraries(bench_color PRIVATE common image_io color_cpu color_cuda compare)
+
+# Stage 12: parallelism ladder on the color kernel.
+add_executable(bench_ladder_color apps/bench_ladder_color.cu)
+target_link_libraries(bench_ladder_color PRIVATE common image_io color_cpu color_cpu_simd color_cuda compare)
 
 # Stage 3: correctness check.
 add_executable(test_compare apps/test_compare.cpp)
