@@ -101,6 +101,13 @@ void blur_cpu(const uint8_t* in, uint8_t* out, int w, int h, const GaussKernel& 
 // and page faults stay out of the timed region.
 void blur_sep_cpu(const uint8_t* in, uint8_t* out, float* tmp, int w, int h, const GaussKernel& g);
 
+// Ladder rungs 2 and 6 for the separable blur, defined in src/blur_cpu_simd.cpp (built with AVX2, FMA
+// and OpenMP). Same signature and scratch buffer as blur_sep_cpu. The _omp versions use OMP_NUM_THREADS.
+void blur_sep_autovec(const uint8_t* in, uint8_t* out, float* tmp, int w, int h, const GaussKernel& g);
+void blur_sep_autovec_omp(const uint8_t* in, uint8_t* out, float* tmp, int w, int h, const GaussKernel& g);
+void blur_sep_avx2(const uint8_t* in, uint8_t* out, float* tmp, int w, int h, const GaussKernel& g);
+void blur_sep_avx2_omp(const uint8_t* in, uint8_t* out, float* tmp, int w, int h, const GaussKernel& g);
+
 // Slow double-precision reference, used only by the correctness check on small images.
 void blur_ref_double(const uint8_t* in, uint8_t* out, int w, int h, const GaussKernel& g);
 

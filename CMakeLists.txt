@@ -49,6 +49,10 @@ target_link_libraries(smoke PRIVATE common)
 add_executable(bench_color apps/bench_color.cu)
 target_link_libraries(bench_color PRIVATE common image_io color_cpu color_cuda compare)
 
+add_library(blur_cpu_simd STATIC src/blur_cpu_simd.cpp)
+target_link_libraries(blur_cpu_simd PUBLIC common OpenMP::OpenMP_CXX)
+target_compile_options(blur_cpu_simd PRIVATE -O3 -mavx2 -mfma -ffinite-math-only -fno-signed-zeros)
+
 # Stage 12: parallelism ladder on the color kernel.
 add_executable(bench_ladder_color apps/bench_ladder_color.cu)
 target_link_libraries(bench_ladder_color PRIVATE common image_io color_cpu color_cpu_simd color_cuda compare)
@@ -70,6 +74,10 @@ add_executable(bench_blur apps/bench_blur.cu)
 target_link_libraries(bench_blur PRIVATE common image_io blur_cpu blur_cuda compare)
 add_executable(check_blur apps/check_blur.cu)
 target_link_libraries(check_blur PRIVATE common image_io blur_cpu blur_cuda compare)
+
+# Stage 12: parallelism ladder on the separable blur.
+add_executable(bench_ladder_blur apps/bench_ladder_blur.cu)
+target_link_libraries(bench_ladder_blur PRIVATE common image_io blur_cpu blur_cpu_simd blur_cuda compare)
 
 enable_testing()
 add_test(NAME compare_selftest COMMAND test_compare)
