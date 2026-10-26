@@ -1,0 +1,21 @@
+$ scripts/bench.sh -t all build/bench_ladder_blur -r 20 -c 5 -v autovec_omp,avx2_omp,cuda -k 15 images/photo_1mp.png images/photo_6mp.png images/photo_48mp.png
+# 2026-10-27T01:27:57+07:00  host=lemasc-ubuntu  commit=8b62663
+WARNING: load average 6.34, machine is not quiet
+bench: mode=all cpus=0-15 threads=16 governor=performance load=6.34
+gpu runs=20, cpu runs=5, caches flushed before each run, medians
+photo_1mp.png (1.0 MP), k=15 (radius 7), 16 OpenMP threads, cpus=0-15
+  autovec AVX2 + OpenMP            4.23 ms    242.3 MP/s     43.6 GFLOP/s maxdiff 1
+  AVX2 intrinsics + OpenMP         0.56 ms   1812.8 MP/s    326.3 GFLOP/s maxdiff 1
+  CUDA kernel                      0.15 ms   6718.5 MP/s   1209.3 GFLOP/s  (compute only) maxdiff 1
+  CUDA end to end                  0.88 ms  (h2d 0.30 + kernel 0.15 + d2h 0.37)
+photo_6mp.png (6.0 MP), k=15 (radius 7), 16 OpenMP threads, cpus=0-15
+  autovec AVX2 + OpenMP           23.94 ms    250.6 MP/s     45.1 GFLOP/s maxdiff 1
+  AVX2 intrinsics + OpenMP         7.37 ms    813.8 MP/s    146.5 GFLOP/s maxdiff 1
+  CUDA kernel                      0.87 ms   6917.5 MP/s   1245.2 GFLOP/s  (compute only) maxdiff 1
+  CUDA end to end                  4.63 ms  (h2d 1.69 + kernel 0.87 + d2h 1.92)
+photo_48mp.png (48.0 MP), k=15 (radius 7), 16 OpenMP threads, cpus=0-15
+  autovec AVX2 + OpenMP          196.66 ms    244.1 MP/s     43.9 GFLOP/s maxdiff 1
+  AVX2 intrinsics + OpenMP        61.28 ms    783.2 MP/s    141.0 GFLOP/s maxdiff 1
+  CUDA kernel                      7.40 ms   6486.1 MP/s   1167.5 GFLOP/s  (compute only) maxdiff 1
+  CUDA end to end                 36.19 ms  (h2d 14.21 + kernel 7.40 + d2h 15.03)
+# exit=0

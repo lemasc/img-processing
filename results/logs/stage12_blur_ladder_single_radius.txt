@@ -1,0 +1,45 @@
+$ scripts/bench.sh -t single build/bench_ladder_blur -r 20 -c 3 -v scalar,autovec,autovec_omp,avx2,avx2_omp,cuda -k 7,15,31,63,127 images/photo_24mp.png
+# 2026-10-27T01:22:15+07:00  host=lemasc-ubuntu  commit=8b62663
+bench: mode=single cpus=0 threads=1 governor=performance load=0.64
+gpu runs=20, cpu runs=3, caches flushed before each run, medians
+photo_24mp.png (24.0 MP), k=7 (radius 3), 1 OpenMP threads, cpus=0
+  scalar                         438.99 ms     54.7 MP/s      4.6 GFLOP/s  x1.0     maxdiff 0
+  autovec AVX2                   359.52 ms     66.8 MP/s      5.6 GFLOP/s  x1.2     maxdiff 1
+  autovec AVX2 + OpenMP          353.27 ms     67.9 MP/s      5.7 GFLOP/s  x1.2     maxdiff 1
+  AVX2 intrinsics                 89.24 ms    268.9 MP/s     22.6 GFLOP/s  x4.9     maxdiff 1
+  AVX2 intrinsics + OpenMP        89.18 ms    269.1 MP/s     22.6 GFLOP/s  x4.9     maxdiff 1
+  CUDA kernel                      2.39 ms  10046.1 MP/s    843.9 GFLOP/s  (compute only)  x183.8   maxdiff 1
+  CUDA end to end                 17.08 ms  (h2d 7.03 + kernel 2.39 + d2h 7.59)  x25.7
+photo_24mp.png (24.0 MP), k=15 (radius 7), 1 OpenMP threads, cpus=0
+  scalar                         862.03 ms     27.8 MP/s      5.0 GFLOP/s  x1.0     maxdiff 0
+  autovec AVX2                   705.02 ms     34.0 MP/s      6.1 GFLOP/s  x1.2     maxdiff 1
+  autovec AVX2 + OpenMP          708.39 ms     33.9 MP/s      6.1 GFLOP/s  x1.2     maxdiff 1
+  AVX2 intrinsics                117.14 ms    204.9 MP/s     36.9 GFLOP/s  x7.4     maxdiff 1
+  AVX2 intrinsics + OpenMP       117.23 ms    204.7 MP/s     36.9 GFLOP/s  x7.4     maxdiff 1
+  CUDA kernel                      3.57 ms   6721.8 MP/s   1209.9 GFLOP/s  (compute only)  x241.4   maxdiff 1
+  CUDA end to end                 18.08 ms  (h2d 7.13 + kernel 3.57 + d2h 7.57)  x47.7
+photo_24mp.png (24.0 MP), k=31 (radius 15), 1 OpenMP threads, cpus=0
+  scalar                        1711.30 ms     14.0 MP/s      5.2 GFLOP/s  x1.0     maxdiff 0
+  autovec AVX2                  1543.34 ms     15.6 MP/s      5.8 GFLOP/s  x1.1     maxdiff 1
+  autovec AVX2 + OpenMP         1546.52 ms     15.5 MP/s      5.8 GFLOP/s  x1.1     maxdiff 1
+  AVX2 intrinsics                182.74 ms    131.3 MP/s     48.9 GFLOP/s  x9.4     maxdiff 1
+  AVX2 intrinsics + OpenMP       180.18 ms    133.2 MP/s     49.6 GFLOP/s  x9.5     maxdiff 1
+  CUDA kernel                      6.75 ms   3556.1 MP/s   1322.9 GFLOP/s  (compute only)  x253.6   maxdiff 1
+  CUDA end to end                 21.08 ms  (h2d 7.02 + kernel 6.75 + d2h 7.57)  x81.2
+photo_24mp.png (24.0 MP), k=63 (radius 31), 1 OpenMP threads, cpus=0
+  scalar                        3533.57 ms      6.8 MP/s      5.1 GFLOP/s  x1.0     maxdiff 0
+  autovec AVX2                  2983.02 ms      8.0 MP/s      6.1 GFLOP/s  x1.2     maxdiff 1
+  autovec AVX2 + OpenMP         2984.33 ms      8.0 MP/s      6.1 GFLOP/s  x1.2     maxdiff 1
+  AVX2 intrinsics                318.86 ms     75.3 MP/s     56.9 GFLOP/s  x11.1    maxdiff 1
+  AVX2 intrinsics + OpenMP       317.91 ms     75.5 MP/s     57.1 GFLOP/s  x11.1    maxdiff 1
+  CUDA kernel                     13.19 ms   1819.4 MP/s   1375.5 GFLOP/s  (compute only)  x267.9   maxdiff 1
+  CUDA end to end                 26.94 ms  (h2d 7.06 + kernel 13.19 + d2h 7.57)  x131.2
+photo_24mp.png (24.0 MP), k=127 (radius 63), 1 OpenMP threads, cpus=0
+  scalar                        7593.62 ms      3.2 MP/s      4.8 GFLOP/s  x1.0     maxdiff 0
+  autovec AVX2                  6278.72 ms      3.8 MP/s      5.8 GFLOP/s  x1.2     maxdiff 1
+  autovec AVX2 + OpenMP         6263.05 ms      3.8 MP/s      5.8 GFLOP/s  x1.2     maxdiff 1
+  AVX2 intrinsics                757.60 ms     31.7 MP/s     48.3 GFLOP/s  x10.0    maxdiff 1
+  AVX2 intrinsics + OpenMP       760.87 ms     31.5 MP/s     48.1 GFLOP/s  x10.0    maxdiff 1
+  CUDA kernel                     26.42 ms    908.5 MP/s   1384.6 GFLOP/s  (compute only)  x287.5   maxdiff 1
+  CUDA end to end                 39.93 ms  (h2d 7.09 + kernel 26.42 + d2h 7.56)  x190.2
+# exit=0

@@ -1,0 +1,31 @@
+$ scripts/bench.sh -t cores build/bench_ladder_blur -r 20 -c 5 -v autovec_omp,avx2_omp,cuda -k 7,15,31,63,127 images/photo_24mp.png
+# 2026-10-27T01:25:36+07:00  host=lemasc-ubuntu  commit=8b62663
+WARNING: load average 1.45, machine is not quiet
+bench: mode=cores cpus=0,2,4,6,8,10 threads=6 governor=performance load=1.45
+gpu runs=20, cpu runs=5, caches flushed before each run, medians
+photo_24mp.png (24.0 MP), k=7 (radius 3), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  autovec AVX2 + OpenMP           66.51 ms    360.9 MP/s     30.3 GFLOP/s maxdiff 1
+  AVX2 intrinsics + OpenMP        31.15 ms    770.5 MP/s     64.7 GFLOP/s maxdiff 1
+  CUDA kernel                      2.44 ms   9831.2 MP/s    825.8 GFLOP/s  (compute only) maxdiff 1
+  CUDA end to end                 17.15 ms  (h2d 7.22 + kernel 2.44 + d2h 7.44)
+photo_24mp.png (24.0 MP), k=15 (radius 7), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  autovec AVX2 + OpenMP          132.28 ms    181.4 MP/s     32.7 GFLOP/s maxdiff 1
+  AVX2 intrinsics + OpenMP        40.63 ms    590.7 MP/s    106.3 GFLOP/s maxdiff 1
+  CUDA kernel                      3.54 ms   6777.8 MP/s   1220.0 GFLOP/s  (compute only) maxdiff 1
+  CUDA end to end                 18.12 ms  (h2d 7.23 + kernel 3.54 + d2h 7.45)
+photo_24mp.png (24.0 MP), k=31 (radius 15), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  autovec AVX2 + OpenMP          290.86 ms     82.5 MP/s     30.7 GFLOP/s maxdiff 1
+  AVX2 intrinsics + OpenMP        50.16 ms    478.5 MP/s    178.0 GFLOP/s maxdiff 1
+  CUDA kernel                      6.70 ms   3582.6 MP/s   1332.7 GFLOP/s  (compute only) maxdiff 1
+  CUDA end to end                 21.02 ms  (h2d 7.23 + kernel 6.70 + d2h 7.44)
+photo_24mp.png (24.0 MP), k=63 (radius 31), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  autovec AVX2 + OpenMP          599.91 ms     40.0 MP/s     30.2 GFLOP/s maxdiff 1
+  AVX2 intrinsics + OpenMP        70.43 ms    340.8 MP/s    257.6 GFLOP/s maxdiff 1
+  CUDA kernel                     13.14 ms   1826.8 MP/s   1381.0 GFLOP/s  (compute only) maxdiff 1
+  CUDA end to end                 27.05 ms  (h2d 7.21 + kernel 13.14 + d2h 7.48)
+photo_24mp.png (24.0 MP), k=127 (radius 63), 6 OpenMP threads, cpus=0,2,4,6,8,10
+  autovec AVX2 + OpenMP         1701.11 ms     14.1 MP/s     21.5 GFLOP/s maxdiff 1
+  AVX2 intrinsics + OpenMP       162.53 ms    147.7 MP/s    225.0 GFLOP/s maxdiff 1
+  CUDA kernel                     26.38 ms    909.7 MP/s   1386.3 GFLOP/s  (compute only) maxdiff 1
+  CUDA end to end                 40.06 ms  (h2d 7.26 + kernel 26.38 + d2h 7.43)
+# exit=0
