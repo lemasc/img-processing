@@ -29,6 +29,18 @@ Build a set of image processing programs and measure how different kinds of para
 
 Installed software: driver 595.71.05, CUDA Toolkit 13.2 (target `sm_86`), gcc 13.3, CMake 3.28, Ninja 1.11, Node.js 24.19, Nsight Compute and Nsight Systems, uv 0.11 (Python 3.12). Emscripten via `emsdk` is installed at Stage 12. Final versions are recorded by `scripts/env_report.sh` into `results/env.txt`.
 
+**Measured ceilings (use these in the roofline, with theoretical peaks shown dashed).** From `scripts/exp_peaks.sh`, log in `results/logs/exp_peaks.txt`:
+
+| Resource | Theoretical | Measured |
+|---|---|---|
+| GPU memory | 360 GB/s | 331 GB/s (copy kernel, `results/logs/smoke.txt`) |
+| Host DRAM, 12 threads | 76.8 GB/s | 51.4 GB/s (STREAM triad) |
+| Host DRAM, 1 thread | n/a | 27.9 GB/s (triad), 23.3 GB/s (copy) |
+| PCIe H2D / D2H, pinned | 31.5 GB/s (gen 4 x16) | 13.2 / 11.8 GB/s |
+| PCIe kernel reading host memory (zero-copy) | | 10.6 GB/s |
+
+PCIe finding: the link negotiates 16 GT/s x16 (gen 4) under load, yet copies of 4 MB and larger cap at about 13 GB/s in both directions (1 MB copies reach 20 GB/s, probably from CPU cache). Host DRAM is not the limit (51 GB/s). Cause not found without root (candidates: IOMMU in lazy-translation mode, BIOS or root-port settings, max payload size); reported as a platform limitation. The link idles at gen 1 and ramps under load, so benchmarks must warm up.
+
 **Machine setup for benchmarking:** CPU governor set to `performance`. Check PCIe link generation under load. Pin CPU threads to P-cores for the main runs and report 6-thread and 16-thread results separately (hybrid P/E-core CPU).
 
 ---

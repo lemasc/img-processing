@@ -1,0 +1,19 @@
+$ scripts/exp_peaks.sh
+# 2026-10-26T12:22:50+07:00  host=lemasc-ubuntu  commit=5a85058
+== host DRAM (theoretical 76.8 GB/s)
+bench: mode=single cpus=0 threads=1 governor=performance load=0.41
+threads=1  copy 23.3 GB/s  triad 27.9 GB/s   (check 13121)
+bench: mode=multi cpus=0-11 threads=12 governor=performance load=0.45
+threads=12  copy 49.4 GB/s  triad 51.4 GB/s   (check 13121)
+== PCIe
+link speed during run: 16.0 GT/s PCIe, width 16
+-- copy engine, pinned, by size (H2D / D2H GB/s)
+    1 MB:  20.4 /  20.5
+    4 MB:  12.7 /  11.3
+   16 MB:  13.2 /  11.7
+   64 MB:  13.3 /  11.8
+  256 MB:  13.3 /  11.9
+ 1024 MB:  13.2 /  11.8
+-- zero-copy: kernel reads 256 MB of mapped pinned host memory directly
+zero-copy read: 10.6 GB/s
+# exit=0
