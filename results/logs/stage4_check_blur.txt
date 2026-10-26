@@ -1,0 +1,66 @@
+$ scripts/run-capped.sh -m 6G build/check_blur images/photo_1mp.png images/photos/24mp_night_shot.jpg images/noise_6mp.png
+# 2026-10-26T14:21:36+07:00  host=lemasc-ubuntu  commit=656d617
+tolerance: 1 level(s) per channel (of 255)
+cpu vs double ref 37x23 k=3                  PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu vs double ref 37x23 k=5                  PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu vs double ref 37x23 k=7                  PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu vs double ref 37x23 k=11                 PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+flat 37: cpu vs input k=3                    PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda vs input k=3                   PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cpu vs input k=5                    PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda vs input k=5                   PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cpu vs input k=7                    PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda vs input k=7                   PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cpu vs input k=11                   PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda vs input k=11                  PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+random 1x1 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x9 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 5x5 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 17x33 k=3 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=5 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=7 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=11 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 16x16 k=3 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=5 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=7 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=11 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 250x3 k=3 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=5 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=7 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=11 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 257x129 k=3 blk=16x16                 PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=5 blk=16x16                 PASS  max 1, mean 0.000010, mismatched 1/33153 px (0.0030%), over tol 0
+random 257x129 k=7 blk=16x16                 PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=11 blk=16x16                PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 301x203 k=7 blk=8x8                   PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=7 blk=16x16                 PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=7 blk=32x32                 PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=7 blk=32x4                  PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=7 blk=1x1                   PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+photo_1mp.png k=3 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=5 blk=16x16                  PASS  max 1, mean 0.000001, mismatched 2/1024000 px (0.0002%), over tol 0
+photo_1mp.png k=7 blk=16x16                  PASS  max 1, mean 0.000001, mismatched 4/1024000 px (0.0004%), over tol 0
+photo_1mp.png k=11 blk=16x16                 PASS  max 1, mean 0.000001, mismatched 3/1024000 px (0.0003%), over tol 0
+24mp_night_shot.jpg k=3 blk=16x16            PASS  max 0, mean 0.000000, mismatched 0/24000000 px (0.0000%), over tol 0
+24mp_night_shot.jpg k=5 blk=16x16            PASS  max 1, mean 0.000001, mismatched 95/24000000 px (0.0004%), over tol 0
+24mp_night_shot.jpg k=7 blk=16x16            PASS  max 1, mean 0.000001, mismatched 91/24000000 px (0.0004%), over tol 0
+24mp_night_shot.jpg k=11 blk=16x16           PASS  max 1, mean 0.000002, mismatched 105/24000000 px (0.0004%), over tol 0
+noise_6mp.png k=3 blk=16x16                  PASS  max 1, mean 0.000003, mismatched 56/6000000 px (0.0009%), over tol 0
+noise_6mp.png k=5 blk=16x16                  PASS  max 1, mean 0.000003, mismatched 52/6000000 px (0.0009%), over tol 0
+noise_6mp.png k=7 blk=16x16                  PASS  max 1, mean 0.000004, mismatched 65/6000000 px (0.0011%), over tol 0
+noise_6mp.png k=11 blk=16x16                 PASS  max 1, mean 0.000004, mismatched 72/6000000 px (0.0012%), over tol 0
+RESULT: PASS
+# exit=0

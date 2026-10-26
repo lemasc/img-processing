@@ -48,7 +48,21 @@ target_link_libraries(test_compare PRIVATE compare)
 add_executable(check_color apps/check_color.cu)
 target_link_libraries(check_color PRIVATE common image_io color_cpu color_cuda compare)
 
+# Stage 4: naive Gaussian blur.
+add_library(blur_cpu STATIC src/blur_cpu.cpp)
+target_link_libraries(blur_cpu PUBLIC common)
+target_compile_options(blur_cpu PRIVATE -O2 -fno-tree-vectorize -fno-tree-slp-vectorize
+                       -ffinite-math-only -fno-signed-zeros)
+add_library(blur_cuda STATIC src/blur_cuda.cu)
+target_link_libraries(blur_cuda PUBLIC common)
+add_executable(bench_blur apps/bench_blur.cu)
+target_link_libraries(bench_blur PRIVATE common image_io blur_cpu blur_cuda compare)
+add_executable(check_blur apps/check_blur.cu)
+target_link_libraries(check_blur PRIVATE common image_io blur_cpu blur_cuda compare)
+
 enable_testing()
 add_test(NAME compare_selftest COMMAND test_compare)
 add_test(NAME color_cuda_vs_cpu COMMAND check_color WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 set_tests_properties(color_cuda_vs_cpu PROPERTIES ENVIRONMENT CHECK_IMPL=ctest)
+add_test(NAME blur_cuda_vs_cpu COMMAND check_blur WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+set_tests_properties(blur_cuda_vs_cpu PROPERTIES ENVIRONMENT CHECK_IMPL=ctest)

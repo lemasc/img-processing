@@ -107,6 +107,8 @@ Rule: do not start a stage until the previous one is measured, screenshotted, an
 ### Stage 4: Convolution, naive
 - **Build:** 2D blur using global memory only.
 - **Measure:** time vs kernel size (3, 5, 7, 11).
+- **Built:** `include/blur.h` (Gaussian weights, OpenCV sigma, 1D weights so 2D weight is `w[j]*w[i]`; shared per-pixel math, edges clamped), `src/blur_cpu.cpp` (scalar reference plus a double-precision reference for checking), `src/blur_cuda.cu` (one thread per pixel, 16x16 blocks, every tap a global load, weights as kernel argument), `apps/bench_blur.cu`, `apps/check_blur.cu` (in `ctest`). Logs: `results/logs/stage4_check_blur.txt`, `results/logs/stage4_blur_naive.txt`, data in `results/data/blur_naive.csv`. CPU runs are capped at 3 (scalar k=11 at 24 MP takes 3.7 s).
+- **Result (24 MP photo, 16x16 blocks):** kernel 1.46 / 3.24 / 5.98 / 13.2 ms for k = 3 / 5 / 7 / 11, 252x to 282x faster than scalar CPU (367 / 871 / 1669 / 3737 ms). End-to-end speedup grows with k, 23x to 136x, because transfers are a fixed 14 ms. The kernel reaches only 11 to 99 GB/s of useful traffic (3 to 27% of peak) and 1.0 to 1.5 TFLOP/s (about 8 to 12% of 12.7 peak, counting 7 flops per tap). By the minimum-traffic arithmetic intensity (10 to 141 flop/byte) it should be compute-bound, but it is limited by neither DRAM nor FP32 throughput. Hypothesis: load issue and L1 throughput (3 byte-loads per tap), which Stage 5 tiling should relieve. Confirm with Nsight Compute before claiming it.
 
 ### Stage 5: Convolution, tiled
 - **Build:** shared-memory version with halo loading.
@@ -313,7 +315,7 @@ Writing the report is not an afterthought. Draft each section right after its st
 - [x] Stage 1: baseline color
 - [x] Stage 2: measurement harness
 - [x] Stage 3: correctness check
-- [ ] Stage 4: convolution naive
+- [x] Stage 4: convolution naive
 - [ ] Stage 5: convolution tiled
 - [ ] Stage 6: separable and radius sweep
 - [ ] Stage 7: histogram

@@ -1,0 +1,17 @@
+$ scripts/bench.sh -t single -m 8G build/bench_blur -o results/output images/photo_1mp.png images/photo_6mp.png images/photo_24mp.png
+# 2026-10-26T14:21:46+07:00  host=lemasc-ubuntu  commit=656d617
+bench: mode=single cpus=0 threads=1 governor=performance load=0.36
+gpu runs=20, cpu runs=3, block=16x16, caches flushed before each run, medians
+photo_1mp.png            1.0 MP k=3  | cpu      15.6 | h2d   0.29  kern    0.065  d2h   0.37  e2e     0.79 ms | kern   95.2 GB/s ( 26%)  1000.0 GFLOP/s, AI  10.5 F/B | x242 kern, x19.7 e2e
+photo_1mp.png            1.0 MP k=5  | cpu      36.8 | h2d   0.30  kern    0.142  d2h   0.37  e2e     0.86 ms | kern   43.2 GB/s ( 12%)  1259.0 GFLOP/s, AI  29.2 F/B | x259 kern, x42.8 e2e
+photo_1mp.png            1.0 MP k=7  | cpu      69.3 | h2d   0.29  kern    0.259  d2h   0.37  e2e     0.98 ms | kern   23.7 GB/s (  7%)  1355.7 GFLOP/s, AI  57.2 F/B | x268 kern, x70.6 e2e
+photo_1mp.png            1.0 MP k=11 | cpu     159.7 | h2d   0.29  kern    0.610  d2h   0.37  e2e     1.34 ms | kern   10.1 GB/s (  3%)  1420.9 GFLOP/s, AI 141.2 F/B | x262 kern, x119.4 e2e
+photo_6mp.png            6.0 MP k=3  | cpu      92.2 | h2d   1.65  kern    0.365  d2h   1.89  e2e     4.10 ms | kern   98.8 GB/s ( 27%)  1037.0 GFLOP/s, AI  10.5 F/B | x253 kern, x22.5 e2e
+photo_6mp.png            6.0 MP k=5  | cpu     216.4 | h2d   1.65  kern    0.802  d2h   1.89  e2e     4.53 ms | kern   44.9 GB/s ( 12%)  1309.2 GFLOP/s, AI  29.2 F/B | x270 kern, x47.8 e2e
+photo_6mp.png            6.0 MP k=7  | cpu     400.9 | h2d   1.67  kern    1.502  d2h   1.89  e2e     5.14 ms | kern   24.0 GB/s (  7%)  1370.4 GFLOP/s, AI  57.2 F/B | x267 kern, x78.0 e2e
+photo_6mp.png            6.0 MP k=11 | cpu     938.2 | h2d   1.65  kern    3.555  d2h   1.91  e2e     7.06 ms | kern   10.1 GB/s (  3%)  1429.5 GFLOP/s, AI 141.2 F/B | x264 kern, x132.9 e2e
+photo_24mp.png          24.0 MP k=3  | cpu     367.5 | h2d   6.92  kern    1.456  d2h   7.43  e2e    15.81 ms | kern   98.9 GB/s ( 27%)  1038.4 GFLOP/s, AI  10.5 F/B | x252 kern, x23.2 e2e
+photo_24mp.png          24.0 MP k=5  | cpu     870.9 | h2d   7.55  kern    3.243  d2h   7.45  e2e    17.43 ms | kern   44.4 GB/s ( 12%)  1295.1 GFLOP/s, AI  29.2 F/B | x269 kern, x50.0 e2e
+photo_24mp.png          24.0 MP k=7  | cpu    1669.2 | h2d   6.90  kern    5.975  d2h   7.40  e2e    19.94 ms | kern   24.1 GB/s (  7%)  1377.7 GFLOP/s, AI  57.2 F/B | x279 kern, x83.7 e2e
+photo_24mp.png          24.0 MP k=11 | cpu    3737.0 | h2d   6.88  kern   13.247  d2h   7.40  e2e    27.52 ms | kern   10.9 GB/s (  3%)  1534.5 GFLOP/s, AI 141.2 F/B | x282 kern, x135.8 e2e
+# exit=0
