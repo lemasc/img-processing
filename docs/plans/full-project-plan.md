@@ -290,9 +290,9 @@ Writing the report is not an afterthought. Draft each section right after its st
 
 ## 14. Master Checklist
 
-- [ ] Hardware and software versions recorded
-- [ ] Test images prepared (1, 6, 24, 48 MP; flat, photo, noise)
-- [ ] Stage 1: baseline color
+- [x] Hardware and software versions recorded
+- [x] Test images prepared (1, 6, 24, 48 MP; flat, photo, noise)
+- [x] Stage 1: baseline color
 - [ ] Stage 2: measurement harness
 - [ ] Stage 3: correctness check
 - [ ] Stage 4: convolution naive
