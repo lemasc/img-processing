@@ -215,3 +215,19 @@ blur_gauss,cuda_naive,random 301x203 k=7 blk=16x16,1,61103,2,0,1,0.00001091,1
 blur_gauss,cuda_naive,random 301x203 k=7 blk=32x32,1,61103,2,0,1,0.00001091,1
 blur_gauss,cuda_naive,random 301x203 k=7 blk=32x4,1,61103,2,0,1,0.00001091,1
 blur_gauss,cuda_naive,random 301x203 k=7 blk=1x1,1,61103,2,0,1,0.00001091,1
+blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_naive,photo_24mp.png k=5,1,24000000,99,0,1,0.00000137,1
+blur_gauss,cuda_naive,photo_24mp.png k=7,1,24000000,115,0,1,0.00000160,1
+blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_naive,photo_24mp.png k=5,1,24000000,99,0,1,0.00000137,1
+blur_gauss,cuda_naive,photo_24mp.png k=7,1,24000000,115,0,1,0.00000160,1
+blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_naive,photo_24mp.png k=5,1,24000000,99,0,1,0.00000137,1
+blur_gauss,cuda_naive,photo_24mp.png k=7,1,24000000,115,0,1,0.00000160,1
+blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
+blur_gauss,cuda_naive,photo_24mp.png k=3,1,24000000,1,0,1,0.00000001,1
+blur_gauss,cuda_naive,photo_24mp.png k=5,1,24000000,99,0,1,0.00000137,1
+blur_gauss,cuda_naive,photo_24mp.png k=7,1,24000000,115,0,1,0.00000160,1
+blur_gauss,cuda_naive,photo_24mp.png k=11,1,24000000,93,0,1,0.00000129,1
