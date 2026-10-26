@@ -2,7 +2,7 @@
 
 **Title:** Performance Analysis of Image Color Processing Across Parallel Computing Platforms
 **Course:** Hybrid Computing Technology (HCT), Computing Code Development and Process
-**Author:** _[Name, Student ID]_
+**Author:** Sakditach Thanasodsai, 67070173
 **Deadline:** Before the final exam, submitted via Microsoft Teams Assignment (PDF or Word)
 
 ---

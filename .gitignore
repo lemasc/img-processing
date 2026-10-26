@@ -7,4 +7,3 @@ images/*
 results/output/
 *.nsys-rep
 *.ncu-rep
-dmidecode.out
