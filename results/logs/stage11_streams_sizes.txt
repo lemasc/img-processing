@@ -1,0 +1,105 @@
+$ scripts/bench.sh -t cores build/bench_streams -r 20 -k 15 images/photo_1mp.png images/photo_6mp.png images/photo_24mp.png images/photo_48mp.png
+# 2026-10-27T01:39:38+07:00  host=lemasc-ubuntu  commit=300b6f7
+bench: mode=cores cpus=0,2,4,6,8,10 threads=6 governor=performance load=0.48
+runs=20, caches flushed before each run, medians; pinned buffers hold the image already (staging is timed separately)
+transfers, photo_1mp.png (1.0 MP, 3 MB)
+  h2d_pageable      0.313 ms    9.8 GB/s
+  h2d_pinned        0.257 ms   12.0 GB/s
+  d2h_pageable      0.377 ms    8.1 GB/s
+  d2h_pinned        0.274 ms   11.2 GB/s
+  host_staging      0.542 ms  (memcpy pageable -> pinned for the input and pinned -> pageable for the output)
+  pinned_alloc      1.745 ms  (cudaHostAlloc + cudaFreeHost of two 3 MB buffers)
+color, photo_1mp.png (1.0 MP)
+  pageable  1 chunk      0.747 ms  (min 0.739, max 0.771)  x1.00 vs pageable/1  maxdiff 0
+  pinned    1 chunk      0.538 ms  (min 0.530, max 0.560)  x1.39 vs pageable/1  maxdiff 0
+  kernel only (whole image)     0.024 ms
+  pinned    2 chunks     0.485 ms  (min 0.475, max 0.562)  x1.54 vs pageable/1  maxdiff 0
+  pinned    4 chunks     0.470 ms  (min 0.454, max 0.521)  x1.59 vs pageable/1  maxdiff 0
+  pinned    8 chunks     0.462 ms  (min 0.451, max 0.511)  x1.62 vs pageable/1  maxdiff 0
+  pinned   16 chunks     0.473 ms  (min 0.462, max 0.542)  x1.58 vs pageable/1  maxdiff 0
+  pageable  4 chunks     1.033 ms  (min 0.994, max 1.538)  x0.72 vs pageable/1  maxdiff 0
+blur_sep_k15, photo_1mp.png (1.0 MP)
+  pageable  1 chunk      0.923 ms  (min 0.904, max 1.035)  x1.00 vs pageable/1  maxdiff 0
+  pinned    1 chunk      0.683 ms  (min 0.673, max 0.713)  x1.35 vs pageable/1  maxdiff 0
+  kernel only (whole image)     0.165 ms
+  pinned    2 chunks     0.510 ms  (min 0.502, max 0.590)  x1.81 vs pageable/1  maxdiff 0
+  pinned    4 chunks     0.490 ms  (min 0.480, max 0.512)  x1.88 vs pageable/1  maxdiff 0
+  pinned    8 chunks     0.494 ms  (min 0.481, max 0.518)  x1.87 vs pageable/1  maxdiff 0
+  pinned   16 chunks     0.545 ms  (min 0.539, max 0.623)  x1.69 vs pageable/1  maxdiff 0
+  pageable  4 chunks     1.189 ms  (min 1.182, max 1.226)  x0.78 vs pageable/1  maxdiff 0
+transfers, photo_6mp.png (6.0 MP, 18 MB)
+  h2d_pageable      1.711 ms   10.5 GB/s
+  h2d_pinned        1.392 ms   12.9 GB/s
+  d2h_pageable      1.896 ms    9.5 GB/s
+  d2h_pinned        1.541 ms   11.7 GB/s
+  host_staging      1.875 ms  (memcpy pageable -> pinned for the input and pinned -> pageable for the output)
+  pinned_alloc      9.160 ms  (cudaHostAlloc + cudaFreeHost of two 18 MB buffers)
+color, photo_6mp.png (6.0 MP)
+  pageable  1 chunk      3.924 ms  (min 3.825, max 4.091)  x1.00 vs pageable/1  maxdiff 0
+  pinned    1 chunk      3.056 ms  (min 3.040, max 3.169)  x1.28 vs pageable/1  maxdiff 0
+  kernel only (whole image)     0.120 ms
+  pinned    2 chunks     2.735 ms  (min 2.719, max 2.817)  x1.43 vs pageable/1  maxdiff 0
+  pinned    4 chunks     2.593 ms  (min 2.569, max 2.716)  x1.51 vs pageable/1  maxdiff 0
+  pinned    8 chunks     2.537 ms  (min 2.513, max 2.938)  x1.55 vs pageable/1  maxdiff 0
+  pinned   16 chunks     2.530 ms  (min 2.512, max 2.654)  x1.55 vs pageable/1  maxdiff 0
+  pageable  4 chunks     4.186 ms  (min 4.156, max 4.339)  x0.94 vs pageable/1  maxdiff 0
+blur_sep_k15, photo_6mp.png (6.0 MP)
+  pageable  1 chunk      4.586 ms  (min 4.547, max 4.707)  x1.00 vs pageable/1  maxdiff 0
+  pinned    1 chunk      3.815 ms  (min 3.797, max 3.940)  x1.20 vs pageable/1  maxdiff 0
+  kernel only (whole image)     0.872 ms
+  pinned    2 chunks     2.887 ms  (min 2.855, max 2.992)  x1.59 vs pageable/1  maxdiff 0
+  pinned    4 chunks     2.714 ms  (min 2.685, max 2.781)  x1.69 vs pageable/1  maxdiff 0
+  pinned    8 chunks     2.695 ms  (min 2.649, max 2.881)  x1.70 vs pageable/1  maxdiff 0
+  pinned   16 chunks     2.775 ms  (min 2.747, max 2.942)  x1.65 vs pageable/1  maxdiff 0
+  pageable  4 chunks     4.982 ms  (min 4.944, max 5.073)  x0.92 vs pageable/1  maxdiff 0
+transfers, photo_24mp.png (24.0 MP, 72 MB)
+  h2d_pageable      7.017 ms   10.3 GB/s
+  h2d_pinned        5.404 ms   13.3 GB/s
+  d2h_pageable      7.332 ms    9.8 GB/s
+  d2h_pinned        5.974 ms   12.1 GB/s
+  host_staging      6.920 ms  (memcpy pageable -> pinned for the input and pinned -> pageable for the output)
+  pinned_alloc     35.673 ms  (cudaHostAlloc + cudaFreeHost of two 72 MB buffers)
+color, photo_24mp.png (24.0 MP)
+  pageable  1 chunk     15.042 ms  (min 14.867, max 17.407)  x1.00 vs pageable/1  maxdiff 0
+  pinned    1 chunk     11.873 ms  (min 11.792, max 12.334)  x1.27 vs pageable/1  maxdiff 0
+  kernel only (whole image)     0.470 ms
+  pinned    2 chunks    10.565 ms  (min 10.516, max 10.655)  x1.42 vs pageable/1  maxdiff 0
+  pinned    4 chunks     9.983 ms  (min 9.909, max 10.392)  x1.51 vs pageable/1  maxdiff 0
+  pinned    8 chunks     9.809 ms  (min 9.644, max 10.131)  x1.53 vs pageable/1  maxdiff 0
+  pinned   16 chunks     9.648 ms  (min 9.577, max 9.748)  x1.56 vs pageable/1  maxdiff 0
+  pageable  4 chunks    15.336 ms  (min 15.207, max 15.535)  x0.98 vs pageable/1  maxdiff 0
+blur_sep_k15, photo_24mp.png (24.0 MP)
+  pageable  1 chunk     17.916 ms  (min 17.774, max 18.203)  x1.00 vs pageable/1  maxdiff 0
+  pinned    1 chunk     14.805 ms  (min 14.698, max 16.807)  x1.21 vs pageable/1  maxdiff 0
+  kernel only (whole image)     3.595 ms
+  pinned    2 chunks    11.065 ms  (min 10.998, max 11.488)  x1.62 vs pageable/1  maxdiff 0
+  pinned    4 chunks    10.418 ms  (min 10.366, max 10.556)  x1.72 vs pageable/1  maxdiff 0
+  pinned    8 chunks    10.116 ms  (min 10.022, max 10.600)  x1.77 vs pageable/1  maxdiff 0
+  pinned   16 chunks    10.317 ms  (min 10.221, max 10.677)  x1.74 vs pageable/1  maxdiff 0
+  pageable  4 chunks    18.287 ms  (min 18.178, max 18.837)  x0.98 vs pageable/1  maxdiff 0
+transfers, photo_48mp.png (48.0 MP, 144 MB)
+  h2d_pageable     14.035 ms   10.3 GB/s
+  h2d_pinned       11.039 ms   13.0 GB/s
+  d2h_pageable     14.674 ms    9.8 GB/s
+  d2h_pinned       12.146 ms   11.9 GB/s
+  host_staging     13.589 ms  (memcpy pageable -> pinned for the input and pinned -> pageable for the output)
+  pinned_alloc     72.138 ms  (cudaHostAlloc + cudaFreeHost of two 144 MB buffers)
+color, photo_48mp.png (48.0 MP)
+  pageable  1 chunk     29.785 ms  (min 29.606, max 30.630)  x1.00 vs pageable/1  maxdiff 0
+  pinned    1 chunk     24.176 ms  (min 24.049, max 24.313)  x1.23 vs pageable/1  maxdiff 0
+  kernel only (whole image)     0.938 ms
+  pinned    2 chunks    21.480 ms  (min 21.413, max 21.706)  x1.39 vs pageable/1  maxdiff 0
+  pinned    4 chunks    20.219 ms  (min 20.144, max 20.535)  x1.47 vs pageable/1  maxdiff 0
+  pinned    8 chunks    19.765 ms  (min 19.628, max 20.219)  x1.51 vs pageable/1  maxdiff 0
+  pinned   16 chunks    19.498 ms  (min 19.403, max 20.284)  x1.53 vs pageable/1  maxdiff 0
+  pageable  4 chunks    30.061 ms  (min 29.902, max 30.374)  x0.99 vs pageable/1  maxdiff 0
+blur_sep_k15, photo_48mp.png (48.0 MP)
+  pageable  1 chunk     35.726 ms  (min 35.594, max 36.353)  x1.00 vs pageable/1  maxdiff 0
+  pinned    1 chunk     30.174 ms  (min 30.042, max 30.475)  x1.18 vs pageable/1  maxdiff 0
+  kernel only (whole image)     7.472 ms
+  pinned    2 chunks    22.710 ms  (min 22.537, max 23.573)  x1.57 vs pageable/1  maxdiff 0
+  pinned    4 chunks    21.038 ms  (min 20.946, max 21.498)  x1.70 vs pageable/1  maxdiff 0
+  pinned    8 chunks    20.444 ms  (min 20.322, max 21.155)  x1.75 vs pageable/1  maxdiff 0
+  pinned   16 chunks    20.512 ms  (min 20.335, max 20.992)  x1.74 vs pageable/1  maxdiff 0
+  pageable  4 chunks    36.205 ms  (min 35.963, max 36.536)  x0.99 vs pageable/1  maxdiff 0
+# exit=0

@@ -9,6 +9,7 @@
 #include <random>
 #include <string>
 #include <vector>
+#include <cuda_runtime.h>
 #include "blur.h"
 #include "compare.h"
 #include "image.h"
@@ -21,6 +22,34 @@ static void report(const std::string& label, const std::string& impl, const Diff
   printf("%-44s %s  %s\n", label.c_str(), passes(d) ? "PASS" : "FAIL", describe(d).c_str());
   if (!passes(d)) failed = true;
   log_diff(kCsv, "blur_gauss", impl, label, tol, d);
+}
+
+// Stage 11: the image blurred in nc horizontal bands (each band gets its input rows plus halo) must
+// join to exactly the whole-image separable result (tolerance 0, same arithmetic).
+static void check_bands(const uint8_t* in, int w, int h, int k, int nc) {
+  const GaussKernel g = make_gaussian(k);
+  const size_t row = 3 * (size_t)w;
+  std::vector<uint8_t> whole(row * h), banded(row * h, 0);
+  blur_sep_cuda(in, whole.data(), w, h, g);
+  for (int c = 0; c < nc; c++) {
+    const int y0 = (int)((long)c * h / nc), y1 = (int)((long)(c + 1) * h / nc);
+    if (y1 == y0) continue;
+    int ya, yb;
+    band_rows(h, k, y0, y1, &ya, &yb);
+    uint8_t *d_in, *d_out;
+    float* d_tmp;
+    cudaMalloc(&d_in, row * (yb - ya));
+    cudaMalloc(&d_tmp, row * (yb - ya) * sizeof(float));
+    cudaMalloc(&d_out, row * (y1 - y0));
+    cudaMemcpy(d_in, in + row * ya, row * (yb - ya), cudaMemcpyHostToDevice);
+    blur_sep_band_launch(d_in, d_tmp, d_out, w, h, y0, y1, g);
+    cudaMemcpy(banded.data() + row * y0, d_out, row * (y1 - y0), cudaMemcpyDeviceToHost);
+    cudaFree(d_in);
+    cudaFree(d_tmp);
+    cudaFree(d_out);
+  }
+  report("bands " + std::to_string(nc) + " " + std::to_string(w) + "x" + std::to_string(h) + " k=" + std::to_string(k), "cuda_sep_bands",
+         compare_images(whole.data(), banded.data(), (size_t)w * h, 3, 0), 0);
 }
 
 static std::vector<uint8_t> random_image(int w, int h, unsigned seed) {
@@ -112,6 +141,14 @@ int main(int argc, char** argv) {
     auto in = random_image(301, 203, 9);
     for (auto b : {std::pair<int, int>{8, 8}, {16, 16}, {32, 32}, {32, 4}, {1, 1}})
       for (int k : {3, 11, 63}) check_cuda("random 301x203", in.data(), 301, 203, k, b.first, b.second);
+  }
+
+  // Banded separable blur: band counts that divide the height and ones that do not, more bands than
+  // rows, and kernels taller than the image or a band (halo clamped at both ends).
+  for (auto sz : {std::pair<int, int>{37, 23}, {64, 48}, {5, 9}, {1, 7}}) {
+    auto in = random_image(sz.first, sz.second, 11);
+    for (int k : {3, 15, 63, 127})
+      for (int nc : {1, 2, 3, 5, 8, 16}) check_bands(in.data(), sz.first, sz.second, k, nc);
   }
 
   for (int i = 1; i < argc; i++) {

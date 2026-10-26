@@ -1,0 +1,599 @@
+$ build/check_blur images/photo_1mp.png
+# 2026-10-27T01:39:13+07:00  host=lemasc-ubuntu  commit=300b6f7
+tolerance: 1 level(s) per channel (of 255)
+cpu vs double ref 37x23 k=3                  PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu separable vs double ref 37x23 k=3        PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu vs double ref 37x23 k=5                  PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu separable vs double ref 37x23 k=5        PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu vs double ref 37x23 k=7                  PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu separable vs double ref 37x23 k=7        PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu vs double ref 37x23 k=11                 PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu separable vs double ref 37x23 k=11       PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu vs double ref 37x23 k=15                 PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu separable vs double ref 37x23 k=15       PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu vs double ref 37x23 k=31                 PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu separable vs double ref 37x23 k=31       PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu vs double ref 37x23 k=63                 PASS  max 1, mean 0.000392, mismatched 1/851 px (0.1175%), over tol 0
+cpu separable vs double ref 37x23 k=63       PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu vs double ref 37x23 k=127                PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+cpu separable vs double ref 37x23 k=127      PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+flat 37: cuda tiled vs input k=3             PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cpu vs input k=3                    PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda vs input k=3                   PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda tiled vs input k=5             PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cpu vs input k=5                    PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda vs input k=5                   PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda tiled vs input k=7             PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cpu vs input k=7                    PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda vs input k=7                   PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda tiled vs input k=11            PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cpu vs input k=11                   PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda vs input k=11                  PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda separable vs input k=3         PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda separable vs input k=5         PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda separable vs input k=7         PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda separable vs input k=11        PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda separable vs input k=15        PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda separable vs input k=31        PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda separable vs input k=63        PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+flat 37: cuda separable vs input k=127       PASS  max 0, mean 0.000000, mismatched 0/6000 px (0.0000%), over tol 0
+random 1x1 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=3 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=3 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=3 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=3 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=5 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=5 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=5 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=5 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=7 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=7 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=7 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=7 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=11 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=11 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=11 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=11 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=15 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=15 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=15 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=15 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=15 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=15 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=31 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=31 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=31 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=31 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=31 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=31 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=63 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=63 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=63 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=63 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=63 blk=16x16                    float tile skipped (exceeds 48 KB)
+random 1x1 k=127 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=127 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0
+random 1x1 k=127 blk=16x16                   skipped (tile exceeds 48 KB)
+random 1x9 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=3 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=3 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=3 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=3 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=5 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=5 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=5 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=5 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=7 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=7 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=7 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=7 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=11 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=11 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=11 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=11 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=15 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=15 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=15 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=15 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=15 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=15 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=31 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=31 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=31 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=31 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=31 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=31 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=63 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=63 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=63 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=63 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=63 blk=16x16                    float tile skipped (exceeds 48 KB)
+random 1x9 k=127 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=127 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 1x9 k=127 blk=16x16                   skipped (tile exceeds 48 KB)
+random 9x1 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=3 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=3 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=3 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=3 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=5 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=5 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=5 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=5 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=7 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=7 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=7 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=7 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=11 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=11 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=11 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=11 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=15 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=15 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=15 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=15 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=15 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=15 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=31 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=31 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=31 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=31 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=31 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=31 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=63 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=63 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=63 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=63 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=63 blk=16x16                    float tile skipped (exceeds 48 KB)
+random 9x1 k=127 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=127 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/9 px (0.0000%), over tol 0
+random 9x1 k=127 blk=16x16                   skipped (tile exceeds 48 KB)
+random 5x5 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=3 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=3 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=3 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=3 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=3 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=5 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=5 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=5 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=5 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=5 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=7 blk=16x16 separable           PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=7 blk=16x16                     PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=7 blk=16x16 vs naive            PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=7 blk=16x16 float tile          PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=7 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=11 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=11 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=11 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=11 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=11 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=15 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=15 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=15 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=15 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=15 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=15 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=31 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=31 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=31 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=31 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=31 blk=16x16 float tile         PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=31 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=63 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=63 blk=16x16 separable          PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=63 blk=16x16                    PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=63 blk=16x16 vs naive           PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=63 blk=16x16                    float tile skipped (exceeds 48 KB)
+random 5x5 k=127 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=127 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/25 px (0.0000%), over tol 0
+random 5x5 k=127 blk=16x16                   skipped (tile exceeds 48 KB)
+random 17x33 k=3 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=3 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=3 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=3 blk=16x16 vs naive          PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=3 blk=16x16 float tile        PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=3 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=5 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=5 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=5 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=5 blk=16x16 vs naive          PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=5 blk=16x16 float tile        PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=5 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=7 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=7 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=7 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=7 blk=16x16 vs naive          PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=7 blk=16x16 float tile        PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=7 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=11 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=11 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=11 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=11 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=11 blk=16x16 float tile       PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=11 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=15 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=15 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=15 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=15 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=15 blk=16x16 float tile       PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=15 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=31 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=31 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=31 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=31 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=31 blk=16x16 float tile       PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=31 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=63 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=63 blk=16x16 separable        PASS  max 1, mean 0.000594, mismatched 1/561 px (0.1783%), over tol 0
+random 17x33 k=63 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=63 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=63 blk=16x16                  float tile skipped (exceeds 48 KB)
+random 17x33 k=127 blk=16x16                 PASS  max 0, mean 0.000000, mismatched 0/561 px (0.0000%), over tol 0
+random 17x33 k=127 blk=16x16 separable       PASS  max 1, mean 0.001188, mismatched 2/561 px (0.3565%), over tol 0
+random 17x33 k=127 blk=16x16                 skipped (tile exceeds 48 KB)
+random 16x16 k=3 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=3 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=3 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=3 blk=16x16 vs naive          PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=3 blk=16x16 float tile        PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=3 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=5 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=5 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=5 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=5 blk=16x16 vs naive          PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=5 blk=16x16 float tile        PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=5 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=7 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=7 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=7 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=7 blk=16x16 vs naive          PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=7 blk=16x16 float tile        PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=7 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=11 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=11 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=11 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=11 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=11 blk=16x16 float tile       PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=11 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=15 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=15 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=15 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=15 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=15 blk=16x16 float tile       PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=15 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=31 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=31 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=31 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=31 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=31 blk=16x16 float tile       PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=31 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=63 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=63 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=63 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=63 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=63 blk=16x16                  float tile skipped (exceeds 48 KB)
+random 16x16 k=127 blk=16x16                 PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=127 blk=16x16 separable       PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0
+random 16x16 k=127 blk=16x16                 skipped (tile exceeds 48 KB)
+random 250x3 k=3 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=3 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=3 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=3 blk=16x16 vs naive          PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=3 blk=16x16 float tile        PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=3 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=5 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=5 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=5 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=5 blk=16x16 vs naive          PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=5 blk=16x16 float tile        PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=5 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=7 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=7 blk=16x16 separable         PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=7 blk=16x16                   PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=7 blk=16x16 vs naive          PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=7 blk=16x16 float tile        PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=7 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=11 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=11 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=11 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=11 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=11 blk=16x16 float tile       PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=11 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=15 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=15 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=15 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=15 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=15 blk=16x16 float tile       PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=15 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=31 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=31 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=31 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=31 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=31 blk=16x16 float tile       PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=31 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=63 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=63 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=63 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=63 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=63 blk=16x16                  float tile skipped (exceeds 48 KB)
+random 250x3 k=127 blk=16x16                 PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=127 blk=16x16 separable       PASS  max 0, mean 0.000000, mismatched 0/750 px (0.0000%), over tol 0
+random 250x3 k=127 blk=16x16                 skipped (tile exceeds 48 KB)
+random 257x129 k=3 blk=16x16                 PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=3 blk=16x16 separable       PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=3 blk=16x16                 PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=3 blk=16x16 vs naive        PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=3 blk=16x16 float tile      PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=3 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=5 blk=16x16                 PASS  max 1, mean 0.000010, mismatched 1/33153 px (0.0030%), over tol 0
+random 257x129 k=5 blk=16x16 separable       PASS  max 1, mean 0.000010, mismatched 1/33153 px (0.0030%), over tol 0
+random 257x129 k=5 blk=16x16                 PASS  max 1, mean 0.000010, mismatched 1/33153 px (0.0030%), over tol 0
+random 257x129 k=5 blk=16x16 vs naive        PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=5 blk=16x16 float tile      PASS  max 1, mean 0.000010, mismatched 1/33153 px (0.0030%), over tol 0
+random 257x129 k=5 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=7 blk=16x16                 PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=7 blk=16x16 separable       PASS  max 1, mean 0.000010, mismatched 1/33153 px (0.0030%), over tol 0
+random 257x129 k=7 blk=16x16                 PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=7 blk=16x16 vs naive        PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=7 blk=16x16 float tile      PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=7 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=11 blk=16x16                PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=11 blk=16x16 separable      PASS  max 1, mean 0.000010, mismatched 1/33153 px (0.0030%), over tol 0
+random 257x129 k=11 blk=16x16                PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=11 blk=16x16 vs naive       PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=11 blk=16x16 float tile     PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=11 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=15 blk=16x16                PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=15 blk=16x16 separable      PASS  max 1, mean 0.000010, mismatched 1/33153 px (0.0030%), over tol 0
+random 257x129 k=15 blk=16x16                PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=15 blk=16x16 vs naive       PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=15 blk=16x16 float tile     PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=15 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=31 blk=16x16                PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=31 blk=16x16 separable      PASS  max 1, mean 0.000090, mismatched 9/33153 px (0.0271%), over tol 0
+random 257x129 k=31 blk=16x16                PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=31 blk=16x16 vs naive       PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=31 blk=16x16 float tile     PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=31 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=63 blk=16x16                PASS  max 1, mean 0.000020, mismatched 2/33153 px (0.0060%), over tol 0
+random 257x129 k=63 blk=16x16 separable      PASS  max 1, mean 0.000090, mismatched 9/33153 px (0.0271%), over tol 0
+random 257x129 k=63 blk=16x16                PASS  max 1, mean 0.000020, mismatched 2/33153 px (0.0060%), over tol 0
+random 257x129 k=63 blk=16x16 vs naive       PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=63 blk=16x16                float tile skipped (exceeds 48 KB)
+random 257x129 k=127 blk=16x16               PASS  max 0, mean 0.000000, mismatched 0/33153 px (0.0000%), over tol 0
+random 257x129 k=127 blk=16x16 separable     PASS  max 1, mean 0.000221, mismatched 22/33153 px (0.0664%), over tol 0
+random 257x129 k=127 blk=16x16               skipped (tile exceeds 48 KB)
+random 301x203 k=3 blk=8x8                   PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=8x8 separable         PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=3 blk=8x8                   PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=8x8 vs naive          PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=3 blk=8x8 float tile        PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=8x8 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=8x8                  PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=8x8 separable        PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=11 blk=8x8                  PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=8x8 vs naive         PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=8x8 float tile       PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=8x8 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=63 blk=8x8                  PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=8x8 separable        PASS  max 1, mean 0.000109, mismatched 20/61103 px (0.0327%), over tol 0
+random 301x203 k=63 blk=8x8                  PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=8x8 vs naive         PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=63 blk=8x8                  float tile skipped (exceeds 48 KB)
+random 301x203 k=3 blk=16x16                 PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=16x16 separable       PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=3 blk=16x16                 PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=16x16 vs naive        PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=3 blk=16x16 float tile      PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=16x16                PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=16x16 separable      PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=11 blk=16x16                PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=16x16 vs naive       PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=16x16 float tile     PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=63 blk=16x16                PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=16x16 separable      PASS  max 1, mean 0.000109, mismatched 20/61103 px (0.0327%), over tol 0
+random 301x203 k=63 blk=16x16                PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=16x16 vs naive       PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=63 blk=16x16                float tile skipped (exceeds 48 KB)
+random 301x203 k=3 blk=32x32                 PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=32x32 separable       PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=3 blk=32x32                 PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=32x32 vs naive        PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=3 blk=32x32 float tile      PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=32x32 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=32x32                PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=32x32 separable      PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=11 blk=32x32                PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=32x32 vs naive       PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=32x32 float tile     PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=32x32 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=63 blk=32x32                PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=32x32 separable      PASS  max 1, mean 0.000109, mismatched 20/61103 px (0.0327%), over tol 0
+random 301x203 k=63 blk=32x32                PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=32x32 vs naive       PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=63 blk=32x32                float tile skipped (exceeds 48 KB)
+random 301x203 k=3 blk=32x4                  PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=32x4 separable        PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=3 blk=32x4                  PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=32x4 vs naive         PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=3 blk=32x4 float tile       PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=32x4 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=32x4                 PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=32x4 separable       PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=11 blk=32x4                 PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=32x4 vs naive        PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=32x4 float tile      PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=32x4 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=63 blk=32x4                 PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=32x4 separable       PASS  max 1, mean 0.000109, mismatched 20/61103 px (0.0327%), over tol 0
+random 301x203 k=63 blk=32x4                 PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=32x4 vs naive        PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=63 blk=32x4                 float tile skipped (exceeds 48 KB)
+random 301x203 k=3 blk=1x1                   PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=1x1 separable         PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=3 blk=1x1                   PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=1x1 vs naive          PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=3 blk=1x1 float tile        PASS  max 1, mean 0.000011, mismatched 2/61103 px (0.0033%), over tol 0
+random 301x203 k=3 blk=1x1 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=1x1                  PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=1x1 separable        PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=11 blk=1x1                  PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=1x1 vs naive         PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=1x1 float tile       PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=11 blk=1x1 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=63 blk=1x1                  PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=1x1 separable        PASS  max 1, mean 0.000109, mismatched 20/61103 px (0.0327%), over tol 0
+random 301x203 k=63 blk=1x1                  PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=1x1 vs naive         PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+random 301x203 k=63 blk=1x1 float tile       PASS  max 1, mean 0.000005, mismatched 1/61103 px (0.0016%), over tol 0
+random 301x203 k=63 blk=1x1 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/61103 px (0.0000%), over tol 0
+bands 1 37x23 k=3                            PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 2 37x23 k=3                            PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 3 37x23 k=3                            PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 5 37x23 k=3                            PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 8 37x23 k=3                            PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 16 37x23 k=3                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 1 37x23 k=15                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 2 37x23 k=15                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 3 37x23 k=15                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 5 37x23 k=15                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 8 37x23 k=15                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 16 37x23 k=15                          PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 1 37x23 k=63                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 2 37x23 k=63                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 3 37x23 k=63                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 5 37x23 k=63                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 8 37x23 k=63                           PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 16 37x23 k=63                          PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 1 37x23 k=127                          PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 2 37x23 k=127                          PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 3 37x23 k=127                          PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 5 37x23 k=127                          PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 8 37x23 k=127                          PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 16 37x23 k=127                         PASS  max 0, mean 0.000000, mismatched 0/851 px (0.0000%), over tol 0
+bands 1 64x48 k=3                            PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 2 64x48 k=3                            PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 3 64x48 k=3                            PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 5 64x48 k=3                            PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 8 64x48 k=3                            PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 16 64x48 k=3                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 1 64x48 k=15                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 2 64x48 k=15                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 3 64x48 k=15                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 5 64x48 k=15                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 8 64x48 k=15                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 16 64x48 k=15                          PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 1 64x48 k=63                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 2 64x48 k=63                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 3 64x48 k=63                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 5 64x48 k=63                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 8 64x48 k=63                           PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 16 64x48 k=63                          PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 1 64x48 k=127                          PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 2 64x48 k=127                          PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 3 64x48 k=127                          PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 5 64x48 k=127                          PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 8 64x48 k=127                          PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 16 64x48 k=127                         PASS  max 0, mean 0.000000, mismatched 0/3072 px (0.0000%), over tol 0
+bands 1 5x9 k=3                              PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 2 5x9 k=3                              PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 3 5x9 k=3                              PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 5 5x9 k=3                              PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 8 5x9 k=3                              PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 16 5x9 k=3                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 1 5x9 k=15                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 2 5x9 k=15                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 3 5x9 k=15                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 5 5x9 k=15                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 8 5x9 k=15                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 16 5x9 k=15                            PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 1 5x9 k=63                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 2 5x9 k=63                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 3 5x9 k=63                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 5 5x9 k=63                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 8 5x9 k=63                             PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 16 5x9 k=63                            PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 1 5x9 k=127                            PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 2 5x9 k=127                            PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 3 5x9 k=127                            PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 5 5x9 k=127                            PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 8 5x9 k=127                            PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 16 5x9 k=127                           PASS  max 0, mean 0.000000, mismatched 0/45 px (0.0000%), over tol 0
+bands 1 1x7 k=3                              PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 2 1x7 k=3                              PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 3 1x7 k=3                              PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 5 1x7 k=3                              PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 8 1x7 k=3                              PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 16 1x7 k=3                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 1 1x7 k=15                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 2 1x7 k=15                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 3 1x7 k=15                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 5 1x7 k=15                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 8 1x7 k=15                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 16 1x7 k=15                            PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 1 1x7 k=63                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 2 1x7 k=63                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 3 1x7 k=63                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 5 1x7 k=63                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 8 1x7 k=63                             PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 16 1x7 k=63                            PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 1 1x7 k=127                            PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 2 1x7 k=127                            PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 3 1x7 k=127                            PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 5 1x7 k=127                            PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 8 1x7 k=127                            PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+bands 16 1x7 k=127                           PASS  max 0, mean 0.000000, mismatched 0/7 px (0.0000%), over tol 0
+photo_1mp.png k=3 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=3 blk=16x16 separable        PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=3 blk=16x16                  PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=3 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=3 blk=16x16 float tile       PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=3 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=5 blk=16x16                  PASS  max 1, mean 0.000001, mismatched 2/1024000 px (0.0002%), over tol 0
+photo_1mp.png k=5 blk=16x16 separable        PASS  max 1, mean 0.000004, mismatched 13/1024000 px (0.0013%), over tol 0
+photo_1mp.png k=5 blk=16x16                  PASS  max 1, mean 0.000001, mismatched 2/1024000 px (0.0002%), over tol 0
+photo_1mp.png k=5 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=5 blk=16x16 float tile       PASS  max 1, mean 0.000001, mismatched 2/1024000 px (0.0002%), over tol 0
+photo_1mp.png k=5 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=7 blk=16x16                  PASS  max 1, mean 0.000001, mismatched 4/1024000 px (0.0004%), over tol 0
+photo_1mp.png k=7 blk=16x16 separable        PASS  max 1, mean 0.000006, mismatched 19/1024000 px (0.0019%), over tol 0
+photo_1mp.png k=7 blk=16x16                  PASS  max 1, mean 0.000001, mismatched 4/1024000 px (0.0004%), over tol 0
+photo_1mp.png k=7 blk=16x16 vs naive         PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=7 blk=16x16 float tile       PASS  max 1, mean 0.000001, mismatched 4/1024000 px (0.0004%), over tol 0
+photo_1mp.png k=7 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=11 blk=16x16                 PASS  max 1, mean 0.000001, mismatched 3/1024000 px (0.0003%), over tol 0
+photo_1mp.png k=11 blk=16x16 separable       PASS  max 1, mean 0.000009, mismatched 28/1024000 px (0.0027%), over tol 0
+photo_1mp.png k=11 blk=16x16                 PASS  max 1, mean 0.000001, mismatched 3/1024000 px (0.0003%), over tol 0
+photo_1mp.png k=11 blk=16x16 vs naive        PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+photo_1mp.png k=11 blk=16x16 float tile      PASS  max 1, mean 0.000001, mismatched 3/1024000 px (0.0003%), over tol 0
+photo_1mp.png k=11 blk=16x16 float tile vs naive PASS  max 0, mean 0.000000, mismatched 0/1024000 px (0.0000%), over tol 0
+RESULT: PASS
+# exit=0

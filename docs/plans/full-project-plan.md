@@ -61,6 +61,7 @@ Real photos are 24 to 32 MP at most.
 The machine is remote with 16 GB RAM, and an out-of-memory event has taken it down before. Precautions:
 
 - Run builds and benchmarks inside a memory-capped cgroup, for example `systemd-run --user --scope -p MemoryMax=10G -p MemorySwapMax=0 <cmd>`, so the OOM killer hits the job and not the machine.
+- Pinned host memory cannot be paged out and counts against the cgroup cap. Stage 11 pins at most two images (in and out), 288 MB at 48 MP, allocated once per run.
 - Limit build parallelism (`ninja -j4`). CUDA compiles are memory-heavy.
 - Check available memory before large runs. Budget buffers explicitly (a 48 MP float RGB image is about 576 MB, and blur needs ping-pong copies).
 - Cap repetitions for slow CPU rungs (for example 3 runs for scalar 63-radius 2D blur at 24 MP and above).
@@ -182,6 +183,23 @@ Not in the submission scope. Kept here for the personal project and for the repo
 - **Apply to:** color (transfer-bound) and separable blur (kernel 13 to 27 ms at large k, so overlap helps there). Expect overlap to save at most the smaller of transfer and compute time per chunk.
 - **Checks:** output identical to the unchunked version (Stage 3 check), chunk count swept (for example 1, 2, 4, 8, 16), and the transfer-time numbers compared against the measured 13.2 / 11.8 GB/s ceilings.
 - **Done when:** pageable vs pinned table, a streams-vs-chunks table, and a timeline from Nsight Systems (text summary is enough) are logged.
+- **Built:** `apps/bench_streams.cu` (variants: pageable 1 chunk, pinned 1 chunk, pinned N chunks with one stream per chunk, pageable 4 chunks as a control), `blur_sep_band_launch` in `src/blur_cuda.cu` (blur of a row band from its input rows plus an r-row halo, `blur_v_pixel_band` in `include/blur.h`), a stream argument on `color_cuda_launch`, and `experiments/pcie_duplex.cu`. `check_blur` gained 240 band checks (bands must join to the whole-image result with tolerance 0, including kernels taller than the image). Every variant's output is compared with the pageable 1-chunk output at tolerance 0. Logs: `results/logs/stage11_streams_{sizes,radius}.txt`, `stage11_check_blur.txt`, `exp_pcie_duplex.txt`, data in `results/data/streams.csv`. Run pinned to the 6 P-cores (`-t cores`), 20 runs.
+- **Result (24 MP, end to end ms):**
+
+  | | pageable 1 chunk | pinned 1 chunk | pinned 2 / 4 / 8 / 16 chunks | best vs pageable |
+  |---|---|---|---|---|
+  | color | 15.0 | 11.9 | 10.6 / 10.0 / 9.8 / 9.6 | 1.56x |
+  | blur k=15 | 17.9 | 14.8 | 11.1 / 10.4 / 10.1 / 10.3 | 1.77x |
+  | blur k=63 | 27.0 | 24.0 | 18.5 / 15.8 / 14.9 / 14.9 | 1.82x |
+  | blur k=127 | 41.4 | 38.4 | 33.3 / 31.4 / 31.7 / 34.0 | 1.32x |
+
+  - **Pinned memory:** H2D 13.3 GB/s and D2H 12.1 GB/s against 10.3 and 9.8 pageable (the Stage 2 ceilings of 13.2 and 11.8). That alone saves 1.4 to 3.1 ms at 24 MP.
+  - **Streams need pinned memory:** pageable with 4 chunks is no faster than pageable with 1 chunk (0.92x to 1.0x), and slower at 1 MP.
+  - **Overlap is limited by the link, not by the code.** `pcie_duplex` shows H2D alone 13.2 GB/s, D2H alone 11.8, both at once only 15.3 GB/s aggregate (full duplex would be about 25). Color at 24 MP moves 144 MB, so the link needs 9.4 ms at 15.3 GB/s, and the pipelined run takes 9.6 ms: it is at the measured aggregate limit, 98%. The same platform limit that caps each direction at about 13 GB/s caps the sum. Streams hide the kernel and the gaps, but cannot hide the transfer itself.
+  - **Chunk count:** returns flatten at 4 to 8 chunks. Blur k=127 gets worse at 16 chunks (34.0 vs 31.4 ms at 4) because each band re-reads r=63 halo rows on each side, so the extra input grows with the chunk count and a band carries 126 halo rows.
+  - **Costs not in the table:** `cudaHostAlloc` of in plus out takes 36 ms at 24 MP (72 ms at 48 MP), so buffers must be pinned once and reused. If the image arrives in pageable memory, staging it into pinned buffers costs a 6.9 ms host memcpy (24 MP, input plus output), which cancels the gain (pinned 1 chunk 11.9 + 6.9 is worse than pageable 15.0). The timings assume the image is decoded straight into pinned memory.
+  - **Against the CPU ladder:** best GPU color is 9.6 ms against 4.0 ms for AVX2 + OpenMP on the CPU, so the CPU still wins color end to end even after pinning and streams (hypothesis 2 stands). Blur k=15 is 10.1 ms against 30 ms CPU, and k=127 is 31.4 against 126 ms, so the GPU wins blur by 3x to 4x end to end.
+- **Caveat:** one image per size, one thread mode (6 P-cores), medians of 20, one stream per chunk with no stream-count sweep. The Nsight Systems timeline is not captured.
 
 ### Stage 12: Parallelism ladder (in scope)
 Run the same algorithm and the same image on every rung, on one memory-bound kernel (color) and one compute-bound kernel (separable blur, Stage 6; bilateral is deferred).
@@ -370,9 +388,9 @@ Writing the report is not an afterthought. Draft each section right after its st
 - [x] Stage 4: convolution naive
 - [x] Stage 5: convolution tiled
 - [x] Stage 6: separable and radius sweep
-- [ ] Stage 11: pinned memory and streams
-- [ ] Stage 12: parallelism ladder (color), native rungs 1, 2, 6, 7
-- [ ] Stage 12: parallelism ladder (separable blur), native rungs 1, 2, 6, 7
+- [x] Stage 11: pinned memory and streams
+- [x] Stage 12: parallelism ladder (color), native rungs 1, 2, 6, 7
+- [x] Stage 12: parallelism ladder (separable blur), native rungs 1, 2, 6, 7
 - [ ] Stage 12 (optional): WASM rungs 3 and 4 in Node
 - [ ] Chart scripts (`scripts/`) for the in-scope charts
 - [ ] Roofline chart

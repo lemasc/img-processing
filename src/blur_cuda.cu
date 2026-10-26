@@ -123,6 +123,31 @@ void blur_sep_launch(const uint8_t* d_in, float* d_tmp, uint8_t* d_out, int w, i
   blur_sep_v_kernel<<<grid, block>>>(d_tmp, d_out, w, h, g);
 }
 
+// Stage 11 band kernels: rows are local to the band buffers (see band_rows in blur.h).
+__global__ void blur_sep_h_band_kernel(const uint8_t* in, float* tmp, int w, int rows, GaussKernel g) {
+  const int x = blockIdx.x * blockDim.x + threadIdx.x;
+  const int y = blockIdx.y * blockDim.y + threadIdx.y;
+  if (x < w && y < rows) blur_h_pixel(in, w, x, y, g, tmp + 3 * ((size_t)y * w + x));
+}
+
+__global__ void blur_sep_v_band_kernel(const float* tmp, uint8_t* out, int w, int h, int ya, int y0, int rows_out,
+                                       GaussKernel g) {
+  const int x = blockIdx.x * blockDim.x + threadIdx.x;
+  const int yo = blockIdx.y * blockDim.y + threadIdx.y;
+  if (x < w && yo < rows_out) blur_v_pixel_band(tmp, w, h, ya, x, y0 + yo, g, out + 3 * ((size_t)yo * w + x));
+}
+
+void blur_sep_band_launch(const uint8_t* d_in, float* d_tmp, uint8_t* d_out, int w, int h, int y0, int y1,
+                          const GaussKernel& g, void* stream, int bx, int by) {
+  int ya, yb;
+  band_rows(h, g.k, y0, y1, &ya, &yb);
+  cudaStream_t s = (cudaStream_t)stream;
+  dim3 block(bx, by);
+  dim3 grid_h((w + bx - 1) / bx, (yb - ya + by - 1) / by), grid_v((w + bx - 1) / bx, (y1 - y0 + by - 1) / by);
+  blur_sep_h_band_kernel<<<grid_h, block, 0, s>>>(d_in, d_tmp, w, yb - ya, g);
+  blur_sep_v_band_kernel<<<grid_v, block, 0, s>>>(d_tmp, d_out, w, h, ya, y0, y1 - y0, g);
+}
+
 void blur_sep_cuda(const uint8_t* in, uint8_t* out, int w, int h, const GaussKernel& g, int bx, int by) {
   const size_t bytes = (size_t)w * h * 3;
   uint8_t *d_in, *d_out;

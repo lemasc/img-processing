@@ -10,9 +10,9 @@ __global__ void color_kernel(const uint8_t* in, uint8_t* out, size_t npixels, Co
   if (i < npixels) adjust_pixel(in + 3 * i, out + 3 * i, p);
 }
 
-void color_cuda_launch(const uint8_t* d_in, uint8_t* d_out, size_t npixels, const ColorParams& p, int block) {
+void color_cuda_launch(const uint8_t* d_in, uint8_t* d_out, size_t npixels, const ColorParams& p, int block, void* stream) {
   int grid = (int)((npixels + block - 1) / block);
-  color_kernel<<<grid, block>>>(d_in, d_out, npixels, p);
+  color_kernel<<<grid, block, 0, (cudaStream_t)stream>>>(d_in, d_out, npixels, p);
 }
 
 void color_cuda(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParams& p) {

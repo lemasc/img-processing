@@ -76,12 +76,14 @@ HD inline void blur_h_pixel(const uint8_t* in, int w, int x, int y, const GaussK
   out[2] = a2;
 }
 
-// Vertical pass of one pixel: float intermediate in, rounded 8-bit out.
-HD inline void blur_v_pixel(const float* tmp, int w, int h, int x, int y, const GaussKernel& g, uint8_t* out) {
+// Vertical pass of one pixel: float intermediate in, rounded 8-bit out. tmp holds image rows
+// ya, ya+1, ... (ya = 0 for the whole image); y is the global row and taps clamp to the global
+// image, so a band of rows (Stage 11) gives the same result as the whole image.
+HD inline void blur_v_pixel_band(const float* tmp, int w, int h, int ya, int x, int y, const GaussKernel& g, uint8_t* out) {
   const int r = g.k / 2;
   float a0 = 0.f, a1 = 0.f, a2 = 0.f;
   for (int j = 0; j < g.k; j++) {
-    const float* p = tmp + 3 * ((size_t)clamp_idx(y + j - r, h - 1) * w + x);
+    const float* p = tmp + 3 * ((size_t)(clamp_idx(y + j - r, h - 1) - ya) * w + x);
     const float wt = g.w[j];
     a0 += wt * p[0];
     a1 += wt * p[1];
@@ -92,6 +94,10 @@ HD inline void blur_v_pixel(const float* tmp, int w, int h, int x, int y, const 
     float v = acc[c] + 0.5f;
     out[c] = (uint8_t)(v > 255.f ? 255.f : v);
   }
+}
+
+HD inline void blur_v_pixel(const float* tmp, int w, int h, int x, int y, const GaussKernel& g, uint8_t* out) {
+  blur_v_pixel_band(tmp, w, h, 0, x, y, g, out);
 }
 
 // CPU reference, defined in src/blur_cpu.cpp (built scalar, no auto-vectorization).
@@ -134,6 +140,18 @@ void blur_sep_launch(const uint8_t* d_in, float* d_tmp, uint8_t* d_out, int w, i
                      int bx = 16, int by = 16);
 // Convenience: host pointers in and out.
 void blur_sep_cuda(const uint8_t* in, uint8_t* out, int w, int h, const GaussKernel& g, int bx = 16, int by = 16);
+
+// Stage 11: separable blur of output rows [y0, y1) only. Needs input rows [ya, yb) = band_rows(...),
+// the band plus r rows of halo on each side, clamped to the image. d_in and d_tmp hold rows
+// ya..yb of the input and the float intermediate (d_tmp: 3*w*(yb-ya) floats), d_out holds rows
+// y0..y1 of the output. Same arithmetic as blur_sep_launch, so the bands join to the identical
+// image. stream is a cudaStream_t (void* keeps CUDA out of this header); nullptr = default stream.
+inline void band_rows(int h, int k, int y0, int y1, int* ya, int* yb) {
+  *ya = y0 - k / 2 < 0 ? 0 : y0 - k / 2;
+  *yb = y1 + k / 2 > h ? h : y1 + k / 2;
+}
+void blur_sep_band_launch(const uint8_t* d_in, float* d_tmp, uint8_t* d_out, int w, int h, int y0, int y1,
+                          const GaussKernel& g, void* stream = nullptr, int bx = 16, int by = 16);
 
 // Bytes of shared memory the tiled kernel needs for this kernel size, block shape and element size.
 inline size_t blur_tile_bytes(const GaussKernel& g, int bx, int by, int elem = 1) {

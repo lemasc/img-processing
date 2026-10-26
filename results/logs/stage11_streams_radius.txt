@@ -1,0 +1,30 @@
+$ scripts/bench.sh -t cores build/bench_streams -r 20 -w blur -k 63,127 images/photo_24mp.png
+# 2026-10-27T01:40:07+07:00  host=lemasc-ubuntu  commit=300b6f7
+bench: mode=cores cpus=0,2,4,6,8,10 threads=6 governor=performance load=0.74
+runs=20, caches flushed before each run, medians; pinned buffers hold the image already (staging is timed separately)
+transfers, photo_24mp.png (24.0 MP, 72 MB)
+  h2d_pageable      6.962 ms   10.3 GB/s
+  h2d_pinned        5.507 ms   13.1 GB/s
+  d2h_pageable      7.579 ms    9.5 GB/s
+  d2h_pinned        6.079 ms   11.8 GB/s
+  host_staging      6.857 ms  (memcpy pageable -> pinned for the input and pinned -> pageable for the output)
+  pinned_alloc     35.692 ms  (cudaHostAlloc + cudaFreeHost of two 72 MB buffers)
+blur_sep_k63, photo_24mp.png (24.0 MP)
+  pageable  1 chunk     27.026 ms  (min 26.938, max 27.757)  x1.00 vs pageable/1  maxdiff 0
+  pinned    1 chunk     24.000 ms  (min 23.950, max 24.205)  x1.13 vs pageable/1  maxdiff 0
+  kernel only (whole image)    13.371 ms
+  pinned    2 chunks    18.462 ms  (min 18.408, max 18.656)  x1.46 vs pageable/1  maxdiff 0
+  pinned    4 chunks    15.802 ms  (min 15.764, max 16.012)  x1.71 vs pageable/1  maxdiff 0
+  pinned    8 chunks    14.883 ms  (min 14.762, max 14.915)  x1.82 vs pageable/1  maxdiff 0
+  pinned   16 chunks    14.945 ms  (min 14.729, max 14.997)  x1.81 vs pageable/1  maxdiff 0
+  pageable  4 chunks    28.021 ms  (min 27.884, max 28.499)  x0.96 vs pageable/1  maxdiff 0
+blur_sep_k127, photo_24mp.png (24.0 MP)
+  pageable  1 chunk     41.351 ms  (min 40.657, max 41.895)  x1.00 vs pageable/1  maxdiff 0
+  pinned    1 chunk     38.372 ms  (min 37.669, max 39.030)  x1.08 vs pageable/1  maxdiff 0
+  kernel only (whole image)    27.698 ms
+  pinned    2 chunks    33.332 ms  (min 32.545, max 33.742)  x1.24 vs pageable/1  maxdiff 0
+  pinned    4 chunks    31.365 ms  (min 30.487, max 31.767)  x1.32 vs pageable/1  maxdiff 0
+  pinned    8 chunks    31.674 ms  (min 30.988, max 31.877)  x1.31 vs pageable/1  maxdiff 0
+  pinned   16 chunks    34.020 ms  (min 33.577, max 34.210)  x1.22 vs pageable/1  maxdiff 0
+  pageable  4 chunks    42.817 ms  (min 42.706, max 43.107)  x0.97 vs pageable/1  maxdiff 0
+# exit=0

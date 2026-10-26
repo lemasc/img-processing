@@ -1,0 +1,10 @@
+$ scripts/bench.sh -t single build/exp/pcie_duplex
+# 2026-10-27T01:40:50+07:00  host=lemasc-ubuntu  commit=300b6f7
+bench: mode=single cpus=0 threads=1 governor=performance load=0.56
+256 MB pinned copies, median of 10
+  H2D alone          20.34 ms   13.2 GB/s
+  D2H alone          22.72 ms   11.8 GB/s
+  both at once       35.05 ms   15.3 GB/s aggregate (7.7 H2D + 7.7 D2H if shared evenly)
+  full duplex would take 22.72 ms (the slower direction), serial would take 43.05 ms
+  overlap achieved: 39% of the serial-to-duplex gap
+# exit=0

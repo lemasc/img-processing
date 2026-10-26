@@ -79,6 +79,10 @@ target_link_libraries(check_blur PRIVATE common image_io blur_cpu blur_cuda comp
 add_executable(bench_ladder_blur apps/bench_ladder_blur.cu)
 target_link_libraries(bench_ladder_blur PRIVATE common image_io blur_cpu blur_cpu_simd blur_cuda compare)
 
+# Stage 11: pinned memory and streams.
+add_executable(bench_streams apps/bench_streams.cu)
+target_link_libraries(bench_streams PRIVATE common image_io blur_cuda color_cuda compare)
+
 enable_testing()
 add_test(NAME compare_selftest COMMAND test_compare)
 add_test(NAME color_cuda_vs_cpu COMMAND check_color WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})

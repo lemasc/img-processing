@@ -42,7 +42,9 @@ void color_cpu(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParam
 
 // CUDA, defined in src/color_cuda.cu.
 // Kernel launch only: d_in and d_out are device pointers. Asynchronous, no sync.
-void color_cuda_launch(const uint8_t* d_in, uint8_t* d_out, size_t npixels, const ColorParams& p, int block = 256);
+// stream is a cudaStream_t (void* keeps CUDA out of this header), nullptr = default stream.
+void color_cuda_launch(const uint8_t* d_in, uint8_t* d_out, size_t npixels, const ColorParams& p, int block = 256,
+                       void* stream = nullptr);
 // Convenience: host pointers in and out. Allocates, copies, runs, copies back, frees.
 void color_cuda(const uint8_t* in, uint8_t* out, size_t npixels, const ColorParams& p);
 
