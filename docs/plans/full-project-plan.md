@@ -38,7 +38,7 @@ Installed software: driver 595.71.05, CUDA Toolkit 13.2 (target `sm_86`), gcc 13
 Real photos are 24 to 32 MP at most.
 
 - **Natural content:** real photos at 24 to 32 MP. Smaller sizes (1, 6 MP) are made by area-average downscaling.
-- **48 MP:** made by tiling or upscaling a real photo and labelled "upscaled" in the report. Used only for kernels whose timing does not depend on pixel content (color, blur, bilateral).
+- **48 MP:** made by upscaling a real photo and labelled "upscaled" in the report. Used only for kernels whose timing does not depend on pixel content. Stage 2 check: the scalar CPU color kernel is content-dependent (24 MP: flat 170 ms, photo 194 ms, noise 286 ms, probably branch misprediction in the clamp), but per-MP time for the real 32 MP photo (7.95 ms/MP) matches the upscaled photos (7.9 to 8.1 ms/MP), so photo-like content is safe at any size. The GPU kernel is content-independent (0.47 to 0.48 ms).
 - **Content-dependent kernels (histogram, median):** use real photos plus generated flat and noise images, never upscaled ones.
 - **Flat and noise images:** generated at every size.
 
@@ -81,6 +81,7 @@ Rule: do not start a stage until the previous one is measured, screenshotted, an
 ### Stage 2: Measurement harness
 - **Build:** timing infrastructure shared by all later stages, with warm-up run, repeated runs, and CSV output.
 - **Measure:** median of about 20 runs, time split (H2D copy, kernel, D2H copy), effective bandwidth as % of the 360 GB/s peak.
+- **Built:** `include/timing.h` (warm-up, cache flush before every timed run, median/min/max, CSV), `include/bench.h` (phase split, peaks). Caches are flushed because the 3060 has only 3 MB of L2 and small images would otherwise report impossible bandwidth.
 
 ### Stage 3: Correctness check
 - **Build:** pixel-by-pixel comparison of GPU and CPU output.
@@ -294,7 +295,7 @@ Writing the report is not an afterthought. Draft each section right after its st
 - [x] Hardware and software versions recorded
 - [x] Test images prepared (1, 6, 24, 48 MP; flat, photo, noise)
 - [x] Stage 1: baseline color
-- [ ] Stage 2: measurement harness
+- [x] Stage 2: measurement harness
 - [ ] Stage 3: correctness check
 - [ ] Stage 4: convolution naive
 - [ ] Stage 5: convolution tiled

@@ -26,5 +26,14 @@ int main() {
   std::vector<float> h(n);
   Stats t = time_cpu([&] { CUDA_CHECK(cudaMemcpy(h.data(), a, n * 4, cudaMemcpyDeviceToHost)); }, 5);
   printf("D2H pageable: median %.3f ms, %.1f GB/s\n", t.median, n * 4 / (t.median / 1000.0) / 1e9);
+
+  // Practical PCIe peak: pinned host memory, both directions.
+  float* hp;
+  CUDA_CHECK(cudaMallocHost(&hp, n * 4));
+  Stats ph = time_gpu([&] { CUDA_CHECK(cudaMemcpy(a, hp, n * 4, cudaMemcpyHostToDevice)); }, 10);
+  Stats pd = time_gpu([&] { CUDA_CHECK(cudaMemcpy(hp, a, n * 4, cudaMemcpyDeviceToHost)); }, 10);
+  printf("H2D pinned:   median %.3f ms, %.1f GB/s\n", ph.median, n * 4 / (ph.median / 1000.0) / 1e9);
+  printf("D2H pinned:   median %.3f ms, %.1f GB/s\n", pd.median, n * 4 / (pd.median / 1000.0) / 1e9);
+  cudaFreeHost(hp);
   cudaFree(a); cudaFree(b);
 }

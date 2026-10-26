@@ -1,6 +1,0 @@
-kernel,platform,megapixels,params,median_ms,min_ms,max_ms,mpix_per_s,gb_per_s
-color,cpu_scalar,24.00,cpus=0;block=256,194.7892,192.1269,198.8811,123.21,0.74
-color,cuda_h2d,24.00,cpus=0;block=256,6.8961,6.8764,6.9561,3480.21,10.44
-color,cuda_kernel,24.00,cpus=0;block=256,0.4833,0.4823,0.4834,49662.30,297.97
-color,cuda_d2h,24.00,cpus=0;block=256,7.4699,7.4418,8.0382,3212.91,9.64
-color,cuda_e2e,24.00,cpus=0;block=256,14.8521,14.7911,15.0020,1615.93,9.70

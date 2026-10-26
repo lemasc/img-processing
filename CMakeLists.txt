@@ -26,6 +26,6 @@ target_link_libraries(color_cuda PUBLIC common)
 add_executable(smoke apps/smoke.cu)
 target_link_libraries(smoke PRIVATE common)
 
-# Stage 1: color adjustment.
-add_executable(stage1_color apps/stage1_color.cu)
-target_link_libraries(stage1_color PRIVATE common image_io color_cpu color_cuda)
+# Stages 1 and 2: color adjustment with the measurement harness.
+add_executable(bench_color apps/bench_color.cu)
+target_link_libraries(bench_color PRIVATE common image_io color_cpu color_cuda)
