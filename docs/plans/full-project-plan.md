@@ -225,6 +225,29 @@ Notes:
 - Compare a float implementation against a fixed-point integer one on SIMD, and use the Stage 3 check to report the precision cost.
 - Rung 6 is now required (it is the strongest CPU rung, and the fair opponent for the GPU). Rungs 3 and 4 are optional, rung 5 is deferred.
 
+- **Built (native rungs):** `src/color_cpu_simd.cpp` (rung 2 auto-vectorized, rung 2b auto-vectorized + OpenMP, rung 6a hand-written AVX2 with 16 pixels per iteration and shuffle masks generated from the RGB layout, rung 6 the same with OpenMP), `src/blur_cpu_simd.cpp` (same four rungs for the separable blur; the AVX2 version treats a row as a flat float array so each tap is one load shifted by 3 floats, and strips the vertical pass 64 floats wide so the k-row window stays in cache), `apps/bench_ladder_color.cu`, `apps/bench_ladder_blur.cu`, a `-t cores` mode in `scripts/bench.sh` (6 threads on the 6 P-cores, no hyper-threading). Rung 1 is the Stage 1/6 scalar code, rung 7 the existing CUDA kernels. Every rung is checked against the scalar rung at tolerance 1 before it is timed. Build flags: `-O3 -mavx2 -mfma -ffinite-math-only -fno-signed-zeros` (same clamp flags as the scalar rung). Logs: `results/logs/stage12_color_ladder_{single,cores,multi,all}.txt`, `stage12_blur_ladder_{mode}_{radius,size}.txt`, data in `results/data/ladder.csv`. 20 GPU runs, 20 CPU runs for color, 3 to 5 for blur.
+- **Result, color (24 MP photo, compute-only ms; best thread mode per rung):** scalar 164, autovec AVX2 1 thread 25.8 (6.4x), AVX2 intrinsics 1 thread 22.3 (7.4x), AVX2 intrinsics + OpenMP 4.7 on 6 cores and 4.2 on 12 threads (up to 39x), autovec + OpenMP 4.0 on 12 threads (41x), CUDA kernel 0.47 (349x), CUDA end to end 15.0 (10.9x).
+  - The best CPU rung beats CUDA end to end by about 3.7x (4.0 against 15 ms), because PCIe takes 14.5 of the 15 ms. After Stage 11 the best GPU time is 9.6 ms, still behind the CPU. Hypothesis 2 holds, at 6, 24 and 48 MP.
+  - GCC's auto-vectorizer reaches 86% of the hand-written AVX2 speed on single-thread color (25.8 against 22.3 ms).
+  - One thread reaches only 6.5 GB/s against the 27.9 GB/s single-thread DRAM measurement, so the single-thread SIMD color kernel is compute-bound (likely shuffle-limited, not profiled). With threads it reaches 36 GB/s, 70% of the measured 51 GB/s.
+  - Using the E-cores hurts: 16 threads (5.1 ms) are slower than 12 (4.0 ms) with `schedule(static)`, probably because every thread gets the same share and the E-cores are slower. Dynamic scheduling was not tried.
+  - Content does not matter: flat, photo and noise agree within noise.
+- **Result, separable blur (24 MP photo, compute-only ms for the CPU rungs, best thread mode; CUDA both ways):**
+
+  | radius (k) | scalar | autovec, 1 thread | AVX2 + OpenMP, best | CUDA kernel | CUDA end to end |
+  |---|---|---|---|---|---|
+  | 3 (7) | 439 | 360 (1.2x) | 29 (15x) | 2.4 (184x) | 17.1 (26x) |
+  | 7 (15) | 862 | 705 (1.2x) | 30 (28x) | 3.6 (241x) | 18.1 (48x) |
+  | 15 (31) | 1711 | 1543 (1.1x) | 34 (50x) | 6.8 (254x) | 21.1 (81x) |
+  | 31 (63) | 3534 | 2983 (1.2x) | 57 (62x) | 13.2 (268x) | 26.9 (131x) |
+  | 63 (127) | 7594 | 6279 (1.2x) | 126 (60x) | 26.4 (288x) | 39.9 (190x) |
+
+  - The GPU wins blur end to end at every radius, from 1.7x at k=7 to 3.2x at k=127 over the best CPU rung. At 1 MP and k=15 it is nearly a tie (CPU 0.76 ms, GPU 0.88 ms). This is the opposite of color, as hypothesis 3 expected.
+  - The auto-vectorizer fails on blur (1.1x to 1.2x, against 6.4x on color): interleaved RGB with clamped tap indices defeats it. Hand-written AVX2 is 5x to 11x on one thread. Part of that gap is the restructuring (flat float rows, column strips), not vector width alone.
+  - The best CPU rung reaches 220 to 320 GFLOP/s, about a quarter of the GPU's roughly 1,380 GFLOP/s. One thread reaches 48 to 57. Six cores give about 4.7x, twelve threads add about 20%, 16 threads add little.
+  - Throughput is flat from 6 to 48 MP (about 730 MP/s at k=15 on 12 threads). 1 MP is about 1.8x faster per pixel on the CPU, probably because its 12 MB intermediate fits in the 20 MB L3 (not measured).
+- **Caveats:** the multi-thread blur runs started with `bench.sh` load-average warnings of 1.5 to 5, which was the tail of our own previous run (nothing else was running when checked), so they may carry a few percent of noise. The CPU rungs materialize the full float intermediate like the GPU kernel does, so the comparison is like for like, but a cache-fused CPU version would be faster. The CUDA rung is the plain separable kernel with global loads, so better GPU variants would widen the GPU lead. No fixed-point rung and no WASM rungs yet.
+
 ### Optional: Median filter
 A branch-heavy counterexample showing warp divergence, and a case where the GPU advantage shrinks.
 
@@ -354,8 +377,8 @@ Adjust to the actual deadline. Work backward from the exam date.
 |---|---|---|
 | A | Stages 1 to 3 (baseline, harness, correctness) | Done |
 | B | Stages 4 to 6 (convolution, separable blur) | Done |
-| C | Stage 12 ladder, native rungs 1, 2, 6, 7 on color and blur | Next |
-| D | Stage 11 (pinned memory, streams) | After C |
+| C | Stage 12 ladder, native rungs 1, 2, 6, 7 on color and blur | Done |
+| D | Stage 11 (pinned memory, streams) | Done |
 | E | Optional: WASM rungs 3 and 4 in Node | Only if time allows, cap the setup effort |
 | F | Chart scripts, roofline, Installation and Execution section, draft sections that do not depend on C to E (environment, source overview, steps) | In parallel with C to E |
 | G | Finish report, proofread, export PDF, submit | Reserve at least 5 days before the deadline |
