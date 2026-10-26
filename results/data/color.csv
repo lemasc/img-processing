@@ -34,3 +34,8 @@ color,cuda_h2d,24.00,cpus=0;block=256;img=noise_24mp.png,20,7.0235,6.9710,7.1004
 color,cuda_kernel,24.00,cpus=0;block=256;img=noise_24mp.png,20,0.4833,0.4823,0.5026,49655.72,297.93,82.8
 color,cuda_d2h,24.00,cpus=0;block=256;img=noise_24mp.png,20,7.4470,7.4222,8.0024,3222.78,9.67,81.9
 color,cuda_e2e,24.00,cpus=0;block=256;img=noise_24mp.png,20,15.0222,14.9580,15.4152,1597.63,9.59,
+color,cpu_scalar,6.00,cpus=0;block=256;img=photo_6mp.png,5,40.4286,40.0908,40.6967,148.41,0.89,1.2
+color,cuda_h2d,6.00,cpus=0;block=256;img=photo_6mp.png,5,1.6724,1.6680,1.8469,3587.56,10.76,81.5
+color,cuda_kernel,6.00,cpus=0;block=256;img=photo_6mp.png,5,0.1239,0.1229,0.1239,48437.10,290.62,80.7
+color,cuda_d2h,6.00,cpus=0;block=256;img=photo_6mp.png,5,1.9519,1.9453,2.1027,3073.87,9.22,78.1
+color,cuda_e2e,6.00,cpus=0;block=256;img=photo_6mp.png,5,3.8579,3.8463,3.8625,1555.26,9.33,

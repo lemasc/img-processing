@@ -1,0 +1,19 @@
+$ scripts/run-capped.sh -m 6G build/check_color images/photos/24mp_complex_colors.jpg images/photos/24mp_night_shot.jpg images/photos/32mp_complex_colors.jpg images/flat_24mp.png images/noise_24mp.png
+# 2026-10-26T12:28:53+07:00  host=lemasc-ubuntu  commit=ddd2779
+tolerance: 1 level(s) per channel (of 255)
+all 16.7M RGB colors               PASS  max 1, mean 0.000005, mismatched 224/16777216 px (0.0013%), over tol 0  hist[0,1,2,3+]=50331421,227,0,0
+first 1 px of all-colors           PASS  max 0, mean 0.000000, mismatched 0/1 px (0.0000%), over tol 0  hist[0,1,2,3+]=3,0,0,0
+first 2 px of all-colors           PASS  max 0, mean 0.000000, mismatched 0/2 px (0.0000%), over tol 0  hist[0,1,2,3+]=6,0,0,0
+first 255 px of all-colors         PASS  max 0, mean 0.000000, mismatched 0/255 px (0.0000%), over tol 0  hist[0,1,2,3+]=765,0,0,0
+first 256 px of all-colors         PASS  max 0, mean 0.000000, mismatched 0/256 px (0.0000%), over tol 0  hist[0,1,2,3+]=768,0,0,0
+first 257 px of all-colors         PASS  max 0, mean 0.000000, mismatched 0/257 px (0.0000%), over tol 0  hist[0,1,2,3+]=771,0,0,0
+first 1023 px of all-colors        PASS  max 0, mean 0.000000, mismatched 0/1023 px (0.0000%), over tol 0  hist[0,1,2,3+]=3069,0,0,0
+first 1025 px of all-colors        PASS  max 0, mean 0.000000, mismatched 0/1025 px (0.0000%), over tol 0  hist[0,1,2,3+]=3075,0,0,0
+first 65537 px of all-colors       PASS  max 1, mean 0.000005, mismatched 1/65537 px (0.0015%), over tol 0  hist[0,1,2,3+]=196610,1,0,0
+24mp_complex_colors.jpg            PASS  max 1, mean 0.000000, mismatched 2/24000000 px (0.0000%), over tol 0  hist[0,1,2,3+]=71999998,2,0,0
+24mp_night_shot.jpg                PASS  max 1, mean 0.000001, mismatched 39/24000000 px (0.0002%), over tol 0  hist[0,1,2,3+]=71999961,39,0,0
+32mp_complex_colors.jpg            PASS  max 1, mean 0.000000, mismatched 38/32294400 px (0.0001%), over tol 0  hist[0,1,2,3+]=96883162,38,0,0
+flat_24mp.png                      PASS  max 0, mean 0.000000, mismatched 0/24000000 px (0.0000%), over tol 0  hist[0,1,2,3+]=72000000,0,0,0
+noise_24mp.png                     PASS  max 1, mean 0.000004, mismatched 313/24000000 px (0.0013%), over tol 0  hist[0,1,2,3+]=71999684,316,0,0
+RESULT: PASS
+# exit=0

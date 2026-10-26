@@ -1,0 +1,13 @@
+$ scripts/exp_fma.sh
+# 2026-10-26T12:28:56+07:00  host=lemasc-ubuntu  commit=ddd2779
+=== build (tolerance 0)
+all 16.7M RGB colors               FAIL  max 1, mean 0.000005, mismatched 224/16777216 px (0.0013%), over tol 224  hist[0,1,2,3+]=50331421,227,0,0
+24mp_night_shot.jpg                FAIL  max 1, mean 0.000001, mismatched 39/24000000 px (0.0002%), over tol 39  hist[0,1,2,3+]=71999961,39,0,0
+noise_24mp.png                     FAIL  max 1, mean 0.000004, mismatched 313/24000000 px (0.0013%), over tol 313  hist[0,1,2,3+]=71999684,316,0,0
+RESULT: FAIL
+=== build-nofma (tolerance 0)
+all 16.7M RGB colors               PASS  max 0, mean 0.000000, mismatched 0/16777216 px (0.0000%), over tol 0  hist[0,1,2,3+]=50331648,0,0,0
+24mp_night_shot.jpg                PASS  max 0, mean 0.000000, mismatched 0/24000000 px (0.0000%), over tol 0  hist[0,1,2,3+]=72000000,0,0,0
+noise_24mp.png                     PASS  max 0, mean 0.000000, mismatched 0/24000000 px (0.0000%), over tol 0  hist[0,1,2,3+]=72000000,0,0,0
+RESULT: PASS
+# exit=0

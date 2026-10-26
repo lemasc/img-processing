@@ -1,0 +1,37 @@
+kernel,impl,input,tol,pixels,mismatched,over_tol,max_abs,mean_abs,pass
+color,cuda,all 16.7M RGB colors,1,16777216,224,0,1,0.00000451,1
+color,cuda,first 1 px of all-colors,1,1,0,0,0,0.00000000,1
+color,cuda,first 2 px of all-colors,1,2,0,0,0,0.00000000,1
+color,cuda,first 255 px of all-colors,1,255,0,0,0,0.00000000,1
+color,cuda,first 256 px of all-colors,1,256,0,0,0,0.00000000,1
+color,cuda,first 257 px of all-colors,1,257,0,0,0,0.00000000,1
+color,cuda,first 1023 px of all-colors,1,1023,0,0,0,0.00000000,1
+color,cuda,first 1025 px of all-colors,1,1025,0,0,0,0.00000000,1
+color,cuda,first 65537 px of all-colors,1,65537,1,0,1,0.00000509,1
+color,cuda,24mp_complex_colors.jpg,1,24000000,2,0,1,0.00000003,1
+color,cuda,24mp_night_shot.jpg,1,24000000,39,0,1,0.00000054,1
+color,cuda,32mp_complex_colors.jpg,1,32294400,38,0,1,0.00000039,1
+color,cuda,flat_24mp.png,1,24000000,0,0,0,0.00000000,1
+color,cuda,noise_24mp.png,1,24000000,313,0,1,0.00000439,1
+color,build,all 16.7M RGB colors,0,16777216,224,224,1,0.00000451,0
+color,build,first 1 px of all-colors,0,1,0,0,0,0.00000000,1
+color,build,first 2 px of all-colors,0,2,0,0,0,0.00000000,1
+color,build,first 255 px of all-colors,0,255,0,0,0,0.00000000,1
+color,build,first 256 px of all-colors,0,256,0,0,0,0.00000000,1
+color,build,first 257 px of all-colors,0,257,0,0,0,0.00000000,1
+color,build,first 1023 px of all-colors,0,1023,0,0,0,0.00000000,1
+color,build,first 1025 px of all-colors,0,1025,0,0,0,0.00000000,1
+color,build,first 65537 px of all-colors,0,65537,1,1,1,0.00000509,0
+color,build,24mp_night_shot.jpg,0,24000000,39,39,1,0.00000054,0
+color,build,noise_24mp.png,0,24000000,313,313,1,0.00000439,0
+color,build-nofma,all 16.7M RGB colors,0,16777216,0,0,0,0.00000000,1
+color,build-nofma,first 1 px of all-colors,0,1,0,0,0,0.00000000,1
+color,build-nofma,first 2 px of all-colors,0,2,0,0,0,0.00000000,1
+color,build-nofma,first 255 px of all-colors,0,255,0,0,0,0.00000000,1
+color,build-nofma,first 256 px of all-colors,0,256,0,0,0,0.00000000,1
+color,build-nofma,first 257 px of all-colors,0,257,0,0,0,0.00000000,1
+color,build-nofma,first 1023 px of all-colors,0,1023,0,0,0,0.00000000,1
+color,build-nofma,first 1025 px of all-colors,0,1025,0,0,0,0.00000000,1
+color,build-nofma,first 65537 px of all-colors,0,65537,0,0,0,0.00000000,1
+color,build-nofma,24mp_night_shot.jpg,0,24000000,0,0,0,0.00000000,1
+color,build-nofma,noise_24mp.png,0,24000000,0,0,0,0.00000000,1

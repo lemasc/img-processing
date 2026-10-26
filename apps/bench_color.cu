@@ -6,6 +6,7 @@
 #include <string>
 #include "bench.h"
 #include "color.h"
+#include "compare.h"
 #include "image.h"
 
 static bool run_one(const std::string& path, int runs, const std::string& outdir) {
@@ -29,18 +30,20 @@ static bool run_one(const std::string& path, int runs, const std::string& outdir
   cudaFree(d_in);
   cudaFree(d_out);
 
-  // Sanity checks only. Stage 3 builds the real correctness check.
-  int maxdiff = 0;
-  for (size_t i = 0; i < bytes; i++) maxdiff = std::max(maxdiff, abs((int)cpu_out.px[i] - (int)gpu_out.px[i]));
+  // Correctness gate (Stage 3): timings are only reported for output within tolerance.
+  const int tol = 1;
+  DiffStats d = compare_images(cpu_out.px.data(), gpu_out.px.data(), n, 3, tol);
+  log_diff("results/data/correctness.csv", "color", "cuda", path, tol, d);
+  if (!passes(d)) { fprintf(stderr, "%s: output differs from CPU reference: %s\n", path.c_str(), describe(d).c_str()); return false; }
   Image wrap_out = img;
   color_cuda(img.px.data(), wrap_out.px.data(), n, p);
   if (wrap_out.px != gpu_out.px) { fprintf(stderr, "color_cuda wrapper mismatch\n"); return false; }
 
   const double gbs = 2.0 * bytes / (g.kernel.median / 1e3) / 1e9;
   const std::string name = std::filesystem::path(path).filename().string();
-  printf("%-26s %6.1f MP | cpu %8.2f | h2d %7.3f  kern %7.3f  d2h %7.3f  e2e %8.3f ms | kern %5.1f GB/s (%2.0f%%) | x%.0f kern, x%.1f e2e | maxdiff %d\n",
+  printf("%-26s %6.1f MP | cpu %8.2f | h2d %7.3f  kern %7.3f  d2h %7.3f  e2e %8.3f ms | kern %5.1f GB/s (%2.0f%%) | x%.0f kern, x%.1f e2e | diff max %d, %zu px\n",
          name.c_str(), mp, cpu.median, g.h2d.median, g.kernel.median, g.d2h.median, g.e2e.median, gbs,
-         100 * gbs / kGpuPeakGBs, cpu.median / g.kernel.median, cpu.median / g.e2e.median, maxdiff);
+         100 * gbs / kGpuPeakGBs, cpu.median / g.kernel.median, cpu.median / g.e2e.median, d.max_abs, d.mismatched);
 
   log_inout("results/data/color.csv", "color", "cpu_scalar", mp, run_tag("block=" + std::to_string(block) + ";img=" + name),
             cpu, g, bytes, bytes);

@@ -100,6 +100,9 @@ Rule: do not start a stage until the previous one is measured, screenshotted, an
 - **Build:** pixel-by-pixel comparison of GPU and CPU output.
 - **Measure:** max difference, mean difference, count of mismatched pixels.
 - **Purpose:** every later optimization must pass this check.
+- **Tolerance:** at most 1 level (of 255) per channel for float implementations; fixed-point ladder rungs get their own tolerance and report the error. Counts are reported with tolerance 0 as well.
+- **Built:** `include/compare.h`, `src/compare.cpp` (self-tested in `apps/test_compare.cpp`), `apps/check_color.cu`, run by `ctest`. Checks every possible RGB color once (16.7M pixels), pixel counts that do not divide the block size, and real photos. `bench_color` refuses to report timings for output outside tolerance.
+- **Result:** CPU and GPU differ by at most 1 level, on 224 of 16.7M colors (0.0013%), and 39 of 24M pixels on a night photo. Cause: nvcc fuses multiply-adds (one rounding), the CPU does not (two). With `--fmad=false` the GPU is bit-exact on all inputs (`scripts/exp_fma.sh`, `results/logs/exp_fma.txt`). Float rounding differences are therefore expected between platforms, not bugs.
 
 ### Stage 4: Convolution, naive
 - **Build:** 2D blur using global memory only.
@@ -309,7 +312,7 @@ Writing the report is not an afterthought. Draft each section right after its st
 - [x] Test images prepared (1, 6, 24, 48 MP; flat, photo, noise)
 - [x] Stage 1: baseline color
 - [x] Stage 2: measurement harness
-- [ ] Stage 3: correctness check
+- [x] Stage 3: correctness check
 - [ ] Stage 4: convolution naive
 - [ ] Stage 5: convolution tiled
 - [ ] Stage 6: separable and radius sweep
