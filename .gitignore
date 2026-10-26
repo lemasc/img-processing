@@ -1,0 +1,10 @@
+build/
+.venv/
+__pycache__/
+emsdk/
+images/*
+!images/.gitkeep
+results/output/
+*.nsys-rep
+*.ncu-rep
+dmidecode.out

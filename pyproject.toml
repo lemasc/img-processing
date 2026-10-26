@@ -1,0 +1,6 @@
+[project]
+name = "hct-imgproc-tools"
+version = "0.1.0"
+description = "Chart generation and test image tools for the HCT image processing assignment"
+requires-python = ">=3.12"
+dependencies = ["numpy", "pandas", "matplotlib", "pillow"]
