@@ -1,0 +1,24 @@
+$ build/bench_blur -k 7,15,31,63,127 -m 31 -c 3 -r 20 images/photo_24mp.png
+# 2026-10-26T17:54:48+07:00  host=lemasc-ubuntu  commit=d873c75
+gpu runs=20, cpu runs=3, block=16x16, caches flushed before each run, medians
+photo_24mp.png      24.0 MP k=7   naive  | cpu2d    1603.0 cpusep    433.3 | kern    5.719  e2e   20.27 ms |   25.2 GB/s (  7%)  1439.4 GFLOP/s | occ 100% | x280 vs cpu
+photo_24mp.png      24.0 MP k=7   tiled  | cpu2d    1603.0 cpusep    433.3 | kern    4.555  e2e   19.14 ms |   31.6 GB/s (  9%)  1807.1 GFLOP/s | occ 100% | x352 vs cpu | x1.26 vs naive
+photo_24mp.png      24.0 MP k=7   tiledf | cpu2d    1603.0 cpusep    433.3 | kern    4.574  e2e   19.20 ms |   31.5 GB/s (  9%)  1799.7 GFLOP/s | occ 100% | x350 vs cpu | x1.25 vs naive
+photo_24mp.png      24.0 MP k=7   sep    | cpu2d    1603.0 cpusep    433.3 | kern    2.431  e2e   17.07 ms |  296.2 GB/s ( 82%)   829.3 GFLOP/s | occ   - | x178 vs cpu-sep | x2.35 vs naive
+photo_24mp.png      24.0 MP k=15  naive  | cpu2d    6942.8 cpusep    855.2 | kern   24.443  e2e   38.74 ms |    5.9 GB/s (  2%)  1546.5 GFLOP/s | occ 100% | x284 vs cpu
+photo_24mp.png      24.0 MP k=15  tiled  | cpu2d    6942.8 cpusep    855.2 | kern   19.212  e2e   33.91 ms |    7.5 GB/s (  2%)  1967.5 GFLOP/s | occ 100% | x361 vs cpu | x1.27 vs naive
+photo_24mp.png      24.0 MP k=15  tiledf | cpu2d    6942.8 cpusep    855.2 | kern   19.208  e2e   33.83 ms |    7.5 GB/s (  2%)  1967.9 GFLOP/s | occ 100% | x361 vs cpu | x1.27 vs naive
+photo_24mp.png      24.0 MP k=15  sep    | cpu2d    6942.8 cpusep    855.2 | kern    3.582  e2e   17.98 ms |  201.0 GB/s ( 56%)  1206.0 GFLOP/s | occ   - | x239 vs cpu-sep | x6.82 vs naive
+photo_24mp.png      24.0 MP k=31  naive  | cpu2d   28991.1 cpusep   1699.6 | kern  101.798  e2e  116.06 ms |    1.4 GB/s (  0%)  1586.0 GFLOP/s | occ 100% | x285 vs cpu
+photo_24mp.png      24.0 MP k=31  tiled  | cpu2d   28991.1 cpusep   1699.6 | kern   80.023  e2e   94.67 ms |    1.8 GB/s (  0%)  2017.5 GFLOP/s | occ 100% | x362 vs cpu | x1.27 vs naive
+photo_24mp.png      24.0 MP k=31  tiledf | cpu2d   28991.1 cpusep   1699.6 | kern   80.025  e2e   94.68 ms |    1.8 GB/s (  0%)  2017.5 GFLOP/s | occ  50% | x362 vs cpu | x1.27 vs naive
+photo_24mp.png      24.0 MP k=31  sep    | cpu2d   28991.1 cpusep   1699.6 | kern    6.776  e2e   20.92 ms |  106.3 GB/s ( 30%)  1317.7 GFLOP/s | occ   - | x251 vs cpu-sep | x15.02 vs naive
+photo_24mp.png      24.0 MP k=63  naive  | cpu2d       0.0 cpusep   3521.4 | kern  419.292  e2e  432.76 ms |    0.3 GB/s (  0%)  1590.3 GFLOP/s | occ 100% | no cpu 2d
+photo_24mp.png      24.0 MP k=63  tiled  | cpu2d       0.0 cpusep   3521.4 | kern  329.251  e2e  343.88 ms |    0.4 GB/s (  0%)  2025.2 GFLOP/s | occ  83% | no cpu 2d | x1.27 vs naive
+photo_24mp.png         k=63 tiledf: tile exceeds 48 KB, skipped
+photo_24mp.png      24.0 MP k=63  sep    | cpu2d       0.0 cpusep   3521.4 | kern   13.296  e2e   26.98 ms |   54.2 GB/s ( 15%)  1364.7 GFLOP/s | occ   - | x265 vs cpu-sep | x31.54 vs naive
+photo_24mp.png      24.0 MP k=127 naive  | cpu2d       0.0 cpusep   7449.1 | kern 1705.626  e2e 1729.75 ms |    0.1 GB/s (  0%)  1588.7 GFLOP/s | occ 100% | no cpu 2d
+photo_24mp.png         k=127 tiled: tile exceeds 48 KB, skipped
+photo_24mp.png         k=127 tiledf: tile exceeds 48 KB, skipped
+photo_24mp.png      24.0 MP k=127 sep    | cpu2d       0.0 cpusep   7449.1 | kern   26.694  e2e   40.26 ms |   27.0 GB/s (  7%)  1370.2 GFLOP/s | occ   - | x279 vs cpu-sep | x63.90 vs naive
+# exit=0

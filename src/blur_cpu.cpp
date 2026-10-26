@@ -6,6 +6,13 @@ void blur_cpu(const uint8_t* in, uint8_t* out, int w, int h, const GaussKernel& 
     for (int x = 0; x < w; x++) blur_pixel(in, w, h, x, y, g, out + 3 * ((size_t)y * w + x));
 }
 
+void blur_sep_cpu(const uint8_t* in, uint8_t* out, float* tmp, int w, int h, const GaussKernel& g) {
+  for (int y = 0; y < h; y++)
+    for (int x = 0; x < w; x++) blur_h_pixel(in, w, x, y, g, tmp + 3 * ((size_t)y * w + x));
+  for (int y = 0; y < h; y++)
+    for (int x = 0; x < w; x++) blur_v_pixel(tmp, w, h, x, y, g, out + 3 * ((size_t)y * w + x));
+}
+
 void blur_ref_double(const uint8_t* in, uint8_t* out, int w, int h, const GaussKernel& g) {
   const int r = g.k / 2;
   for (int y = 0; y < h; y++)

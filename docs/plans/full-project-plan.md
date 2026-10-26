@@ -137,6 +137,22 @@ Rule: do not start a stage until the previous one is measured, screenshotted, an
 - **Build:** separable Gaussian (horizontal then vertical pass) and a radius sweep (3, 7, 15, 31, 63).
 - **Measure:** time vs radius for naive 2D, tiled 2D, and separable. Work grows with radius² for 2D and with radius for separable.
 - **Purpose:** produces a smooth curve of increasing arithmetic intensity for the roofline chart.
+- **Built:** `blur_h_pixel` and `blur_v_pixel` in `include/blur.h` (shared by CPU and GPU), `blur_sep_cpu` (scalar, caller-owned scratch buffer), `blur_sep_h_kernel` and `blur_sep_v_kernel` in `src/blur_cuda.cu` (one thread per pixel, global loads, 16x16 blocks). The intermediate between the passes is float (12 bytes per pixel), so the result matches 2D to float rounding and passes the same 1-level tolerance. Rounding it to 8 bits would add up to one more level of error. Radius r is k = 2r + 1, so the sweep 3, 7, 15, 31, 63 is `-k 7,15,31,63,127`. `check_blur` now covers the separable kernels and k up to 127 (455 checks, all pass, `results/logs/stage6_check_blur.txt`). `bench_blur` has a `sep` variant and `-m` (largest k that gets a scalar 2D CPU run, default 31). Log: `results/logs/stage6_radius_sweep.txt`, data in `results/data/blur_conv.csv`.
+- **Result (24 MP photo, 16x16, kernel ms):**
+
+  | radius (k) | naive 2D | tiled 2D | separable | sep over naive | sep GB/s (% of 360) | scalar CPU 2D / separable (ms) |
+  |---|---|---|---|---|---|---|
+  | 3 (7) | 5.72 | 4.56 | 2.43 | 2.35x | 296 (82%) | 1603 / 433 |
+  | 7 (15) | 24.4 | 19.2 | 3.58 | 6.8x | 201 (56%) | 6943 / 855 |
+  | 15 (31) | 101.8 | 80.0 | 6.78 | 15.0x | 106 (30%) | 28991 / 1700 |
+  | 31 (63) | 419.3 | 329.3 | 13.3 | 31.5x | 54 (15%) | not run / 3521 |
+  | 63 (127) | 1705.6 | skipped | 26.7 | 63.9x | 27 (7%) | not run / 7449 |
+
+  - **Work scaling:** naive time grows by 4.1x to 4.3x for each doubling of k (k² work), separable by 1.5x to 2.0x (about linear in k). Separable beats naive by 63.9x at k=127, which equals the tap-count ratio k²/2k = 63.5. At k=7 the ratio of work is only 3.5 and the measured speedup 2.35x, because the float intermediate makes the small-k separable kernel memory-bound: it moves 30 bytes per pixel (3 + 12 + 12 + 3) and reaches 82% of the 360 GB/s peak (89% of the measured 331 GB/s).
+  - **Tiled 2D:** a constant 1.26x to 1.27x over naive at every k it fits (k=7 to 63). The Stage 5 finding holds across the sweep: tiling swaps global loads for shared loads one for one. The byte tile is skipped at k=127 and the float tile at k=63 and above because the tile exceeds 48 KB.
+  - **Compute rate:** every kernel stays at 1.4 to 2.0 TFLOP/s (11 to 16% of the 12.7 TFLOP/s FP32 peak) at large k, separable included (1.2 to 1.4). Separable is far above the ridge point by arithmetic intensity (12k/30 = 2.8 flop/byte at k=7 up to 51 at k=127, against a ridge of about 38) yet does not approach the FP32 peak. Each tap is 3 loads for 3 multiply-adds, so load issue is the likely limit here too. This was not profiled for the separable kernels, so it stays a hypothesis. GFLOP/s counts 12k flops per pixel for separable and 7k² for 2D, so the two are not the same flop count.
+  - **CPU:** scalar 2D is capped at k=31 (29 s per run at 24 MP, 3 runs). Above that the 2D GPU kernels have no CPU speedup figure and the GPU outputs are checked against the CPU separable result. Like for like (separable on both), the GPU kernel is 178x to 279x faster than scalar CPU. The scalar CPU separable is 17x faster than scalar CPU 2D at k=31 (1.7 s vs 29 s). End to end, separable at k=127 takes 40 ms against 1730 ms for naive 2D, with 14 ms of that fixed PCIe transfer.
+- **Caveats:** one image (24 MP photo), one block shape (16x16), medians of 20 GPU runs and 3 CPU runs. No Nsight Compute profile of the separable kernels yet, and no separable sweep across block sizes or image sizes.
 
 ### Stage 7: Histogram
 - **Build:** global-atomics version, then shared-memory privatized version.
@@ -336,7 +352,7 @@ Writing the report is not an afterthought. Draft each section right after its st
 - [x] Stage 3: correctness check
 - [x] Stage 4: convolution naive
 - [x] Stage 5: convolution tiled
-- [ ] Stage 6: separable and radius sweep
+- [x] Stage 6: separable and radius sweep
 - [ ] Stage 7: histogram
 - [ ] Stage 8: auto-contrast
 - [ ] Stage 9: bilateral filter

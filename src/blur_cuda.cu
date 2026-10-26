@@ -100,6 +100,45 @@ void blur_tiled_cuda(const uint8_t* in, uint8_t* out, int w, int h, const GaussK
   cudaFree(d_out);
 }
 
+// Separable version. Two kernels, one thread per pixel each. The horizontal pass reads k RGB byte triples
+// along a row, the vertical pass reads k RGB float triples down a column (adjacent threads in x read
+// adjacent floats, so those loads coalesce). The float intermediate costs 12 bytes per pixel of
+// DRAM write plus read, so the minimum traffic is 30 bytes per pixel against 6 for the 2D kernels.
+__global__ void blur_sep_h_kernel(const uint8_t* in, float* tmp, int w, int h, GaussKernel g) {
+  const int x = blockIdx.x * blockDim.x + threadIdx.x;
+  const int y = blockIdx.y * blockDim.y + threadIdx.y;
+  if (x < w && y < h) blur_h_pixel(in, w, x, y, g, tmp + 3 * ((size_t)y * w + x));
+}
+
+__global__ void blur_sep_v_kernel(const float* tmp, uint8_t* out, int w, int h, GaussKernel g) {
+  const int x = blockIdx.x * blockDim.x + threadIdx.x;
+  const int y = blockIdx.y * blockDim.y + threadIdx.y;
+  if (x < w && y < h) blur_v_pixel(tmp, w, h, x, y, g, out + 3 * ((size_t)y * w + x));
+}
+
+void blur_sep_launch(const uint8_t* d_in, float* d_tmp, uint8_t* d_out, int w, int h, const GaussKernel& g, int bx,
+                     int by) {
+  dim3 block(bx, by), grid((w + bx - 1) / bx, (h + by - 1) / by);
+  blur_sep_h_kernel<<<grid, block>>>(d_in, d_tmp, w, h, g);
+  blur_sep_v_kernel<<<grid, block>>>(d_tmp, d_out, w, h, g);
+}
+
+void blur_sep_cuda(const uint8_t* in, uint8_t* out, int w, int h, const GaussKernel& g, int bx, int by) {
+  const size_t bytes = (size_t)w * h * 3;
+  uint8_t *d_in, *d_out;
+  float* d_tmp;
+  CUDA_CHECK(cudaMalloc(&d_in, bytes));
+  CUDA_CHECK(cudaMalloc(&d_out, bytes));
+  CUDA_CHECK(cudaMalloc(&d_tmp, bytes * sizeof(float)));
+  CUDA_CHECK(cudaMemcpy(d_in, in, bytes, cudaMemcpyHostToDevice));
+  blur_sep_launch(d_in, d_tmp, d_out, w, h, g, bx, by);
+  CUDA_CHECK(cudaGetLastError());
+  CUDA_CHECK(cudaMemcpy(out, d_out, bytes, cudaMemcpyDeviceToHost));
+  cudaFree(d_in);
+  cudaFree(d_out);
+  cudaFree(d_tmp);
+}
+
 static double occupancy(const void* kernel, int bx, int by, size_t smem) {
   int blocks = 0, dev = 0, max_threads = 0;
   CUDA_CHECK(cudaGetDevice(&dev));
