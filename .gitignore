@@ -8,3 +8,4 @@ results/output/
 *.nsys-rep
 *.ncu-rep
 build-nofma/
+report/main.pdf
