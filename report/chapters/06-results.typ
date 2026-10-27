@@ -8,19 +8,9 @@
 
 Kernel ปรับสีบน GPU ใช้เวลาเพียง 0.47 ms ที่ภาพ 24 MP ซึ่งเร็วกว่า CPU แบบ Scalar (164 ms) ถึง 349 เท่า แต่เมื่อรวมเวลาคัดลอกข้อมูลผ่าน PCIe ไปและกลับ เวลาทั้งหมดเพิ่มเป็น 15.0 ms โดยเป็นเวลาคัดลอกถึง 14.5 ms หรือ 97% ของเวลาทั้งหมด (@fig-color-breakdown) ความเร็วที่ได้จริงเมื่อเทียบกับ CPU แบบ Scalar จึงลดเหลือ 10.9 เท่า
 
-#fig-placeholder(
-  [การแบ่งเวลาของการปรับสีบน GPU เป็น H2D, Kernel และ D2H ตามขนาดภาพ],
-  [กราฟแท่งซ้อน แกน X ขนาดภาพ 1 / 6 / 24 / 48 MP, แกน Y เวลา (ms)],
-  source: "results/data/color.csv",
-  label: <fig-color-breakdown>,
-)
+#chart-fig("/results/charts/color_breakdown.png", [การแบ่งเวลาของการปรับสีบน GPU เป็น H2D, Kernel และ D2H ตามขนาดภาพ], width: 80%, label: <fig-color-breakdown>)
 
-#fig-placeholder(
-  [อัตราเร่งของการปรับสีบน GPU เทียบกับ CPU แบบ Scalar ตามขนาดภาพ],
-  [กราฟเส้นสองเส้น: เฉพาะ Kernel และเวลาทั้งหมด],
-  source: "results/data/color.csv",
-  label: <fig-color-speedup>,
-)
+#chart-fig("/results/charts/color_speedup.png", [อัตราเร่งของการปรับสีบน GPU เทียบกับ CPU แบบ Scalar ตามขนาดภาพ], width: 80%, label: <fig-color-speedup>)
 
 ผลนี้ไม่ขึ้นกับเนื้อหาภาพ ภาพสีเรียบ ภาพถ่าย และภาพสัญญาณรบกวนขนาด 24 MP ใช้เวลา 164 ms บน CPU และ 0.47 ถึง 0.48 ms บน GPU เท่ากัน
 
@@ -91,12 +81,7 @@ Kernel แบบ Tiled เร็วกว่า Naive เพียง 1.02, 1.23
 
 เวลาของแบบ Naive เพิ่มขึ้น 4.1 ถึง 4.3 เท่าทุกครั้งที่ $k$ เพิ่มเป็นสองเท่า (ตามงาน $k^2$) ส่วนแบบ Separable เพิ่มขึ้นเพียง 1.5 ถึง 2.0 เท่า (ประมาณเชิงเส้นตาม $k$) ที่ $k = 127$ แบบ Separable เร็วกว่า Naive 63.9 เท่า ซึ่งตรงกับอัตราส่วนจำนวน Tap $k^2 \/ 2k = 63.5$ (@fig-radius, @tab-radius)
 
-#fig-placeholder(
-  [เวลา Kernel ของการเบลอแบบ Naive, Tiled และ Separable ตามรัศมี],
-  [กราฟเส้น แกน X รัศมี 3 / 7 / 15 / 31 / 63 (สเกล Log), แกน Y เวลา (ms, สเกล Log)],
-  source: "results/data/blur_conv.csv",
-  label: <fig-radius>,
-)
+#chart-fig("/results/charts/blur_radius.png", [เวลา Kernel ของการเบลอแบบ Naive, Tiled และ Separable ตามรัศมี], width: 80%, label: <fig-radius>)
 
 #{
   let t = radius-sweep()
@@ -135,12 +120,7 @@ Kernel แบบ Tiled เร็วกว่า Naive เพียง 1.02, 1.23
     }), label: <tab-streams>)
 }
 
-#fig-placeholder(
-  [เวลาทั้งหมดตามจำนวน Chunk ของ CUDA Streams],
-  [กราฟเส้น แกน X จำนวน Chunk 1 / 2 / 4 / 8 / 16, เส้นละงาน, เส้นอ้างอิงเวลาคัดลอกขั้นต่ำที่ 15.3 GB/s],
-  source: "results/data/streams.csv",
-  label: <fig-streams>,
-)
+#chart-fig("/results/charts/streams_chunks.png", [เวลาทั้งหมดตามจำนวน Chunk ของ CUDA Streams], width: 80%, label: <fig-streams>)
 
 หน่วยความจำแบบ Pinned เพิ่มความเร็วการคัดลอก H2D จาก 10.3 เป็น 13.3 GB/s และ D2H จาก 9.8 เป็น 12.1 GB/s ซึ่งใกล้เพดานที่วัดได้ ประหยัดเวลา 1.4 ถึง 3.1 ms ที่ภาพ 24 MP การแบ่ง Chunk ด้วย Streams ลดเวลาลงได้อีก โดยดีที่สุดที่ 4 ถึง 8 Chunk รวมแล้วเร็วขึ้น 1.32 ถึง 1.82 เท่า (@tab-streams) ส่วนแบบ Pageable 4 Chunk ไม่เร็วขึ้นเลย (0.92 ถึง 1.0 เท่า) แสดงว่า Streams ต้องใช้คู่กับหน่วยความจำแบบ Pinned
 
@@ -152,12 +132,7 @@ Kernel แบบ Tiled เร็วกว่า Naive เพียง 1.02, 1.23
 
 == บันไดการประมวลผลแบบขนาน: การปรับสี
 
-#fig-placeholder(
-  [บันไดการประมวลผลแบบขนานของการปรับสี เวลาคำนวณและเวลาทั้งหมด],
-  [กราฟแท่งแนวนอน สเกล Log: Scalar 164 ; Autovec 1T 25.8 ; AVX2 1T 22.3 ; AVX2+OMP 6 core 4.7 ; AVX2+OMP 12T 4.2 ; Autovec+OMP 12T 4.0 ; CUDA Kernel 0.47 ; CUDA ทั้งหมด 15.0 ; CUDA Pinned+Streams 9.6 (ms)],
-  source: "results/data/ladder.csv, results/data/streams.csv",
-  label: <fig-ladder-color>,
-)
+#chart-fig("/results/charts/ladder_color.png", [บันไดการประมวลผลแบบขนานของการปรับสี เวลาคำนวณและเวลาทั้งหมด], width: 80%, label: <fig-ladder-color>)
 
 #{
   let lad = measures("results/data/ladder.csv")
@@ -201,12 +176,7 @@ CPU ระดับที่ดีที่สุด (Vectorize อัตโน�
     }), label: <tab-ladder-blur>)
 }
 
-#fig-placeholder(
-  [บันไดการประมวลผลแบบขนานของการเบลอ เทียบกับการปรับสี],
-  [กราฟสองช่องเคียงกัน: ซ้ายการปรับสี ขวาการเบลอ k = 15 ; แต่ละแท่งคือระดับของบันได เวลาทั้งหมด],
-  source: "results/data/ladder.csv",
-  label: <fig-ladder-both>,
-)
+#chart-fig("/results/charts/ladder_both.png", [บันไดการประมวลผลแบบขนานของการเบลอ เทียบกับการปรับสี], width: 100%, label: <fig-ladder-both>)
 
 ผลของการเบลอตรงข้ามกับการปรับสี GPU ชนะทุกรัศมีแม้รวมเวลาคัดลอก ตั้งแต่ 1.7 เท่าที่ $k = 7$ ถึง 3.2 เท่าที่ $k = 127$ เมื่อเทียบกับ CPU ระดับที่ดีที่สุด (@tab-ladder-blur) มีเพียงภาพขนาด 1 MP ที่ $k = 15$ ที่ผลใกล้เคียงกัน (CPU 0.76 ms, GPU 0.88 ms) ข้อสังเกตอื่นจากผลนี้มีดังนี้
 
@@ -216,14 +186,13 @@ CPU ระดับที่ดีที่สุด (Vectorize อัตโน�
 
 == แบบจำลอง Roofline
 
-#fig-placeholder(
-  [แบบจำลอง Roofline ของ CPU และ GPU พร้อมตำแหน่งของแต่ละ Kernel],
-  [แกน X ความเข้มข้นของการคำนวณ (FLOP/byte, Log), แกน Y GFLOP/s (Log) ; เพดาน GPU 331 GB/s และ 12.7 TFLOP/s, CPU 51.4 GB/s และ #todo[FP32 Peak ของ CPU] ; เส้นประคือค่าทางทฤษฎี ; จุดของการปรับสี, Naive, Tiled, Separable ทุกรัศมี และ CPU AVX2+OMP],
-  source: "results/data/*.csv",
-  label: <fig-roofline>,
-)
+#chart-fig("/results/charts/roofline.png", [แบบจำลอง Roofline ของ CPU และ GPU พร้อมตำแหน่งของแต่ละ Kernel], width: 90%, label: <fig-roofline>)
 
-#todo[เขียนคำอธิบาย Roofline หลังได้กราฟ: การปรับสีอยู่ใต้เพดานแบนด์วิดท์ทั้ง CPU และ GPU, การเบลอขวาของ Ridge Point แต่ต่ำกว่าเพดาน FP32 มากเพราะ LSU, ระยะห่างจากเพดานคือส่วนที่ Roofline อธิบายไม่ได้]
+แกนของ @fig-roofline ใช้ความเข้มข้นของการคำนวณจากปริมาณข้อมูลขั้นต่ำที่ต้องอ่านและเขียนต่อพิกเซล โดยนับ 35 FLOP ต่อพิกเซลสำหรับการปรับสี (6 ไบต์ จึงได้ 5.8 FLOP/byte) นับ $7k^2$ FLOP ต่อพิกเซลสำหรับการเบลอแบบสองมิติ (6 ไบต์) และ $12k$ FLOP ต่อพิกเซลสำหรับแบบ Separable (30 ไบต์ เพราะผลระหว่างกลางเป็นทศนิยม) เส้นทึบคือเพดานที่วัดได้ (GPU 331 GB/s, CPU 51.4 GB/s) เส้นประคือค่าตามทฤษฎี เพดานการคำนวณของ CPU คือ 883 GFLOP/s คำนวณจาก P-core 6 แกน ความถี่สูงสุด 4.6 GHz และ 32 FLOP ต่อรอบต่อแกน (FMA ขนาด 8 ค่า 2 หน่วย) ซึ่งเป็นค่าตามทฤษฎีเท่านั้น ไม่ได้วัดจริง
+
+การปรับสีอยู่ใกล้เพดานแบนด์วิดท์ของทั้งสองแพลตฟอร์ม โดย GPU ได้ 1,779 GFLOP/s หรือ 92% ของเพดานแบนด์วิดท์ ส่วน CPU AVX2 ร่วมกับ OpenMP ได้ 202 GFLOP/s หรือประมาณ 67% ซึ่งตรงกับข้อสรุปว่าเป็นงาน Memory-bound และเวลาที่ GPU เสียไปคือการคัดลอกผ่าน PCIe ซึ่งไม่อยู่ในกราฟนี้
+
+การเบลออยู่ทางขวาของจุดเปลี่ยน (Ridge Point) ของ GPU ที่ประมาณ 38 FLOP/byte สำหรับแบบสองมิติ (ตั้งแต่ $k = 7$) หากมองตามเพดาน ควรเข้าใกล้ 12.7 TFLOP/s แต่ทุก Kernel หยุดที่ 1.1 ถึง 2.0 TFLOP/s (Naive 1.1 ถึง 1.6, Tiled 1.1 ถึง 2.0, Separable 0.8 ถึง 1.4) ช่องว่างนี้คือส่วนที่ Roofline อธิบายไม่ได้ เพราะแบบจำลองนับเฉพาะแบนด์วิดท์และหน่วยคำนวณ ส่วนข้อมูลจาก Nsight Compute ชี้ว่าเกิดจากหน่วย LSU (@tab-ncu) จุดของ Separable ที่ $k = 7$ ถึง 15 อยู่ใกล้เส้นแบนด์วิดท์ สอดคล้องกับที่วัดได้ว่าใช้แบนด์วิดท์ 56 ถึง 82% ของค่าสูงสุด ส่วน CPU แบบ Separable ได้ 69 ถึง 319 GFLOP/s คือ 8 ถึง 36% ของเพดานทางทฤษฎี และอยู่ใต้เส้นแบนด์วิดท์อย่างชัดเจน
 
 == สรุปผลเทียบกับสมมติฐาน
 

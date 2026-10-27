@@ -6,21 +6,13 @@
 
 หลักการที่ใช้ตลอดการพัฒนาคือ จะไม่เริ่มขั้นถัดไปจนกว่าขั้นปัจจุบันจะผ่านการตรวจความถูกต้อง วัดผล และบันทึก Log เรียบร้อยแล้ว
 
-#fig-placeholder(
-  [ภาพรวมลำดับขั้นการพัฒนา],
-  [แผนภาพลำดับขั้น: เตรียมเครื่องและ Smoke Test → การปรับสีพื้นฐาน → ชุดวัดเวลา → ตรวจความถูกต้อง → เบลอ Naive → เบลอ Tiled + Profiler → เบลอ Separable → Pinned Memory + Streams → บันไดการประมวลผลแบบขนาน],
-  label: <fig-dev-flow>,
-)
+#chart-fig("/results/charts/dev_flow.png", [ภาพรวมลำดับขั้นการพัฒนา], width: 85%, label: <fig-dev-flow>)
 
 == การคอมไพล์ Source Code
 
 โปรเจกต์ใช้ CMake อธิบายการ Build และใช้ Ninja สั่งคอมไพล์ กระบวนการแปลงจาก Source Code เป็นโปรแกรมที่ใช้งานได้มีขั้นตอนดังนี้ (@fig-compile-flow)
 
-#fig-placeholder(
-  [ขั้นตอนการแปลง Source Code เป็นโปรแกรมที่ทำงานได้],
-  [แผนภาพ: `CMakeLists.txt` → cmake → `build/build.ninja` ; ไฟล์ `.cu` → nvcc (ส่วน Device → PTX/SASS sm_86, ส่วน Host → g++) → `.o` ; ไฟล์ `.cpp` → g++ (Flag ตามระดับ) → `.o` ; `.o` → ar → ไลบรารี `.a` ; ไลบรารี + `apps/*.cu` → nvcc/ลิงก์ → โปรแกรมใน `build/`],
-  label: <fig-compile-flow>,
-)
+#chart-fig("/results/charts/compile_flow.png", [ขั้นตอนการแปลง Source Code เป็นโปรแกรมที่ทำงานได้], width: 85%, label: <fig-compile-flow>)
 
 === ขั้นที่ 1: กำหนดค่าการ Build ด้วย CMake
 

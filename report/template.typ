@@ -44,6 +44,13 @@
   caption: caption,
 ), label)
 
+// A generated chart or diagram from results/charts (made by scripts/make_charts.py).
+#let chart-fig(path, caption, width: 80%, label: none) = labelled(figure(
+  image(path, width: width),
+  kind: image,
+  caption: caption,
+), label)
+
 // A table. `columns` lists the intended column headings.
 #let table-placeholder(caption, desc, columns: (), source: none, label: none) = labelled(figure(
   placeholder-box("ตาราง")[
