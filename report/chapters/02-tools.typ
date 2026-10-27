@@ -6,7 +6,7 @@
 
 == ฮาร์ดแวร์
 
-การทดลองทั้งหมดทำบนเครื่องคอมพิวเตอร์เครื่องเดียว ซึ่งเข้าถึงจากระยะไกลผ่าน SSH รายละเอียดอยู่ใน @tab-hw
+การทดลองทั้งหมดทำบนเครื่องคอมพิวเตอร์เครื่องเดียว รายละเอียดอยู่ใน @tab-hw
 
 #table-placeholder(
   [ฮาร์ดแวร์ที่ใช้ในการทดลองและหน้าที่],
@@ -36,7 +36,7 @@ CPU รุ่นนี้เป็นแบบ Hybrid ที่มีแกน�
 
 #table-placeholder(
   [ซอฟต์แวร์ที่ใช้ในการพัฒนาและหน้าที่],
-  [Ubuntu 24.04 (Linux 6.8) ; NVIDIA Driver 595.71.05 ; CUDA Toolkit 13.2 (nvcc, CUDA Runtime) ; GCC 13.3 (g++, OpenMP) ; CMake 3.28 ; Ninja 1.11 ; Nsight Compute 2026.1 ; Nsight Systems 2025.6 ; uv 0.11 + Python 3.12 (NumPy, Pillow) ; stb_image / stb_image_write ; Git ; tmux],
+  [Ubuntu 24.04 (Linux 6.8) ; NVIDIA Driver 595.71.05 ; CUDA Toolkit 13.2 (nvcc, CUDA Runtime) ; GCC 13.3 (g++, OpenMP) ; CMake 3.28 ; Ninja 1.11 ; Nsight Compute 2026.1 ; Nsight Systems 2025.6 ; uv 0.11 + Python 3.12 (NumPy, Pillow) ; stb_image / stb_image_write ; Git],
   columns: ("ซอฟต์แวร์", "รุ่น", "หน้าที่"),
   source: "results/env.txt",
   label: <tab-sw>,
@@ -54,15 +54,12 @@ CPU รุ่นนี้เป็นแบบ Hybrid ที่มีแกน�
 - *Nsight Systems* (`nsys`) แสดงลำดับเวลาการทำงานของ CPU, GPU และการคัดลอกข้อมูลทั้งโปรแกรม
 - *uv และ Python* จัดการ Virtual Environment ของสคริปต์ Python สำหรับสร้างภาพทดสอบและกราฟ
 - *stb_image* ไลบรารีแบบไฟล์ Header เดียวสำหรับอ่านและเขียนไฟล์ภาพ PNG และ JPEG
-- *tmux* ให้งานที่ใช้เวลานานทำงานต่อได้แม้การเชื่อมต่อ SSH หลุด
 
 == สคริปต์ช่วยรันที่พัฒนาขึ้น
 
-เนื่องจากเครื่องทดลองเป็นเครื่องระยะไกลที่มี RAM 16 GB และเคยล่มจากหน่วยความจำไม่พอมาแล้ว จึงเขียนสคริปต์ช่วยรันเพื่อความปลอดภัยและเพื่อให้การวัดผลทำซ้ำได้
+เพื่อให้การวัดผลทำซ้ำได้ จึงเขียนสคริปต์ช่วยรันและสคริปต์สร้างข้อมูลทดสอบ
 
-- `scripts/run-capped.sh` รันคำสั่งภายใน cgroup ที่จำกัดหน่วยความจำ (ค่าเริ่มต้น 10 GB ไม่ใช้ Swap) และจำกัด CPU เพื่อให้หากหน่วยความจำไม่พอ ระบบจะหยุดเฉพาะงานนั้น ไม่ใช่ทั้งเครื่อง
 - `scripts/bench.sh` รัน Benchmark โดยตรึง Thread ไว้กับแกนที่กำหนด มี 4 โหมด ได้แก่ `single` (1 Thread), `cores` (6 P-core), `multi` (12 Thread บน P-core) และ `all` (16 Thread รวม E-core) และเตือนหาก CPU Governor ไม่ใช่ `performance` หรือเครื่องมีโหลดอื่นอยู่
-- `scripts/logrun.sh` บันทึกคำสั่ง เวลา Commit ของ Git และผลลัพธ์ทั้งหมดลงไฟล์ใน `results/logs/` ผลลัพธ์จากเทอร์มินัลทุกภาพในรายงานนี้มาจากไฟล์เหล่านี้
 - `scripts/env_report.sh` บันทึกรุ่นของฮาร์ดแวร์และซอฟต์แวร์ลง `results/env.txt`
 - `scripts/make_test_images.py` สร้างภาพทดสอบทุกขนาด
 - `scripts/exp_peaks.sh`, `exp_clamp.sh`, `exp_fma.sh` รันการทดลองย่อยที่ใช้วัดขีดจำกัดของเครื่องและอธิบายผลบางข้อ

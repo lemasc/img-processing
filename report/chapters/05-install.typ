@@ -44,7 +44,7 @@
 
 #cmd[
   ```
-  sudo apt install build-essential cmake ninja-build git tmux
+  sudo apt install build-essential cmake ninja-build git
   ```
 ]
 
@@ -90,12 +90,12 @@
 
 === คอมไพล์
 
-ขั้นตอนนี้คือขั้นที่ 1 และ 2 ในบทที่ 4 คำสั่งแรกกำหนดค่าการ Build คำสั่งที่สองคอมไพล์ทุกโปรแกรมภายใต้ cgroup ที่จำกัดหน่วยความจำ
+ขั้นตอนนี้คือขั้นที่ 1 และ 2 ในบทที่ 4 คำสั่งแรกกำหนดค่าการ Build คำสั่งที่สองคอมไพล์ทุกโปรแกรม
 
 #cmd[
   ```
   cmake -S . -B build -G Ninja
-  scripts/run-capped.sh cmake --build build -j4
+  cmake --build build -j4
   ```
 ]
 
@@ -135,21 +135,21 @@
 
 === รันการวัดประสิทธิภาพ
 
-ทุกการวัดรันผ่าน `scripts/bench.sh` ซึ่งตรึง Thread และจำกัดหน่วยความจำ และครอบด้วย `scripts/logrun.sh` เพื่อบันทึกผลลง `results/logs/` ตัวอย่างการรันแต่ละการทดลอง
+ทุกการวัดรันผ่าน `scripts/bench.sh` ซึ่งตรึง Thread ไว้กับแกนที่กำหนด ตัวอย่างการรันแต่ละการทดลอง
 
 #cmd[
   ```
   # การปรับสี: CPU Scalar เทียบ GPU
-  scripts/logrun.sh color scripts/bench.sh -t single build/bench_color -r 20 images/photo_24mp.png
+  scripts/bench.sh -t single build/bench_color -r 20 images/photo_24mp.png
 
   # การเบลอ: Naive, Tiled, Separable ตามรัศมี
-  scripts/logrun.sh radius build/bench_blur -k 7,15,31,63,127 -c 3 -r 20 images/photo_24mp.png
+  build/bench_blur -k 7,15,31,63,127 -c 3 -r 20 images/photo_24mp.png
 
   # Pinned Memory และ CUDA Streams บน 6 P-core
-  scripts/logrun.sh streams scripts/bench.sh -t cores build/bench_streams -r 20 images/photo_24mp.png
+  scripts/bench.sh -t cores build/bench_streams -r 20 images/photo_24mp.png
 
   # บันไดการประมวลผลแบบขนาน (โหมด single, cores, multi, all)
-  scripts/logrun.sh ladder scripts/bench.sh -t multi build/bench_ladder_color -r 20 images/photo_24mp.png
+  scripts/bench.sh -t multi build/bench_ladder_color -r 20 images/photo_24mp.png
   ```
 ]
 
@@ -167,8 +167,7 @@
 
 == ข้อควรระวังในการรัน
 
-- รันงานหนักทุกงานภายใต้ `run-capped.sh` หรือ `bench.sh` เพื่อให้ระบบหยุดเฉพาะงานนั้นเมื่อหน่วยความจำไม่พอ ไม่ใช่ทั้งเครื่อง ภาพ 48 MP แบบทศนิยมใช้หน่วยความจำประมาณ 576 MB ต่อสำเนา
-- หน่วยความจำแบบ Pinned ไม่สามารถย้ายออกได้และนับรวมในขีดจำกัดของ cgroup จึงจองไว้เพียงสองบัฟเฟอร์และใช้ซ้ำ
+- ภาพ 48 MP แบบทศนิยมใช้หน่วยความจำประมาณ 576 MB ต่อสำเนา ควรเผื่อหน่วยความจำให้พอ
+- หน่วยความจำแบบ Pinned ไม่สามารถย้ายออกได้ จึงจองไว้เพียงสองบัฟเฟอร์และใช้ซ้ำ
 - ตั้ง CPU Governor เป็น `performance` และให้เครื่องไม่มีงานอื่นระหว่างวัด `bench.sh` จะเตือนหากเงื่อนไขไม่ครบ
 - บัส PCIe ทำงานที่ Gen 1 เมื่อว่าง และเพิ่มความเร็วเมื่อมีโหลด การวัดจึงต้อง Warm-up ก่อนเสมอ
-- รันงานที่ใช้เวลานานภายใน `tmux` เพื่อไม่ให้หยุดเมื่อการเชื่อมต่อ SSH หลุด

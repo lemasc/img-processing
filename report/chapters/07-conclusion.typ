@@ -8,7 +8,7 @@
 
 #table-placeholder(
   [สรุปทรัพยากรที่ต้องใช้],
-  [ฮาร์ดแวร์: GPU NVIDIA (CUDA, sm_86), CPU x86-64 ที่มี AVX2/FMA และหลายแกน, RAM ≥ 16 GB, PCIe Gen 4 x16 ; ซอฟต์แวร์สำหรับพัฒนา: Ubuntu 24.04, CUDA Toolkit 13.2 (nvcc), GCC 13.3 + OpenMP, CMake 3.28, Ninja, Git ; ซอฟต์แวร์สำหรับวิเคราะห์: Nsight Compute, Nsight Systems, Python 3.12 + uv ; ซอฟต์แวร์สำหรับรัน: NVIDIA Driver 595, CUDA Runtime, systemd (cgroup), taskset],
+  [ฮาร์ดแวร์: GPU NVIDIA (CUDA, sm_86), CPU x86-64 ที่มี AVX2/FMA และหลายแกน, RAM ≥ 16 GB, PCIe Gen 4 x16 ; ซอฟต์แวร์สำหรับพัฒนา: Ubuntu 24.04, CUDA Toolkit 13.2 (nvcc), GCC 13.3 + OpenMP, CMake 3.28, Ninja, Git ; ซอฟต์แวร์สำหรับวิเคราะห์: Nsight Compute, Nsight Systems, Python 3.12 + uv ; ซอฟต์แวร์สำหรับรัน: NVIDIA Driver 595, CUDA Runtime, taskset],
   columns: ("ทรัพยากร", "ใช้ในการพัฒนา", "ใช้ในการรัน", "หน้าที่"),
   label: <tab-resources>,
 )

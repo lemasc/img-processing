@@ -42,11 +42,11 @@ CMake อ่านไฟล์ `CMakeLists.txt` ซึ่งกำหนดว�
 
 === ขั้นที่ 2: คอมไพล์และลิงก์ด้วย Ninja
 
-Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ CMake กำหนด ไฟล์ `.cu` ถูกแปลด้วย `nvcc` ซึ่งแยกโค้ดเป็นสองส่วน คือส่วน Device (Kernel) ที่แปลเป็นรหัสเครื่องของ GPU และส่วน Host ที่ส่งต่อให้ g++ แปล ไฟล์ `.cpp` ถูกแปลด้วย g++ โดยแต่ละไลบรารีใช้ Flag ต่างกันตามระดับของบันได (@tab-flags) แล้วรวมเป็นไลบรารีแบบ Static และลิงก์เป็นโปรแกรม การ Build จำกัดไว้ 4 งานพร้อมกัน (`-j4`) และรันภายใต้ `run-capped.sh` เพราะการคอมไพล์ CUDA ใช้หน่วยความจำมาก
+Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ CMake กำหนด ไฟล์ `.cu` ถูกแปลด้วย `nvcc` ซึ่งแยกโค้ดเป็นสองส่วน คือส่วน Device (Kernel) ที่แปลเป็นรหัสเครื่องของ GPU และส่วน Host ที่ส่งต่อให้ g++ แปล ไฟล์ `.cpp` ถูกแปลด้วย g++ โดยแต่ละไลบรารีใช้ Flag ต่างกันตามระดับของบันได (@tab-flags) แล้วรวมเป็นไลบรารีแบบ Static และลิงก์เป็นโปรแกรม การ Build จำกัดไว้ 4 งานพร้อมกัน (`-j4`) เพราะการคอมไพล์ CUDA ใช้หน่วยความจำมาก
 
 #step-io(
   input: [ไดเรกทอรี `build/` จากขั้นที่ 1],
-  command: [`scripts/run-capped.sh cmake --build build -j4`],
+  command: [`cmake --build build -j4`],
   output: [ไลบรารี `.a` และโปรแกรม เช่น `build/bench_color`, `build/bench_blur`, `build/check_blur`, `build/bench_ladder_color`, `build/bench_streams`],
 )
 
@@ -60,7 +60,7 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
 
 #term-placeholder(
   [ผลการคอมไพล์และลิงก์ด้วย Ninja],
-  "scripts/run-capped.sh cmake --build build -j4",
+  "cmake --build build -j4",
   "ยังไม่มี (ต้องรันและบันทึกใหม่)",
   label: <term-ninja>,
 )
@@ -120,11 +120,11 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
 
 #step-io(
   input: [ภาพทุกสี (สร้างในโปรแกรม), ภาพถ่าย 24 และ 32 MP, ภาพ flat และ noise],
-  command: [`scripts/run-capped.sh -m 6G build/check_color <images...>`, `scripts/exp_fma.sh` และ `ctest --test-dir build`],
+  command: [`build/check_color <images...>`, `scripts/exp_fma.sh` และ `ctest --test-dir build`],
   output: [รายงาน PASS/FAIL พร้อมผลต่างสูงสุด ผลต่างเฉลี่ย และจำนวนพิกเซลที่ต่างกัน],
 )
 
-#term-placeholder([ผลการตรวจความถูกต้องของการปรับสี], "scripts/run-capped.sh -m 6G build/check_color images/photos/24mp_complex_colors.jpg ...", "results/logs/stage3_check_color.txt", label: <term-check-color>)
+#term-placeholder([ผลการตรวจความถูกต้องของการปรับสี], "build/check_color images/photos/24mp_complex_colors.jpg ...", "results/logs/stage3_check_color.txt", label: <term-check-color>)
 #term-placeholder([ผลการทดลองปิด FMA บน GPU], "scripts/exp_fma.sh", "results/logs/exp_fma.txt", label: <term-fma>)
 
 === ขั้นที่ 7: การเบลอแบบ Naive
@@ -137,7 +137,7 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [`results/data/blur_naive.csv` และภาพเบลอใน `results/output/`],
 )
 
-#term-placeholder([ผลการตรวจความถูกต้องของการเบลอ], "scripts/run-capped.sh -m 6G build/check_blur images/photo_1mp.png images/photos/24mp_night_shot.jpg images/noise_6mp.png", "results/logs/stage4_check_blur.txt", label: <term-check-blur>)
+#term-placeholder([ผลการตรวจความถูกต้องของการเบลอ], "build/check_blur images/photo_1mp.png images/photos/24mp_night_shot.jpg images/noise_6mp.png", "results/logs/stage4_check_blur.txt", label: <term-check-blur>)
 #term-placeholder([ผลการวัดเวลาการเบลอแบบ Naive], "scripts/bench.sh -t single -m 8G build/bench_blur -o results/output images/photo_{1,6,24}mp.png", "results/logs/stage4_blur_naive.txt", label: <term-naive>)
 
 === ขั้นที่ 8: การเบลอแบบ Tiled และการวิเคราะห์ด้วย Profiler
