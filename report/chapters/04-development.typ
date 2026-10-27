@@ -32,13 +32,7 @@ CMake อ่านไฟล์ `CMakeLists.txt` ซึ่งกำหนดว�
   output: [ไดเรกทอรี `build/` ที่มีไฟล์ `build.ninja`],
 )
 
-#term-placeholder(
-  [ผลการกำหนดค่าการ Build ด้วย CMake],
-  "cmake -S . -B build -G Ninja",
-  "ยังไม่มี (ต้องรันและบันทึกใหม่)",
-  desc: [แสดงการตรวจพบ CUDA 13.2, GCC 13.3 และ OpenMP],
-  label: <term-cmake>,
-)
+#term-log([ผลการกำหนดค่าการ Build ด้วย CMake], "results/logs/stage1_cmake_configure.txt", label: <term-cmake>)
 
 === ขั้นที่ 2: คอมไพล์และลิงก์ด้วย Ninja
 
@@ -50,20 +44,13 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [ไลบรารี `.a` และโปรแกรม เช่น `build/bench_color`, `build/bench_blur`, `build/check_blur`, `build/bench_ladder_color`, `build/bench_streams`],
 )
 
-#table-placeholder(
-  [Flag การคอมไพล์ของแต่ละไลบรารี],
-  [color_cpu, blur_cpu: `-O2 -fno-tree-vectorize -fno-tree-slp-vectorize -ffinite-math-only -fno-signed-zeros` (Scalar) ; color_cpu_simd, blur_cpu_simd: `-O3 -mavx2 -mfma -ffinite-math-only -fno-signed-zeros -fopenmp` ; color_cuda, blur_cuda: nvcc `-arch=sm_86`, เลือก `--fmad=false` ได้],
-  columns: ("ไลบรารี", "ระดับ", "Flag", "เหตุผล"),
-  source: "CMakeLists.txt",
-  label: <tab-flags>,
-)
+#data-table([Flag การคอมไพล์ของแต่ละไลบรารี], ("ไลบรารี", "ระดับ", "Flag", "เหตุผล"), (
+  ([`color_cpu`, `blur_cpu`], [Scalar], [`-O2 -fno-tree-vectorize -fno-tree-slp-vectorize -ffinite-math-only -fno-signed-zeros`], [ปิดการ Vectorize อัตโนมัติเพื่อเป็นเส้นฐาน ส่วน `-ffinite-math-only` ทำให้ Clamp ใช้ `minss`/`maxss` แทน Branch]),
+  ([`color_cpu_simd`, `blur_cpu_simd`], [Autovec และ AVX2 (1 Thread และ OpenMP)], [`-O3 -mavx2 -mfma -ffinite-math-only -fno-signed-zeros` และ OpenMP], [Flag Clamp เหมือนระดับ Scalar จึงต่างกันเฉพาะการ Vectorize และ Thread]),
+  ([`color_cuda`, `blur_cuda`], [CUDA], [`nvcc -arch=sm_86` (Release) และเลือก `--fmad=false` ได้ด้วย `-DCOLOR_CUDA_FMAD=OFF` (เฉพาะ `color_cuda`)], [`nvcc` รวมการคูณและบวกเป็น FMA ตามค่าเริ่มต้น ใช้ปิดเพื่ออธิบายผลต่าง 1 ระดับ]),
+), align: left, widths: (1fr, 0.9fr, 2.3fr, 1.5fr), label: <tab-flags>)
 
-#term-placeholder(
-  [ผลการคอมไพล์และลิงก์ด้วย Ninja],
-  "cmake --build build -j4",
-  "ยังไม่มี (ต้องรันและบันทึกใหม่)",
-  label: <term-ninja>,
-)
+#term-log([ผลการคอมไพล์และลิงก์ด้วย Ninja], "results/logs/stage1_ninja_build.txt", ranges: ((1, 8), (33, 37)), label: <term-ninja>)
 
 == ขั้นการพัฒนาโปรแกรม
 
@@ -77,8 +64,8 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [แบนด์วิดท์ GPU 331 GB/s, DRAM 51.4 GB/s, PCIe 13.2 / 11.8 GB/s (@tab-ceilings)],
 )
 
-#term-placeholder([ผลการทดสอบ Toolchain และ GPU], "scripts/bench.sh -t single build/smoke", "results/logs/smoke.txt", label: <term-smoke>)
-#term-placeholder([ผลการวัดขีดจำกัด DRAM และ PCIe], "scripts/exp_peaks.sh", "results/logs/exp_peaks.txt", label: <term-peaks>)
+#term-log([ผลการทดสอบ Toolchain และ GPU], "results/logs/smoke.txt", label: <term-smoke>)
+#term-log([ผลการวัดขีดจำกัด DRAM และ PCIe], "results/logs/exp_peaks.txt", label: <term-peaks>)
 
 === ขั้นที่ 4: การปรับสีพื้นฐานบน CPU และ GPU
 
@@ -90,14 +77,9 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [ภาพที่ปรับสีแล้ว `results/output/stage1_24mp_complex_colors.png` และเวลาของ CPU และ GPU],
 )
 
-#term-placeholder([ผลการปรับสีพื้นฐาน], "scripts/bench.sh -t single build/stage1_color images/photos/24mp_complex_colors.jpg results/output/stage1_24mp_complex_colors.png 10", "results/logs/stage1_24mp_complex_colors.txt", label: <term-stage1>)
+#term-log([ผลการปรับสีพื้นฐาน], "results/logs/stage1_24mp_complex_colors.txt", label: <term-stage1>)
 
-#fig-placeholder(
-  [ภาพก่อนและหลังการปรับสี],
-  [ภาพต้นฉบับเทียบกับภาพที่ปรับสีแล้ว],
-  source: "results/charts/stage1_before_after.png",
-  label: <fig-before-after-color>,
-)
+#labelled(figure(image("/results/charts/stage1_before_after.png", width: 100%), kind: image, caption: [ภาพก่อนและหลังการปรับสี]), <fig-before-after-color>)
 
 === ขั้นที่ 5: ชุดวัดเวลา
 
@@ -111,8 +93,8 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [`results/data/color.csv` และภาพผลลัพธ์ใน `results/output/`],
 )
 
-#term-placeholder([ผลการวัดเวลาการปรับสีทุกขนาดภาพ], "scripts/bench.sh -t single build/bench_color -r 20 -o results/output images/photo_{1,6,24,48}mp.png ...", "results/logs/stage2_color_sweep.txt", label: <term-stage2>)
-#term-placeholder([ผลการทดลองคำสั่ง Clamp แบบมีและไม่มี Branch], "scripts/exp_clamp.sh", "results/logs/exp_clamp.txt", label: <term-clamp>)
+#term-log([ผลการวัดเวลาการปรับสีทุกขนาดภาพ], "results/logs/stage2_color_sweep.txt", label: <term-stage2>)
+#term-log([ผลการทดลองคำสั่ง Clamp แบบมีและไม่มี Branch], "results/logs/exp_clamp.txt", label: <term-clamp>)
 
 === ขั้นที่ 6: ตรวจความถูกต้อง
 
@@ -124,8 +106,8 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [รายงาน PASS/FAIL พร้อมผลต่างสูงสุด ผลต่างเฉลี่ย และจำนวนพิกเซลที่ต่างกัน],
 )
 
-#term-placeholder([ผลการตรวจความถูกต้องของการปรับสี], "build/check_color images/photos/24mp_complex_colors.jpg ...", "results/logs/stage3_check_color.txt", label: <term-check-color>)
-#term-placeholder([ผลการทดลองปิด FMA บน GPU], "scripts/exp_fma.sh", "results/logs/exp_fma.txt", label: <term-fma>)
+#term-log([ผลการตรวจความถูกต้องของการปรับสี], "results/logs/stage3_check_color.txt", ranges: ((1, 4), (13, 19)), label: <term-check-color>)
+#term-log([ผลการทดลองปิด FMA บน GPU], "results/logs/exp_fma.txt", label: <term-fma>)
 
 === ขั้นที่ 7: การเบลอแบบ Naive
 
@@ -137,8 +119,8 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [`results/data/blur_naive.csv` และภาพเบลอใน `results/output/`],
 )
 
-#term-placeholder([ผลการตรวจความถูกต้องของการเบลอ], "build/check_blur images/photo_1mp.png images/photos/24mp_night_shot.jpg images/noise_6mp.png", "results/logs/stage4_check_blur.txt", label: <term-check-blur>)
-#term-placeholder([ผลการวัดเวลาการเบลอแบบ Naive], "scripts/bench.sh -t single -m 8G build/bench_blur -o results/output images/photo_{1,6,24}mp.png", "results/logs/stage4_blur_naive.txt", label: <term-naive>)
+#term-log([ผลการตรวจความถูกต้องของการเบลอ], "results/logs/stage4_check_blur.txt", ranges: ((1, 8), (59, 66)), label: <term-check-blur>)
+#term-log([ผลการวัดเวลาการเบลอแบบ Naive], "results/logs/stage4_blur_naive.txt", label: <term-naive>)
 
 === ขั้นที่ 8: การเบลอแบบ Tiled และการวิเคราะห์ด้วย Profiler
 
@@ -152,12 +134,12 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [`results/data/blur_conv.csv`, รายงาน `.ncu-rep` และสรุปเป็นข้อความใน `results/logs/stage5_ncu_details.txt`],
 )
 
-#term-placeholder([ผลการวัดเวลาแบบ Tiled เทียบกับ Naive], "scripts/bench.sh -t single -m 8G build/bench_blur -c 1 images/photo_{1,6,24}mp.png", "results/logs/stage5_tiled_vs_naive.txt", label: <term-tiled>)
-#term-placeholder([ผลการวิเคราะห์ด้วย Nsight Compute], "ncu --set full -s 1 -c 1 -o results/profiler/stage5_tiled_k11 build/bench_blur -r 2 -c 1 -k 11 -v tiled images/photo_24mp.png", "results/logs/stage5_ncu_details.txt", desc: [ตัดเฉพาะส่วน LSU/L1 Throughput, FMA Pipe, Load Instructions และ Warp Stall], label: <term-ncu>)
+#term-log([ผลการวัดเวลาแบบ Tiled เทียบกับ Naive], "results/logs/stage5_tiled_vs_naive.txt", ranges: ((1, 4), (29, 40)), label: <term-tiled>)
+#term-log([ผลการวิเคราะห์ด้วย Nsight Compute], "results/logs/stage5_ncu_details.txt", cmd: "ncu --set full -s 1 -c 1 -o results/profiler/stage5_tiled_k11 build/bench_blur -r 2 -c 1 -k 11 -v tiled images/photo_24mp.png", ranges: ((1, 16), (207, 221), (418, 432), (616, 630)), label: <term-ncu>)
 
 === ขั้นที่ 9: การเบลอแบบ Separable และรัศมีขนาดใหญ่
 
-เพิ่มสูตรแนวนอนและแนวตั้งใน `include/blur.h` เวอร์ชัน CPU แบบ Separable และ Kernel สองรอบ (@lst-sep) เพิ่มการตรวจความถูกต้องจนถึง $k = 127$ (455 กรณี) แล้ววัดเวลาที่รัศมี 3, 7, 15, 31 และ 63 เทียบกับแบบ Naive และ Tiled
+เพิ่มสูตรแนวนอนและแนวตั้งใน `include/blur.h` เวอร์ชัน CPU แบบ Separable และ Kernel สองรอบ (@lst-sep) เพิ่มการตรวจความถูกต้องจนถึง $k = 127$ (454 กรณี) แล้ววัดเวลาที่รัศมี 3, 7, 15, 31 และ 63 เทียบกับแบบ Naive และ Tiled
 
 #step-io(
   input: [ภาพ photo 24 MP, $k$ = 7, 15, 31, 63, 127],
@@ -165,8 +147,8 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [`results/data/blur_conv.csv` (เพิ่มแถวของ Separable)],
 )
 
-#term-placeholder([ผลการตรวจความถูกต้องของการเบลอแบบ Separable], "build/check_blur ...", "results/logs/stage6_check_blur.txt", label: <term-check-sep>)
-#term-placeholder([ผลการวัดเวลาตามรัศมี], "build/bench_blur -k 7,15,31,63,127 -m 31 -c 3 -r 20 images/photo_24mp.png", "results/logs/stage6_radius_sweep.txt", label: <term-radius>)
+#term-log([ผลการตรวจความถูกต้องของการเบลอแบบ Separable], "results/logs/stage6_check_blur.txt", cmd: "build/check_blur", ranges: ((1, 5), (470, 476)), label: <term-check-sep>)
+#term-log([ผลการวัดเวลาตามรัศมี], "results/logs/stage6_radius_sweep.txt", label: <term-radius>)
 
 === ขั้นที่ 10: หน่วยความจำแบบ Pinned และ CUDA Streams
 
@@ -178,8 +160,8 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [`results/data/streams.csv`],
 )
 
-#term-placeholder([ผลการทดลอง Pinned Memory และ Streams ตามขนาดภาพ], "scripts/bench.sh -t cores build/bench_streams -r 20 -k 15 images/photo_{1,6,24,48}mp.png", "results/logs/stage11_streams_sizes.txt", label: <term-streams>)
-#term-placeholder([ผลการวัด PCIe สองทิศทางพร้อมกัน], "scripts/bench.sh -t single build/exp/pcie_duplex", "results/logs/exp_pcie_duplex.txt", label: <term-duplex>)
+#term-log([ผลการทดลอง Pinned Memory และ Streams ตามขนาดภาพ], "results/logs/stage11_streams_sizes.txt", ranges: ((1, 4), (55, 79)), label: <term-streams>)
+#term-log([ผลการวัด PCIe สองทิศทางพร้อมกัน], "results/logs/exp_pcie_duplex.txt", label: <term-duplex>)
 
 === ขั้นที่ 11: บันไดการประมวลผลแบบขนาน
 
@@ -191,5 +173,5 @@ Ninja สั่งคอมไพล์ทุกไฟล์ตามที่ C
   output: [`results/data/ladder.csv`],
 )
 
-#term-placeholder([ผลบันไดการปรับสี 12 Thread], "scripts/bench.sh -t multi build/bench_ladder_color -r 20 images/photo_{1,6,24,48}mp.png images/flat_24mp.png images/noise_24mp.png", "results/logs/stage12_color_ladder_multi.txt", label: <term-ladder-color>)
-#term-placeholder([ผลบันไดการเบลอ 12 Thread ตามรัศมี], "scripts/bench.sh -t multi build/bench_ladder_blur -r 20 -c 5 -v autovec_omp,avx2_omp,cuda -k 7,15,31,63,127 images/photo_24mp.png", "results/logs/stage12_blur_ladder_multi_radius.txt", label: <term-ladder-blur>)
+#term-log([ผลบันไดการปรับสี 12 Thread], "results/logs/stage12_color_ladder_multi.txt", ranges: ((1, 4), (21, 28)), label: <term-ladder-color>)
+#term-log([ผลบันไดการเบลอ 12 Thread ตามรัศมี], "results/logs/stage12_blur_ladder_multi_radius.txt", label: <term-ladder-blur>)

@@ -6,12 +6,19 @@
 
 == ความต้องการของระบบ
 
-#table-placeholder(
-  [ความต้องการขั้นต่ำของระบบ],
-  [GPU NVIDIA ที่รองรับ CUDA (โปรเจกต์ตั้งค่าไว้สำหรับ sm_86 ต้องแก้ `CMAKE_CUDA_ARCHITECTURES` หากใช้ GPU รุ่นอื่น) ; CPU x86-64 ที่รองรับ AVX2 และ FMA ; RAM อย่างน้อย 8 GB (ภาพ 48 MP ต้องการ 10 GB) ; พื้นที่ดิสก์สำหรับภาพทดสอบ ; Ubuntu 24.04 ; NVIDIA Driver ; CUDA Toolkit 13.x ; GCC 13 ; CMake ≥ 3.24 ; Ninja ; uv],
-  columns: ("รายการ", "ขั้นต่ำ", "ที่ใช้ทดลอง"),
-  label: <tab-requirements>,
-)
+#data-table([ความต้องการขั้นต่ำของระบบ], ("รายการ", "ขั้นต่ำ", "ที่ใช้ทดลอง"), (
+  ([GPU], [NVIDIA ที่รองรับ CUDA (ตั้งค่าไว้สำหรับ sm_86 หากใช้รุ่นอื่นต้องแก้ `CMAKE_CUDA_ARCHITECTURES`)], [RTX 3060 12 GB (sm_86)]),
+  ([CPU], [x86-64 ที่รองรับ AVX2 และ FMA], [Core i5-13400F]),
+  ([RAM], [16 GB (ภาพ 48 MP ใช้ประมาณ 10 GB)], [16 GB]),
+  ([พื้นที่ดิสก์], [พอสำหรับภาพทดสอบ (ประมาณ 400 MB)], [–]),
+  ([ระบบปฏิบัติการ], [Ubuntu 24.04], [Ubuntu 24.04 (Linux 6.8)]),
+  ([NVIDIA Driver], [รุ่นที่รองรับ CUDA 13.x], [595.71.05]),
+  ([CUDA Toolkit], [13.x], [13.2]),
+  ([GCC], [13], [13.3.0]),
+  ([CMake], [3.24 ขึ้นไป], [3.28.3]),
+  ([Ninja], [ทุกรุ่น], [1.11.1]),
+  ([uv], [ใช้เมื่อสร้างภาพทดสอบและกราฟ], [0.11.3]),
+), align: left, widths: (1fr, 2fr, 1.3fr), label: <tab-requirements>)
 
 == การติดตั้งเครื่องมือ
 
@@ -29,16 +36,16 @@
   ```
 ]
 
-#todo[ยืนยันชื่อแพ็กเกจ Driver ที่ติดตั้งจริง (เช่น `cuda-drivers` หรือ `nvidia-driver-595-open`)] หลังติดตั้งแล้ว ให้ Reboot และตรวจสอบด้วยคำสั่งต่อไปนี้ ซึ่งควรแสดงชื่อ GPU รุ่นของ Driver และรุ่นของ `nvcc`
+หลังติดตั้งแล้ว ให้ Reboot และตรวจสอบด้วยคำสั่งต่อไปนี้ ซึ่งควรแสดงชื่อ GPU รุ่นของ Driver และรุ่นของ `nvcc`
 
 #cmd[
   ```
-  nvidia-smi
+  nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv
   nvcc --version
   ```
 ]
 
-#term-placeholder([ผลการตรวจสอบ Driver และ CUDA Toolkit], "nvidia-smi && nvcc --version", "results/env.txt", label: <term-nvsmi>)
+#term-log([ผลการตรวจสอบ Driver และ CUDA Toolkit], "results/logs/env_nvidia.txt", label: <term-nvsmi>)
 
 === ตัวแปลภาษา C++ และเครื่องมือ Build
 
@@ -101,13 +108,17 @@
 
 โปรแกรมที่ได้อยู่ในไดเรกทอรี `build/` ดังตาราง @tab-programs โปรแกรมเหล่านี้ทำงานได้ทันทีโดยไม่ต้องติดตั้งเพิ่ม เพราะไลบรารีของโปรเจกต์ลิงก์แบบ Static ไว้แล้ว ต้องการเพียง Driver ของ NVIDIA และ CUDA Runtime ที่มากับ Toolkit
 
-#table-placeholder(
-  [โปรแกรมที่ได้จากการ Build และหน้าที่],
-  [smoke, bench_color, check_color, test_compare, bench_blur, check_blur, bench_ladder_color, bench_ladder_blur, bench_streams],
-  columns: ("โปรแกรม", "หน้าที่", "ตัวเลือกสำคัญ"),
-  source: "CMakeLists.txt, apps/",
-  label: <tab-programs>,
-)
+#data-table([โปรแกรมที่ได้จากการ Build และหน้าที่], ("โปรแกรม", "หน้าที่", "ตัวเลือกสำคัญ"), (
+  ([`smoke`], [ตรวจ Toolchain และ GPU วัดแบนด์วิดท์ของ Copy Kernel และ PCIe], [–]),
+  ([`bench_color`], [วัดเวลาการปรับสีของ CPU เทียบ GPU], [`-r` จำนวนรอบ, `-o` ไดเรกทอรีเก็บภาพผลลัพธ์]),
+  ([`check_color`], [ตรวจผลการปรับสีของ GPU เทียบ CPU ทั้ง 16.7 ล้านสีและภาพจริง], [`--tol` ผลต่างที่ยอมรับได้]),
+  ([`test_compare`], [ทดสอบชุดเปรียบเทียบผลลัพธ์เอง], [–]),
+  ([`bench_blur`], [วัดเวลาการเบลอแบบ Naive, Tiled และ Separable], [`-r`, `-c` จำนวนรอบ GPU และ CPU, `-k` ขนาดเคอร์เนล, `-b` ขนาด Block, `-v` เวอร์ชัน, `-m` $k$ สูงสุดของ CPU 2D, `-o`]),
+  ([`check_blur`], [ตรวจความถูกต้องของการเบลอทุกเวอร์ชัน], [รายชื่อภาพ (ไม่ระบุจะใช้ภาพสังเคราะห์)]),
+  ([`bench_ladder_color`], [วัดบันไดการประมวลผลแบบขนานของการปรับสี], [`-r`]),
+  ([`bench_ladder_blur`], [วัดบันไดการประมวลผลแบบขนานของการเบลอแบบ Separable], [`-r`, `-c`, `-k`, `-v` ระดับของบันได]),
+  ([`bench_streams`], [วัด Pinned Memory และ CUDA Streams], [`-r`, `-k`, `-n` จำนวน Chunk, `-w` งาน (color, blur)]),
+), align: left, widths: (3.9cm, 1fr, 1fr), label: <tab-programs>)
 
 == การเตรียมภาพทดสอบ
 
@@ -131,7 +142,7 @@
   ```
 ]
 
-#term-placeholder([ผลการรันชุดตรวจความถูกต้องด้วย CTest], "ctest --test-dir build --output-on-failure", "ยังไม่มี (ต้องรันและบันทึกใหม่)", label: <term-ctest>)
+#term-log([ผลการรันชุดตรวจความถูกต้องด้วย CTest], "results/logs/ctest.txt", label: <term-ctest>)
 
 === รันการวัดประสิทธิภาพ
 

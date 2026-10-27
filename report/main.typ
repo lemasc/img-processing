@@ -1,3 +1,7 @@
+// Build the PDF from the repository root (the report reads files from results/ and images/):
+//   typst compile --root . report/main.typ
+// The output is report/main.pdf. Use `typst watch --root . report/main.typ` to rebuild on save.
+
 #import "template.typ": *
 
 #show: report

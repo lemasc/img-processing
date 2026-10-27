@@ -1,0 +1,37 @@
+$ cmake --build build -j4
+# 2026-10-27T10:44:07+07:00  host=lemasc-ubuntu  commit=6982d3a
+[1/34] Building CXX object CMakeFiles/color_cpu.dir/src/color_cpu.cpp.o
+[2/34] Linking CXX static library libcolor_cpu.a
+[3/34] Building CXX object CMakeFiles/compare.dir/src/compare.cpp.o
+[4/34] Linking CXX static library libcompare.a
+[5/34] Building CXX object CMakeFiles/color_cpu_simd.dir/src/color_cpu_simd.cpp.o
+[6/34] Linking CXX static library libcolor_cpu_simd.a
+[7/34] Building CUDA object CMakeFiles/color_cuda.dir/src/color_cuda.cu.o
+[8/34] Linking CUDA static library libcolor_cuda.a
+[9/34] Building CUDA object CMakeFiles/smoke.dir/apps/smoke.cu.o
+[10/34] Linking CUDA executable smoke
+[11/34] Building CXX object CMakeFiles/blur_cpu_simd.dir/src/blur_cpu_simd.cpp.o
+[12/34] Linking CXX static library libblur_cpu_simd.a
+[13/34] Building CXX object CMakeFiles/test_compare.dir/apps/test_compare.cpp.o
+[14/34] Linking CXX executable test_compare
+[15/34] Building CUDA object CMakeFiles/bench_color.dir/apps/bench_color.cu.o
+[16/34] Building CXX object CMakeFiles/blur_cpu.dir/src/blur_cpu.cpp.o
+[17/34] Linking CXX static library libblur_cpu.a
+[18/34] Building CUDA object CMakeFiles/check_color.dir/apps/check_color.cu.o
+[19/34] Building CUDA object CMakeFiles/bench_ladder_color.dir/apps/bench_ladder_color.cu.o
+[20/34] Building CUDA object CMakeFiles/blur_cuda.dir/src/blur_cuda.cu.o
+[21/34] Linking CUDA static library libblur_cuda.a
+[22/34] Building CXX object CMakeFiles/image_io.dir/src/image_io.cpp.o
+[23/34] Linking CXX static library libimage_io.a
+[24/34] Linking CXX executable bench_color
+[25/34] Linking CXX executable bench_ladder_color
+[26/34] Linking CXX executable check_color
+[27/34] Building CUDA object CMakeFiles/bench_blur.dir/apps/bench_blur.cu.o
+[28/34] Linking CXX executable bench_blur
+[29/34] Building CUDA object CMakeFiles/check_blur.dir/apps/check_blur.cu.o
+[30/34] Linking CXX executable check_blur
+[31/34] Building CUDA object CMakeFiles/bench_ladder_blur.dir/apps/bench_ladder_blur.cu.o
+[32/34] Linking CXX executable bench_ladder_blur
+[33/34] Building CUDA object CMakeFiles/bench_streams.dir/apps/bench_streams.cu.o
+[34/34] Linking CXX executable bench_streams
+# exit=0

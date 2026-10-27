@@ -83,6 +83,139 @@
 // Inline note for prose or values still to be confirmed.
 #let todo(body) = text(fill: rgb("#b00020"))[\[#body\]]
 
+// ---------- saved logs and data ----------
+// Logs and CSVs are read straight from results/ (paths are relative to the repository root).
+
+// Show a saved log as a terminal block. `ranges` picks line ranges (1-based, as numbered in the
+// file) and marks each gap; `cmd` replaces the command line, or adds one to a log without it.
+// The `# date host commit` and `# exit` bookkeeping lines are dropped.
+#let term-log(caption, log, cmd: none, ranges: none, label: none) = {
+  let all = read("/" + log).split("\n")
+  if all.last() == "" { all = all.slice(0, -1) }
+  let picked = ()
+  if ranges == none {
+    picked = all
+  } else {
+    for (i, r) in ranges.enumerate() {
+      if i > 0 {
+        picked.push("[ ... ละไว้ " + str(r.at(0) - ranges.at(i - 1).at(1) - 1) + " บรรทัด ... ]")
+      }
+      picked += all.slice(r.at(0) - 1, r.at(1))
+    }
+  }
+  let is-meta(l) = l.starts-with("# ") and (l.contains("host=") or l.starts-with("# exit="))
+  let body = picked.filter(l => not is-meta(l)).map(l => l.replace(regex("scripts/run-capped\\.sh( -m \\S+)? "), ""))
+  if cmd != none {
+    if body.len() > 0 and body.first().starts-with("$ ") { body = body.slice(1) }
+    body = ("$ " + cmd,) + body
+  }
+  labelled(figure(raw(body.join("\n"), block: true), kind: image, caption: caption), label)
+}
+
+// A results table: header row, booktabs-style rules, numbers right-aligned unless `align` is given.
+#let data-table(caption, columns, rows, align: none, widths: none, label: none) = {
+  let n = columns.len()
+  let al = if align == none { (left,) + (right,) * (n - 1) } else { align }
+  labelled(figure({
+    set text(size: 14pt)
+    set par(first-line-indent: 0pt, justify: false, leading: 0.5em)
+    table(
+      columns: if widths == none { n } else { widths },
+      align: al,
+      inset: (x: 6pt, y: 5pt),
+      stroke: none,
+      table.hline(stroke: 0.8pt),
+      table.header(..columns.map(strong)),
+      table.hline(stroke: 0.5pt),
+      ..rows.flatten(),
+      table.hline(stroke: 0.8pt),
+    )
+  }, kind: table, caption: caption), label)
+}
+
+// Fixed-decimal number as a string: fx(15, d: 1) = "15.0".
+#let fx(x, d: 1) = {
+  if x == none { return "–" }
+  if d == 0 { return str(int(calc.round(x))) }
+  let parts = str(calc.round(x, digits: d)).split(".")
+  let frac = if parts.len() > 1 { parts.at(1) } else { "" }
+  while frac.len() < d { frac += "0" }
+  parts.at(0) + "." + frac
+}
+
+// Rows of a measurement CSV from results/data. Some `params` hold commas (cpu lists), so the first
+// three and last seven fields are taken by position and the middle is the params.
+#let measures(path) = read("/" + path).split("\n").slice(1).filter(l => l.trim() != "").map(l => {
+  let f = l.split(",")
+  let n = f.len()
+  let kv = f.slice(3, n - 7).join(",").split(";").map(p => p.split("=")).filter(p => p.len() == 2)
+  (
+    kernel: f.at(0),
+    platform: f.at(1),
+    params: kv.map(p => (p.at(0), p.at(1))).to-dict(),
+    median: float(f.at(n - 6)),
+  )
+})
+
+// Median (ms) of the last row matching kernel, platform and the given params, or none.
+#let pick(rows, kernel, platform, ..want) = {
+  let m = rows.filter(r => (
+    r.kernel == kernel and r.platform == platform
+      and want.named().pairs().all(((k, v)) => r.params.at(k, default: none) == v)
+  ))
+  if m.len() == 0 { none } else { m.last().median }
+}
+
+// Counts from a check_* log: (cases, failed, largest max-difference). The RESULT line is not a case.
+#let check-stats(log, only: none) = {
+  let lines = read("/" + log).split("\n").filter(l => only == none or l.starts-with(only))
+  let cases = lines.map(l => l.match(regex("^\\S.*?\\s+(PASS|FAIL)\\s+max (\\d+),"))).filter(m => m != none)
+  (
+    cases: cases.len(),
+    failed: cases.filter(m => m.captures.at(0) == "FAIL").len(),
+    max: calc.max(..cases.map(m => int(m.captures.at(1)))),
+  )
+}
+
+// Kernel times of the Gaussian blur block-size sweep: ("naive"|"tiled", block, k) -> ms,
+// and block -> theoretical occupancy (%). Naive comes from stage 4 (k = 3, 5, 7, 11), tiled and
+// occupancy from stage 5 (k = 3, 11).
+#let block-sweep() = {
+  let ms = (:)
+  let occ = (:)
+  for path in ("results/logs/stage4_block_sweep.txt", "results/logs/stage5_block_sweep.txt") {
+    let stage5 = path.contains("stage5")
+    let blk = none
+    for l in read("/" + path).split("\n") {
+      let b = l.match(regex("block=(\\d+x\\d+)"))
+      if b != none { blk = b.captures.at(0); continue }
+      let m = l.match(regex("k=(\\d+)\\s+(?:(naive|tiled)\\s+)?\\|.*?kern\\s+([\\d.]+)"))
+      if m == none { continue }
+      let k = m.captures.at(0)
+      let v = if m.captures.at(1) == none { "naive" } else { m.captures.at(1) }
+      if not stage5 or v == "tiled" { ms.insert(v + "|" + blk + "|" + k, float(m.captures.at(2))) }
+      if stage5 and v == "naive" { occ.insert(blk, int(l.match(regex("occ\\s+(\\d+)%")).captures.at(0))) }
+    }
+  }
+  (ms: ms, occ: occ)
+}
+
+// The radius sweep of stage 6: k -> (variant -> (kernel ms, GB/s, % of peak)), plus the CPU times.
+#let radius-sweep() = {
+  let t = (:)
+  for l in read("/results/logs/stage6_radius_sweep.txt").split("\n") {
+    let m = l.match(regex("k=(\\d+)\\s+(naive|tiled|sep)\\s+\\|\\s+cpu2d\\s+([\\d.]+)\\s+cpusep\\s+([\\d.]+)\\s+\\|\\s+kern\\s+([\\d.]+).*?\\|\\s+([\\d.]+) GB/s \\(\\s*(\\d+)%\\)"))
+    if m == none { continue }
+    let c = m.captures
+    let e = t.at(c.at(0), default: (:))
+    e.insert(c.at(1), (ms: float(c.at(4)), gbs: float(c.at(5)), pct: int(c.at(6))))
+    e.insert("cpu2d", float(c.at(2)))
+    e.insert("cpusep", float(c.at(3)))
+    t.insert(c.at(0), e)
+  }
+  t
+}
+
 // ---------- code ----------
 
 // Excerpt of a source file, lines a..b inclusive (1-based), shown as a numbered listing.
@@ -155,6 +288,11 @@
   set par(first-line-indent: (amount: indent, all: true), justify: true, leading: 0.6em, spacing: 0.6em)
   show raw: set text(font: font-mono, size: 9pt)
   show raw.where(block: true): set par(justify: false)
+  // Inline code has no break points inside file names; allow a break after these characters.
+  show raw.where(block: false): it => {
+    show regex("[_/.,\\-]"): m => m + sym.zws
+    it
+  }
   show raw.where(block: true): block.with(width: 100%, inset: 8pt, radius: 3pt, fill: luma(245), stroke: luma(200) + 0.5pt)
 
   set list(indent: indent, body-indent: 0.5em)
@@ -219,3 +357,6 @@
   body
 }
 
+
+// Kernel time in ms with two decimals below 10 and one above.
+#let ms(x) = if x == none { "–" } else { fx(x, d: if x < 10 { 2 } else { 1 }) }

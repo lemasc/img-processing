@@ -26,15 +26,29 @@ Kernel ปรับสีบน GPU ใช้เวลาเพียง 0.47 ms
 
 == ความถูกต้องของผลลัพธ์
 
-ผลการปรับสีบน GPU ต่างจาก CPU ไม่เกิน 1 ระดับ ใน 224 สีจาก 16.7 ล้านสี (0.0013%) และ 39 พิกเซลจาก 24 ล้านพิกเซลของภาพถ่ายกลางคืน สาเหตุคือ nvcc รวมการคูณและบวกเป็นคำสั่ง FMA ซึ่งปัดเศษครั้งเดียว เมื่อปิดด้วย `--fmad=false` ผลตรงกันทุกบิต ความต่างนี้จึงเป็นผลปกติของการคำนวณทศนิยม ไม่ใช่ข้อผิดพลาดของโปรแกรม การเบลอทุกเวอร์ชันผ่านการตรวจทั้งหมด 455 กรณี และการเบลอแบบแบ่งแถบอีก 240 กรณี
+ผลการปรับสีบน GPU ต่างจาก CPU ไม่เกิน 1 ระดับ ใน 224 สีจาก 16.7 ล้านสี (0.0013%) และ 39 พิกเซลจาก 24 ล้านพิกเซลของภาพถ่ายกลางคืน สาเหตุคือ nvcc รวมการคูณและบวกเป็นคำสั่ง FMA ซึ่งปัดเศษครั้งเดียว เมื่อปิดด้วย `--fmad=false` ผลตรงกันทุกบิต ความต่างนี้จึงเป็นผลปกติของการคำนวณทศนิยม ไม่ใช่ข้อผิดพลาดของโปรแกรม การเบลอทุกเวอร์ชันผ่านการตรวจทั้งหมด 454 กรณี และการเบลอแบบแบ่งแถบอีก 96 กรณี
 
-#table-placeholder(
-  [สรุปผลการตรวจความถูกต้อง],
-  [การปรับสี GPU เทียบ CPU (16.7 ล้านสี, ภาพจริง) ; การเบลอ Naive / Tiled / Separable เทียบ CPU และ Double Reference ; แถบ Streams เทียบทั้งภาพ ; บันได CPU ทุกระดับเทียบ Scalar],
-  columns: ("การตรวจ", "ค่าที่ยอมรับได้", "จำนวนกรณี", "ผลต่างสูงสุด", "ผล"),
-  source: "results/data/correctness.csv, results/logs/stage3_check_color.txt, stage6_check_blur.txt, stage11_check_blur.txt",
-  label: <tab-correctness>,
-)
+#{
+  let s3 = check-stats("results/logs/stage3_check_color.txt")
+  let s6 = check-stats("results/logs/stage6_check_blur.txt")
+  let sb = check-stats("results/logs/stage11_check_blur.txt", only: "bands")
+  let cs = csv("/results/data/correctness.csv", row-type: dictionary)
+  let grp(pred) = {
+    let r = cs.filter(pred)
+    (cases: r.len(), failed: r.filter(x => x.pass != "1").len(), max: calc.max(..r.map(x => int(x.max_abs))))
+  }
+  let row(name, tol, g) = (name, tol, str(g.cases), str(g.max), if g.failed == 0 [ผ่านทั้งหมด] else [ไม่ผ่าน #g.failed])
+  data-table([สรุปผลการตรวจความถูกต้อง], ("การตรวจ", "ผลต่างที่ยอมรับได้ (ระดับ)", "จำนวนกรณี", "ผลต่างสูงสุด", "ผล"), (
+    row([การปรับสี GPU เทียบ CPU (16.7 ล้านสีและภาพจริง)], "1", s3),
+    row([การปรับสี GPU โดยไม่ปิด FMA เทียบ CPU], "0", grp(x => x.impl == "build")),
+    row([การปรับสี GPU เมื่อปิด FMA เทียบ CPU], "0", grp(x => x.impl == "build-nofma")),
+    row([การเบลอ Naive, Tiled และ Separable ($k$ = 3 ถึง 127) เทียบ CPU, Double Reference และกันเอง], "1 (เทียบ Naive และภาพสีเรียบ: 0)", s6),
+    row([การเบลอแบบแบ่งแถบเทียบทั้งภาพ], "0", sb),
+    row([Streams ทุกแบบเทียบ Pageable 1 Chunk], "0", grp(x => x.impl.starts-with("gpu_"))),
+    row([บันไดการปรับสี (CPU และ GPU ทุกระดับ)], "1", grp(x => x.kernel == "color" and x.impl.starts-with("r"))),
+    row([บันไดการเบลอแบบ Separable (CPU และ GPU ทุกระดับ)], "1", grp(x => x.kernel == "blur_sep" and x.impl.starts-with("r"))),
+  ), align: (left, left, right, right, left), widths: (2.4fr, 1.3fr, 0.8fr, 0.8fr, 1fr), label: <tab-correctness>)
+}
 
 == การเบลอแบบ Naive และขนาด Thread Block
 
@@ -44,13 +58,15 @@ Kernel แบบ Naive ใช้เวลา 1.46, 3.24, 5.98 และ 13.2 ms 
 
 ขนาด Block มีผลต่อเวลาไม่เกินประมาณ 1.4 เท่า (@tab-block) Block ขนาด 32×32 ช้าที่สุดทุก $k$ ส่วน 16×16 และ 32×4 เร็วพอกันในระดับความแปรปรวนของการวัด ขนาด Block จึงไม่ใช่สาเหตุที่ทำให้ Kernel ใช้ทรัพยากรได้ต่ำ
 
-#table-placeholder(
-  [เวลา Kernel (ms) ของการเบลอแบบ Naive และ Tiled ตามขนาด Block],
-  [Naive k = 3 / 5 / 7 / 11 และ Tiled k = 3 / 11 ที่ Block 8×8, 16×16, 32×32, 32×4 พร้อม Theoretical Occupancy],
-  columns: ("Block", "Naive k=3", "k=5", "k=7", "k=11", "Tiled k=3", "Tiled k=11", "Occupancy"),
-  source: "results/logs/stage4_block_sweep.txt, results/logs/stage5_block_sweep.txt",
-  label: <tab-block>,
-)
+#{
+  let b = block-sweep()
+  let g(v, blk, k) = ms(b.ms.at(v + "|" + blk + "|" + str(k), default: none))
+  data-table([เวลา Kernel (ms) ของการเบลอแบบ Naive และ Tiled ตามขนาด Block], ("Block", "Naive k=3", "k=5", "k=7", "k=11", "Tiled k=3", "Tiled k=11", "Occupancy"),
+    ("8x8", "16x16", "32x32", "32x4").map(blk => (
+      blk.replace("x", "×"), g("naive", blk, 3), g("naive", blk, 5), g("naive", blk, 7), g("naive", blk, 11),
+      g("tiled", blk, 3), g("tiled", blk, 11), str(b.occ.at(blk)) + "%",
+    )), label: <tab-block>)
+}
 
 == การเบลอแบบ Tiled และการวิเคราะห์ด้วย Profiler
 
@@ -58,13 +74,16 @@ Kernel แบบ Tiled เร็วกว่า Naive เพียง 1.02, 1.23
 
 ผลจาก Nsight Compute (@tab-ncu) ชี้คอขวดที่แท้จริง คือ *หน่วยสั่งงาน Load/Store (LSU) และ L1* ไม่ใช่ DRAM และไม่ใช่หน่วยคำนวณ ข้อมูลที่อ่านจาก DRAM เท่ากับขั้นต่ำ 72 MB (24 MP × 3 ไบต์) ในทุกเวอร์ชัน และหน่วย FMA ทำงานไม่เกิน 33% การทำ Tiling เพียงเปลี่ยนคำสั่งอ่าน Global Memory แต่ละคำสั่งเป็นคำสั่งอ่าน Shared Memory หนึ่งต่อหนึ่ง (272.25 ล้านคำสั่งที่ $k = 11$ ทั้งสองเวอร์ชัน) จำนวนคำสั่งที่ LSU ต้องรับจึงไม่ลดลง Kernel แบบ Tiled ที่ $k = 11$ ใช้ LSU เต็ม 99.7% และสาเหตุที่ Warp ต้องรอมากที่สุดคือคิว MIO (42% ของรอบที่รอ) ส่วน Occupancy ที่ทำได้จริงอยู่ที่ 94 ถึง 98% จึงไม่ใช่สาเหตุ
 
-#table-placeholder(
-  [ผลจาก Nsight Compute ของการเบลอแบบ Naive และ Tiled],
-  [เวลา Kernel 1.45 / 14.2 / 1.43 / 11.2 ms ; LSU 64 / 76 / 82 / 99.7% ; L1/TEX 64 / 76 / 82 / 99.7% ; FMA 33 / 31 / 32 / 23% ; Global Load 20.3 / 272 / 3.1 / 6.2 M ; Shared Load 0 / 0 / 20.3 / 272 M ; DRAM Read 72 MB ทุกตัว ; Achieved Occupancy 77 / 96 / 94 / 98%],
-  columns: ("ค่าที่วัด", "Naive k=3", "Naive k=11", "Tiled k=3", "Tiled k=11"),
-  source: "results/logs/stage5_ncu_details.txt",
-  label: <tab-ncu>,
-)
+#data-table([ผลจาก Nsight Compute ของการเบลอแบบ Naive และ Tiled], ("ค่าที่วัด", "Naive k=3", "Naive k=11", "Tiled k=3", "Tiled k=11"), (
+  ([เวลา Kernel (ms)], [1.45], [14.16], [1.43], [11.24]),
+  ([LSU Pipe (% ของค่าสูงสุด)], [64.2], [75.8], [82.2], [99.7]),
+  ([L1/TEX Throughput (%)], [64.2], [75.8], [82.2], [99.7]),
+  ([FMA Pipe (%)], [32.6], [31.1], [32.2], [23.1]),
+  ([คำสั่ง Global Load (ล้าน)], [20.25], [272.25], [3.09], [6.19]),
+  ([คำสั่ง Shared Load (ล้าน)], [0], [0], [20.25], [272.25]),
+  ([อ่านจาก DRAM (MB)], [72.1], [72.2], [72.0], [72.2]),
+  ([Achieved Occupancy (%)], [77.0], [95.8], [94.1], [98.2]),
+), label: <tab-ncu>)
 
 ข้อสรุปคือ การจะทำให้เร็วขึ้นต้องลดจำนวนคำสั่งอ่านต่อพิกเซลผลลัพธ์ เช่น การอ่านแบบเวกเตอร์ การให้หนึ่ง Thread คำนวณหลายพิกเซล หรือการเปลี่ยนอัลกอริทึมเป็นแบบ Separable ซึ่งเป็นขั้นถัดไป
 
@@ -79,13 +98,23 @@ Kernel แบบ Tiled เร็วกว่า Naive เพียง 1.02, 1.23
   label: <fig-radius>,
 )
 
-#table-placeholder(
-  [เวลา Kernel (ms) ของการเบลอตามรัศมี],
-  [r = 3 / 7 / 15 / 31 / 63: Naive 5.72 / 24.4 / 101.8 / 419.3 / 1705.6 ; Tiled 4.56 / 19.2 / 80.0 / 329.3 / – ; Separable 2.43 / 3.58 / 6.78 / 13.3 / 26.7 ; CPU 2D / Separable 1603/433, 6943/855, 28991/1700, –/3521, –/7449],
-  columns: ("รัศมี (k)", "Naive", "Tiled", "Separable", "Sep/Naive", "GB/s (% of 360)", "CPU 2D / Sep"),
-  source: "results/logs/stage6_radius_sweep.txt",
-  label: <tab-radius>,
-)
+#{
+  let t = radius-sweep()
+  data-table([เวลา Kernel (ms) ของการเบลอตามรัศมี], ("รัศมี r (k)", "Naive", "Tiled", "Separable", "Sep เร็วกว่า Naive", "Sep GB/s (% ของ 360)", "CPU 2D / Sep (ms)"),
+    (7, 15, 31, 63, 127).map(k => {
+      let e = t.at(str(k))
+      let cpu2d = if e.cpu2d > 0 { fx(e.cpu2d, d: 0) } else { "–" }
+      (
+        str(int((k - 1) / 2)) + " (" + str(k) + ")",
+        ms(e.naive.ms),
+        if "tiled" in e { ms(e.tiled.ms) } else { "–" },
+        ms(e.sep.ms),
+        fx(e.naive.ms / e.sep.ms) + "×",
+        fx(e.sep.gbs) + " (" + str(e.sep.pct) + "%)",
+        cpu2d + " / " + fx(e.cpusep, d: 0),
+      )
+    }), label: <tab-radius>)
+}
 
 ที่ $k = 7$ แบบ Separable เร็วกว่าเพียง 2.35 เท่า ทั้งที่งานลดลง 3.5 เท่า เพราะผลระหว่างกลางแบบทศนิยมทำให้ต้องอ่านเขียน 30 ไบต์ต่อพิกเซล Kernel จึงกลายเป็น Memory-bound ใช้แบนด์วิดท์ได้ 82% ของค่าสูงสุด (89% ของค่าที่วัดได้) ส่วน Kernel แบบ Tiled เร็วกว่า Naive คงที่ 1.26 ถึง 1.27 เท่าทุกรัศมี ยืนยันผลของหัวข้อก่อนหน้า
 
@@ -93,13 +122,18 @@ Kernel แบบ Tiled เร็วกว่า Naive เพียง 1.02, 1.23
 
 == หน่วยความจำแบบ Pinned และ CUDA Streams
 
-#table-placeholder(
-  [เวลาทั้งหมด (ms) ของแบบ Pageable, Pinned และ Pinned แบ่ง Chunk ที่ภาพ 24 MP],
-  [color 15.0 / 11.9 / 10.6, 10.0, 9.8, 9.6 / 1.56× ; blur k=15 17.9 / 14.8 / 11.1, 10.4, 10.1, 10.3 / 1.77× ; blur k=63 27.0 / 24.0 / 18.5, 15.8, 14.9, 14.9 / 1.82× ; blur k=127 41.4 / 38.4 / 33.3, 31.4, 31.7, 34.0 / 1.32×],
-  columns: ("งาน", "Pageable 1", "Pinned 1", "Pinned 2 / 4 / 8 / 16", "ดีที่สุดเทียบ Pageable"),
-  source: "results/data/streams.csv, results/logs/stage11_streams_*.txt",
-  label: <tab-streams>,
-)
+#{
+  let s = measures("results/data/streams.csv")
+  data-table([เวลาทั้งหมด (ms) ของแบบ Pageable, Pinned และ Pinned แบ่ง Chunk ที่ภาพ 24 MP], ("งาน", "Pageable 1", "Pinned 1", "Pinned 2 / 4 / 8 / 16", "ดีที่สุดเทียบ Pageable"),
+    (([การปรับสี], "color"), ([การเบลอ k=15], "blur_sep_k15"), ([การเบลอ k=63], "blur_sep_k63"), ([การเบลอ k=127], "blur_sep_k127")).map(((name, kern)) => {
+      let g(p) = pick(s, kern, p, img: "photo_24mp.png")
+      let chunked = (2, 4, 8, 16).map(n => g("gpu_pinned_n" + str(n)))
+      (
+        name, fx(g("gpu_pageable_n1")), fx(g("gpu_pinned_n1")), chunked.map(x => fx(x)).join(" / "),
+        fx(g("gpu_pageable_n1") / calc.min(g("gpu_pinned_n1"), ..chunked), d: 2) + "×",
+      )
+    }), label: <tab-streams>)
+}
 
 #fig-placeholder(
   [เวลาทั้งหมดตามจำนวน Chunk ของ CUDA Streams],
@@ -125,13 +159,24 @@ Kernel แบบ Tiled เร็วกว่า Naive เพียง 1.02, 1.23
   label: <fig-ladder-color>,
 )
 
-#table-placeholder(
-  [เวลาของการปรับสี (ms) แต่ละระดับตามโหมด Thread],
-  [ระดับ × โหมด single / cores / multi / all ที่ภาพ 1, 6, 24, 48 MP],
-  columns: ("ระดับ", "1 Thread", "6 P-core", "12 Thread", "16 Thread", "อัตราเร่ง"),
-  source: "results/data/ladder.csv, results/logs/stage12_color_ladder_*.txt",
-  label: <tab-ladder-color>,
-)
+#{
+  let lad = measures("results/data/ladder.csv")
+  let modes = ("0", "0,2,4,6,8,10", "0-11", "0-15")
+  let g(p, c) = pick(lad, "color", p, img: "photo_24mp.png", cpus: c)
+  let base = g("r1_scalar", modes.first())
+  data-table([เวลาของการปรับสี (ms) แต่ละระดับตามโหมด Thread], ("ระดับ", "1 Thread", "6 P-core", "12 Thread", "16 Thread", "อัตราเร่งสูงสุดเทียบ Scalar"), (
+    ([Scalar], "r1_scalar"),
+    ([Autovec AVX2], "r2_autovec_avx2"),
+    ([AVX2 Intrinsics], "r6a_avx2_intrin"),
+    ([Autovec AVX2 + OpenMP], "r2b_autovec_avx2_omp"),
+    ([AVX2 Intrinsics + OpenMP], "r6_avx2_intrin_omp"),
+    ([CUDA Kernel], "r7_cuda_kernel"),
+    ([CUDA ทั้งหมด], "r7_cuda_e2e"),
+  ).map(((name, p)) => {
+    let v = modes.map(t => g(p, t))
+    (name, ..v.map(ms), fx(base / calc.min(..v.filter(x => x != none)), d: 1) + "×")
+  }), label: <tab-ladder-color>)
+}
 
 CPU ระดับที่ดีที่สุด (Vectorize อัตโนมัติร่วมกับ OpenMP 12 Thread) ใช้เวลา 4.0 ms เร็วกว่า Scalar 41 เท่า และ *เร็วกว่า GPU เมื่อวัดเวลาทั้งหมด* ประมาณ 3.7 เท่า (4.0 เทียบกับ 15.0 ms) แม้ใช้ Pinned Memory และ Streams แล้ว GPU ก็ยังใช้ 9.6 ms ช้ากว่า CPU ผลนี้เป็นจริงที่ภาพ 6, 24 และ 48 MP ข้อสังเกตอื่นจากผลนี้มีดังนี้
 
@@ -141,13 +186,20 @@ CPU ระดับที่ดีที่สุด (Vectorize อัตโน�
 
 == บันไดการประมวลผลแบบขนาน: การเบลอแบบ Separable
 
-#table-placeholder(
-  [เวลาของการเบลอแบบ Separable (ms) แต่ละระดับตามรัศมี],
-  [r = 3 / 7 / 15 / 31 / 63: Scalar 439 / 862 / 1711 / 3534 / 7594 ; Autovec 1T 360 / 705 / 1543 / 2983 / 6279 ; AVX2+OMP ดีที่สุด 29 / 30 / 34 / 57 / 126 ; CUDA Kernel 2.4 / 3.6 / 6.8 / 13.2 / 26.4 ; CUDA ทั้งหมด 17.1 / 18.1 / 21.1 / 26.9 / 39.9],
-  columns: ("รัศมี (k)", "Scalar", "Autovec 1T", "AVX2 + OpenMP", "CUDA Kernel", "CUDA ทั้งหมด"),
-  source: "results/data/ladder.csv, results/logs/stage12_blur_ladder_*.txt",
-  label: <tab-ladder-blur>,
-)
+#{
+  let lad = measures("results/data/ladder.csv")
+  let modes = ("0", "0,2,4,6,8,10", "0-11", "0-15")
+  let g(k, p, c) = pick(lad, "blur_sep", p, img: "photo_24mp.png", k: str(k), cpus: c)
+  data-table([เวลาของการเบลอแบบ Separable (ms) แต่ละระดับตามรัศมี], ("รัศมี r (k)", "Scalar", "Autovec 1T", "AVX2 + OpenMP ที่ดีที่สุด", "CUDA Kernel", "CUDA ทั้งหมด"),
+    (7, 15, 31, 63, 127).map(k => {
+      let omp = calc.min(..modes.map(c => g(k, "r6_avx2_intrin_omp", c)).filter(x => x != none))
+      (
+        str(int((k - 1) / 2)) + " (" + str(k) + ")",
+        ms(g(k, "r1_scalar", modes.first())), ms(g(k, "r2_autovec_avx2", modes.first())), ms(omp),
+        ms(g(k, "r7_cuda_kernel", modes.first())), ms(g(k, "r7_cuda_e2e", modes.first())),
+      )
+    }), label: <tab-ladder-blur>)
+}
 
 #fig-placeholder(
   [บันไดการประมวลผลแบบขนานของการเบลอ เทียบกับการปรับสี],
@@ -175,11 +227,12 @@ CPU ระดับที่ดีที่สุด (Vectorize อัตโน�
 
 == สรุปผลเทียบกับสมมติฐาน
 
-#table-placeholder(
-  [ผลการทดลองเทียบกับสมมติฐาน],
-  [1 Memory-bound, PCIe ครอบงำ: ยืนยัน (97% ของเวลา) ; 2 CPU แข่งได้: ยืนยัน (CPU 4.0 ms ชนะ GPU 9.6 ms) ; 3 การเบลอ GPU ชนะมาก: ยืนยันบางส่วน (ชนะ 1.7–3.2 เท่า แต่ถูกจำกัดด้วย LSU ไม่ใช่ FP32) ; 4 Tiled > Naive, Separable > ทั้งคู่: Tiled ได้น้อย (1.02–1.27 เท่า), Separable ยืนยัน (ถึง 63.9 เท่า) ; 5 Pinned + Streams: ยืนยัน แต่ถูกจำกัดด้วย PCIe Duplex 15.3 GB/s],
-  columns: ("สมมติฐาน", "ผลที่วัดได้", "สรุป"),
-  label: <tab-hypotheses>,
-)
+#data-table([ผลการทดลองเทียบกับสมมติฐาน], ("สมมติฐาน", "ผลที่วัดได้", "สรุป"), (
+  ([1 งานเป็น Memory-bound และเวลาคัดลอกผ่าน PCIe ครอบงำ], [เวลาคัดลอกคิดเป็น 97% ของเวลาทั้งหมดของการปรับสี], [ยืนยัน]),
+  ([2 CPU หลายแกนแข่งกับ GPU ได้], [CPU 4.0 ms ชนะ GPU 9.6 ms (Pinned + Streams)], [ยืนยัน]),
+  ([3 การเบลอบน GPU ชนะ CPU มาก], [ชนะ 1.7 ถึง 3.2 เท่า แต่คอขวดคือ LSU ไม่ใช่ FP32], [ยืนยันบางส่วน]),
+  ([4 Tiled เร็วกว่า Naive และ Separable เร็วกว่าทั้งสอง], [Tiled เร็วกว่า 1.02 ถึง 1.27 เท่า, Separable เร็วกว่าถึง 63.9 เท่า], [Tiled ได้น้อย, Separable ยืนยัน]),
+  ([5 Pinned Memory และ Streams ลดเวลาทั้งหมด], [เร็วขึ้น 1.32 ถึง 1.82 เท่า แต่ถูกจำกัดด้วย PCIe สองทิศทาง 15.3 GB/s], [ยืนยัน]),
+), align: left, widths: (1.5fr, 1.8fr, 1fr), label: <tab-hypotheses>)
 
 สมมติฐานที่ไม่ตรงกับผลเป็นข้อค้นพบที่สำคัญที่สุดของรายงานนี้ การเบลอถูกจัดว่าเป็นงาน Compute-bound ตามความเข้มข้นของการคำนวณ แต่ในทางปฏิบัติถูกจำกัดด้วยการสั่งคำสั่งอ่าน (Load Issue) และการทำ Tiling ซึ่งเป็นเทคนิคมาตรฐานแทบไม่ช่วย เพราะลดปริมาณข้อมูลจาก DRAM แต่ไม่ลดจำนวนคำสั่ง ข้อค้นพบนี้ได้มาจาก Profiler เท่านั้น การวิเคราะห์จากทฤษฎีเพียงอย่างเดียวจะให้ข้อสรุปที่ผิด

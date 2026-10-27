@@ -6,12 +6,18 @@ Source Code ทั้งหมดเขียนขึ้นเองด้ว�
 
 == โครงสร้างโปรเจกต์
 
-#table-placeholder(
-  [โครงสร้างไดเรกทอรีของโปรเจกต์],
-  [`include/` Header ที่ใช้ร่วมกัน (สูตรคำนวณรายพิกเซล ชุดวัดเวลา ชุดเปรียบเทียบผล) ; `src/` ไลบรารี Kernel ของ CUDA และโค้ด CPU ทุกระดับ ; `apps/` โปรแกรมหลักแต่ละขั้น (`bench_*`, `check_*`) ; `experiments/` การทดลองย่อย (PCIe, DRAM, clamp) ; `scripts/` สคริปต์ช่วยรัน ; `images/` ภาพทดสอบ ; `results/` CSV, Log, ภาพผลลัพธ์ ; `CMakeLists.txt`],
-  columns: ("ไดเรกทอรี / ไฟล์", "เนื้อหา"),
-  label: <tab-layout>,
-)
+#data-table([โครงสร้างไดเรกทอรีของโปรเจกต์], ("ไดเรกทอรี / ไฟล์", "เนื้อหา"), (
+  ([`include/`], [Header ที่ใช้ร่วมกัน: สูตรคำนวณรายพิกเซล (`color.h`, `blur.h`), ชุดวัดเวลา (`timing.h`, `bench.h`), ชุดเปรียบเทียบผล (`compare.h`), โครงสร้างภาพ (`image.h`) และไลบรารี stb ใน `third_party/`]),
+  ([`src/`], [ไลบรารี Kernel ของ CUDA (`*_cuda.cu`) และโค้ด CPU ทุกระดับ (`*_cpu.cpp`, `*_cpu_simd.cpp`)]),
+  ([`apps/`], [โปรแกรมหลักของแต่ละขั้น (`bench_*`, `check_*`, `smoke`)]),
+  ([`experiments/`], [การทดลองย่อย: แบนด์วิดท์ DRAM, PCIe และ Branch ของ Clamp]),
+  ([`scripts/`], [สคริปต์ช่วยรันและบันทึกค่าของเครื่อง]),
+  ([`images/`], [ภาพทดสอบ]),
+  ([`results/`], [ผลการทดลอง: `data/` (CSV), `logs/` (ผลลัพธ์จากเทอร์มินัล), `profiler/` (รายงาน Nsight), `output/` (ภาพผลลัพธ์), `charts/` และ `env.txt`]),
+  ([`docs/`], [โจทย์และแผนงาน]),
+  ([`report/`], [ต้นฉบับของรายงานนี้]),
+  ([`CMakeLists.txt`], [อธิบายไลบรารี โปรแกรม และ Flag ของโปรเจกต์]),
+), align: left, widths: (3.4cm, 1fr), label: <tab-layout>)
 
 หลักการออกแบบที่สำคัญมี 3 ข้อ
 
