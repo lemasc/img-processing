@@ -332,9 +332,10 @@
 
   // Table of contents: chapters show as "บทที่ N  title".
   show outline.entry.where(level: 1): it => {
-    set text(weight: "bold")
     let el = it.element
-    if el.func() == heading and el.numbering != none {
+    if el.func() != heading { return it }
+    set text(weight: "bold")
+    if el.numbering != none {
       let n = numbering("1", ..counter(heading).at(el.location()))
       link(el.location(), it.indented([บทที่ #n], it.inner()))
     } else { it }
