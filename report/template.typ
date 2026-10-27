@@ -294,6 +294,8 @@
   set text(font: font-body, size: 16pt, lang: "th")
   set par(first-line-indent: (amount: indent, all: true), justify: true, leading: 0.6em, spacing: 0.6em)
   show raw: set text(font: font-mono, size: 9pt)
+  // TH Sarabun is small for its point size, so the math font looks oversized beside it. Scale it down.
+  show math.equation: set text(size: 0.8em)
   show raw.where(block: true): set par(justify: false)
   // Inline code has no break points inside file names; allow a break after these characters.
   show raw.where(block: false): it => {
