@@ -258,18 +258,18 @@
 ) = page(numbering: none, header: none)[
   #set align(center)
   #set par(first-line-indent: 0pt, justify: false)
-  #set text(weight: "bold", size: 20pt)
+  #set text(size: 20pt)
   #v(1fr)
-  #text(size: 24pt, title-th) \
-  #text(size: 20pt, title-en)
+  #text(size: 24pt, weight: "bold", title-th) \
+  #text(weight: "bold", title-en)
   #v(1fr)
-  จัดทำโดย \
+  #text(weight: "bold")[จัดทำโดย] \
   #for a in authors [#a \ ]
   #v(1fr)
-  เสนอ \
+  #text(weight: "bold")[เสนอ] \
   #advisor
   #v(1fr)
-  #text(size: 18pt)[
+  #text(size: 18pt, weight: "bold")[
     รายงานนี้เป็นส่วนหนึ่งของรายวิชา #course \
     #term \
     #faculty \

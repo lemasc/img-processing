@@ -9,11 +9,11 @@
 #cover(
   title-th: [การวิเคราะห์ประสิทธิภาพการประมวลผลภาพ \ บนแพลตฟอร์มการประมวลผลแบบขนาน],
   title-en: [Performance Analysis of Image Color Processing \ Across Parallel Computing Platforms],
-  authors: ([#todo[ชื่อ-นามสกุล ภาษาไทย] รหัสนักศึกษา 67070173],),
-  advisor: [#todo[ชื่ออาจารย์ผู้สอน]],
-  course: [Hybrid Computing Technology (HCT) #todo[รหัสวิชา]],
-  term: [#todo[ภาคเรียนที่ … ปีการศึกษา …]],
-  faculty: [#todo[คณะ / สาขาวิชา]],
+  authors: ([ศักดิธัช ธนาสดใส รหัสนักศึกษา 67070173],),
+  advisor: [ผศ. อัครินทร์ คุณกิตติ],
+  course: [Hybrid Computing Technology (HCT) รหัสวิชา 06046432],
+  term: [ภาคเรียนที่ 1 ปีการศึกษา 2569],
+  faculty: [คณะเทคโนโลยีสารสนเทศ สาขาวิชาเทคโนโลยีปัญญาประดิษฐ์],
   institute: [สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง],
 )
 
