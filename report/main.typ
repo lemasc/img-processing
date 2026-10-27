@@ -34,3 +34,4 @@
 #include "chapters/05-install.typ"
 #include "chapters/06-results.typ"
 #include "chapters/07-conclusion.typ"
+#include "chapters/08-appendix.typ"
